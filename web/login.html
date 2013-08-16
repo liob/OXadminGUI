@@ -1,0 +1,70 @@
+<script type="text/javascript">
+
+    function Toogle(c) {
+        if(c.checked) {
+            document.getElementById("CTX").style.display = '';
+            document.getElementById("OX").style.display = 'none';
+        } else {
+            document.getElementById("OX").style.display = '';
+            document.getElementById("CTX").style.display = 'none';
+        }
+
+    }
+</script>
+
+<h3>${msg.get('login')}</h3>
+
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('loginerror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=login" method="post">
+
+    <div style="width:22em; border: 1px solid <#if loginFailed??>red<#else>lightgray</#if>;padding:.5em;margin-top:1em">
+        <div class="subcolumns">
+            <div class="c33l">
+                <div class="tdb"><span id="OX">OX</span><span id="CTX" style="display:none">CTX</span>admin</div>
+                <div class="tdb">${msg.get('password')}</div>
+                <#if contextList??>
+                <div class="tdb">${msg.get('context')} Login</div>
+                </#if>
+            </div>
+            <div class="c66r">
+                <div class="td"><input name="loginUser" size="25" maxlength="50" /></div>
+                <div class="td"><input type="password" name="loginPwd" size="25" maxlength="50" /></div>
+                <#if contextList??>
+                <div class="td">
+                    <input type="checkbox" name="ctxlogin" onclick="Toogle(this)"> 
+                    <select name="context">
+                        <#list contextList as list>
+                        <option value="${list.ID}|${list.name}">${list.name}</option>
+                        </#list>
+                    </select>
+                </div>
+                </#if>
+                <div class="td"><input class="submit" type="submit" value= "${msg.get('login')}" /></div>
+            </div>
+
+        </div>
+        <#if loginFailed??>
+        <div style="color:red;text-align:center">
+            ${msg.get('oxadminlogingerror')}
+        </div>
+        </#if>
+    </div>
+
+</form>
+
+

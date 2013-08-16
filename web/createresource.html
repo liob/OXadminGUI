@@ -1,0 +1,138 @@
+<script type="text/javascript">
+
+    function Dismiss() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "resource";
+    }
+
+
+    function ToogleDiv(a,b,c) {
+        document.getElementById(a).style.display = '';
+        document.getElementById(b).style.display = 'none';
+        document.getElementById(c).value = a;
+        return false;
+    }
+
+    function CheckInput() {
+        var area = document.forms[0];
+        var errorCount = 0;
+        var test = new Array('name','displayName');
+        var f;
+        for(var i = 0; i < test.length; ++i) {
+            f = area.elements[test[i]];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+            }
+        }
+       
+        var e = document.getElementById('domain_list');
+        if(e != undefined && e.style.display == '')  {
+            f = area.elements['emailUser'];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+                if(!checkEmailAdr(f.value + '@' + area.elements['domain'].value)) {
+                    area.elements['emailUser'].style.border = '1px solid red';
+                    document.getElementById('emailhint').style.display = '';
+                    document.getElementById('emailhint').firstChild.nodeValue = "${msg.get('invalid')}";
+                    ++errorCount;
+                } else {
+                    area.elements['emailUser'].style.border = '';
+                    document.getElementById('emailhint').style.display = 'none';
+                }
+            }
+        }
+
+        var e = document.getElementById('email_input');
+        if(e != undefined && e.style.display == '')  {
+            f = area.elements['email_str'];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+                if(!checkEmailAdr(area.elements['email_str'].value)) {
+                    area.elements['email_str'].style.border = '1px solid red';
+                    document.getElementById('emailhint2').style.display = '';
+                    document.getElementById('emailhint2').firstChild.nodeValue = "${msg.get('invalid')}";
+                    ++errorCount;
+                } else {
+                    area.elements['email_str'].style.border = '';
+                    document.getElementById('emailhint2').style.display = 'none';
+                }
+            }
+        }
+
+        if(errorCount == 0) {
+            area.submit();
+        }
+    }
+</script>
+
+<h2>${msg.get('createres')}</h2>
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('createreserror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=createresource" method="post">
+    <div style="width:38em; border: 1px solid lightgray;margin-top:1em;margin-bottom:1em;padding:.3em">
+        <div class="subcolumns">
+            <div class="c30l">
+                <div class="tdb">Name <span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('displayname')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('description')}</div>
+                <div class="tdb">${msg.get('email')}<span class="r">&sup1;</span></div>
+
+            </div>
+            <div class="c70r">
+                <div class="td"><input name="name" size="25" maxlength="50" value="${name!}" /></div>
+                <div class="td"><input name="displayName" size="35" maxlength="50" value="${displayName!}" /></div>
+                <div class="td"><input name="description" size="35" maxlength="50" value="${description!}" /></div>
+                <div class="td">
+                    <#if emailDomain??>
+                    <input type="hidden" id="email_show" name="email_show" value="${email_show!}" />
+                    <div id="domain_list" <#if email_show! = "email_input">style="display:none"</#if>>
+                         <input name="emailUser" size="15" maxlength="30" style="text-align:right" value="<#if emailUser??>${emailUser}</#if>" />
+                        @
+                        <select name="domain" >
+                            <#list emailDomain as dlist><option value="${dlist}" <#if domain?? && domain == dlist>selected="selected"</#if>>${dlist}</option></#list>
+                        </select>
+                        <input onclick="return ToogleDiv('email_input','domain_list','email_show')" type="checkbox" /> manuell
+                        <span id="emailhint" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </div>
+                    <div id="email_input" <#if email_show! = "domain_list" || email_show! = "">style="display:none"</#if>>
+                         <input name="email_str" id="email_str" size="35" maxlength="50" value="${email_str!}" />
+                        <input onclick="return ToogleDiv('domain_list','email_input','email_show')" type="checkbox" /> ${msg.get('emaildomains')}
+                        <span id="emailhint2" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+
+                    </div>
+                    <#else>
+                    <input name="email_str" id="email_input" size="35" maxlength="50" value="${email_str!}" />
+                    <span id="emailhint2" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </#if>
+                </div>
+                <div class="td"><input class="submit" type="button" onclick="return CheckInput()" value= "${msg.get('create')}" /> <input class="submit" type="button" onclick="return Dismiss()" value= "${msg.get('dismiss')}" /></div>
+            </div>
+        </div>
+    </div>
+    <div style="font-size:smaller;margin-top:.8em">
+        <span class="r">&sup1;</span> ${msg.get('mandatory')}<br />
+    </div>
+</form>

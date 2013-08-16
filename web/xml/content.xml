@@ -1,0 +1,2024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE content SYSTEM "text.dtd" >
+
+<content>
+    <group name="general">
+         <text id="context">
+            <lang id="es">Contexto</lang>        
+            <lang id="de">Kontext</lang>
+            <lang id="en">Context</lang>
+            <lang id="it">Context</lang>
+            <lang id="fr">Context</lang>
+            <lang id="nl">Context</lang>
+         </text>
+
+        <text id="user">
+            <lang id="es">Usuario</lang>
+            <lang id="de">Benutzer</lang>
+            <lang id="en">User</lang>
+            <lang id="it">Utente</lang>
+            <lang id="fr">User</lang>
+            <lang id="nl">Gebruiker</lang>
+        </text>
+
+        <text id="group">
+            <lang id="es">Grupo</lang>
+            <lang id="de">Gruppen</lang>
+            <lang id="en">Group</lang>
+            <lang id="it">Gruppo</lang>
+            <lang id="fr">Group</lang>
+            <lang id="nl">Groep</lang>
+        </text>
+
+        <text id="groups">
+            <lang id="es">Grupos</lang>
+            <lang id="de">Gruppen</lang>
+            <lang id="en">Groups</lang>
+            <lang id="it">Gruppi</lang>
+            <lang id="fr">Groups</lang>
+            <lang id="nl">Groepen</lang>
+         </text>
+
+        <text id="resource">
+            <lang id="es">Recurso</lang>        
+            <lang id="de">Ressourcen</lang>
+            <lang id="en">Resource</lang>
+            <lang id="it">Risorsa</lang>
+            <lang id="fr">Resource</lang>
+            <lang id="nl">Contacten</lang>
+        </text>
+
+        <text id="info">
+            <lang id="es">Información</lang>
+            <lang id="de">Information</lang>
+            <lang id="en">Information</lang>
+            <lang id="it">Informazioni</lang>
+            <lang id="fr">Information</lang>
+            <lang id="nl">Informatie</lang>
+        </text>
+
+        <text id="logout">
+            <lang id="es">Salir</lang>
+            <lang id="de">Logout</lang>
+            <lang id="en">Logout</lang>
+            <lang id="it">Logout</lang>
+            <lang id="fr">Logout</lang>
+            <lang id="nl">Afmelden</lang>
+        </text>
+
+        <text id="create">
+            <lang id="es">Crear</lang>
+            <lang id="de">Anlegen</lang>
+            <lang id="en">Create</lang>
+            <lang id="it">Crea</lang>
+            <lang id="fr">Create</lang>
+            <lang id="nl">Maak</lang>
+        </text>
+
+        <text id="set">
+            <lang id="es">Seleccionar</lang>
+            <lang id="de">Setzen</lang>
+            <lang id="en">Set</lang>
+            <lang id="it">Imposta</lang>
+            <lang id="fr">Set</lang>
+            <lang id="nl">Selecteer</lang>
+        </text>
+
+        <text id="change">
+            <lang id="es">Modificar</lang>
+            <lang id="de">Ändern</lang>
+            <lang id="en">Change</lang>
+            <lang id="it">Modifica</lang>
+            <lang id="fr">Change</lang>
+            <lang id="nl">Wijzig</lang>
+        </text>
+
+        <text id="dismiss">
+            <lang id="es">Cancelar</lang>
+            <lang id="de">Änderungen verwerfen</lang>
+            <lang id="en">Dismiss</lang>
+            <lang id="it">Annulla</lang>
+            <lang id="fr">Dismiss</lang>
+            <lang id="nl">Annuleer</lang>
+        </text>
+
+        <text id="delete">
+            <lang id="es">Borrar</lang>
+            <lang id="de">Löschen</lang>
+            <lang id="en">Delete</lang>
+            <lang id="it">Cancella</lang>
+            <lang id="fr">Delete</lang>
+            <lang id="nl">Verwijder</lang>
+        </text>
+
+        <text id="activate">
+            <lang id="es">Habilitar</lang>
+            <lang id="de">Aktivieren</lang>
+            <lang id="en">Enable</lang>
+            <lang id="it">Abilita</lang>
+            <lang id="fr">Enable</lang>
+            <lang id="nl">Activeer</lang>
+        </text>
+
+        <text id="setContextAdmin">
+            <lang id="es">Seleccionar Administrador de Contexto</lang>
+            <lang id="de">ContextAdmin setzen</lang>
+            <lang id="en">Set ContextAdmin</lang>
+            <lang id="it">Imposta il ContextAdmin</lang>
+            <lang id="fr">Set ContextAdmin</lang>
+            <lang id="nl">Selecteer context</lang>
+        </text>
+
+        <text id="noworkingCTX">
+            <lang id="es">No ha seleccionado un contexto de trabajo. Por favor, utilice el menú contextual para seleccionar el contexto de trabajo!</lang>
+            <lang id="de">Es ist kein aktueller Kontext gesetzt. Setzen Sie bitte über das Menü Kontext einen Kontext!</lang>
+            <lang id="en">No working context is set. Please use menu context for setting the working context!</lang>
+            <lang id="it">Non è stato impostato nessun context operativo. Si prega di utilizza il menu context per impostare il context operativo!</lang>
+            <lang id="fr">No working context is set. Please use menu context for setting the working context!</lang>
+            <lang id="nl">Er is geen context gezet. Selecteer een context in het Context menu!</lang>
+        </text>
+
+        <text id="name">
+            <lang id="es">Nombre</lang>
+            <lang id="de">Name</lang>
+            <lang id="en">Name</lang>
+            <lang id="it">Nome</lang>
+            <lang id="fr">Name</lang>
+            <lang id="nl">Naam</lang>
+        </text>
+
+        <text id="quota">
+            <lang id="es">Cuota</lang>
+            <lang id="de">Kontigent</lang>
+            <lang id="en">Quota</lang>
+            <lang id="it">Quota</lang>
+            <lang id="fr">Quota</lang>
+            <lang id="nl">Limiet</lang>
+        </text>
+
+        <text id="mapping">
+            <lang id="es">Asignación</lang>
+            <lang id="de">Zuordnung</lang>
+            <lang id="en">Mapping</lang>
+            <lang id="it">Mapping</lang>
+            <lang id="fr">Mapping</lang>
+            <lang id="nl">Koppelingen</lang>
+        </text>
+
+        <text id="rights">
+            <lang id="es">Permisos</lang>
+            <lang id="de">Rechte</lang>
+            <lang id="en">Rights</lang>
+            <lang id="it">Permessi</lang>
+            <lang id="fr">Rights</lang>
+            <lang id="nl">Rechten</lang>
+        </text>
+
+        <text id="active">
+            <lang id="es">Habilitado</lang>            
+            <lang id="de">Aktiv</lang>
+            <lang id="en">Enabled</lang>
+            <lang id="it">Abilitato</lang>
+            <lang id="fr">Enabled</lang>
+            <lang id="nl">Actief</lang>
+        </text>
+
+        <text id="login">
+            <lang id="es">Iniciar sesión</lang>            
+            <lang id="de">Login</lang>
+            <lang id="en">Login</lang>
+            <lang id="it">Login</lang>
+            <lang id="fr">Login</lang>
+            <lang id="nl">Aanmelden</lang>
+        </text>
+
+        <text id="yes">
+            <lang id="es">Si</lang>
+            <lang id="de">Ja</lang>
+            <lang id="en">Yes</lang>
+            <lang id="it">Si</lang>
+            <lang id="fr">Yes</lang>
+            <lang id="nl">Ja</lang>
+        </text>
+
+        <text id="no">
+            <lang id="es">No</lang>
+            <lang id="de">Nein</lang>
+            <lang id="en">No</lang>
+            <lang id="it">No</lang>
+            <lang id="fr">No</lang>
+            <lang id="nl">Nee</lang>
+        </text>
+
+        <text id="noctxselected">
+            <lang id="es">¡Error: Contexto no seleccionado!</lang>
+            <lang id="de">Fehler: Kein Kontext ausgewählt!</lang>
+            <lang id="en">Error: No context selected!</lang>
+            <lang id="it">Errore: Nessun context selezionato!</lang>
+            <lang id="fr">Error: No context selected!</lang>
+            <lang id="nl">Fout: Geen context geselecteerd!</lang>
+        </text>
+
+        <text id="morectxselected">
+            <lang id="es">¡Error: Más de un Contexto seleccionado!</lang>
+            <lang id="de">Fehler: Es wurde mehr als ein Kontext ausgewählt!</lang>
+            <lang id="en">Error: More than one context selected!</lang>
+            <lang id="it">Errore: E' stato selezionato più di un context!</lang>
+            <lang id="fr">Error: More than one context selected!</lang>
+            <lang id="nl">Fout: Meer dan een context geselecteerd!</lang>
+        </text>
+
+        <text id="noctxadmin">
+            <lang id="es">Error: Faltan datos en la cuenta de administrador de contexto!\nPor favor, el menú 'Seleccionar Administrador de Contexto' para fijar estos datos</lang>
+            <lang id="de">Fehler: Für diesen Kontext sind keine Account-Daten für den ContextAdmin vorhanden!\nBitte setzen Sie diese Daten über den Menüpunkt 'ContextAdmin setzen'.</lang>
+            <lang id="en">Error: Missing context admin account data!\nPlease the menu 'Set ContextAdmin' to set this data.</lang>
+            <lang id="it">Errore: Non sono presenti i dati dell'account del Context admin!\nSi prega di utilizzare il menu 'Imposta il ContextAdmin' per impostare questi dati.</lang>
+            <lang id="fr">Error: Missing context admin account data!\nPlease the menu 'Set ContextAdmin' to set this data.</lang>
+            <lang id="nl">Fout: Ontbrekende context!\nSelecteer een context om te beheren in menu Context.</lang>
+        </text>
+
+        <text id="ctxadminset">
+            <lang id="es">El Administrador de Contexto ya está seleccionado!\nPara cambiar el Administrador de Contexto por favor use el menú de usuario.</lang>
+            <lang id="de">Der ContextAdmin für diesen Kontext ist schon gesetzt!\nWenn Sie den ContextAdmin ändern wollen, benutzen Sie das Menü Benutzer.</lang>
+            <lang id="en">The ContextAdmin is already set!\nFor changing the ContextAdmin please use the menu User.</lang>
+            <lang id="it">Il ContextAdmin è stato già impostato!\nPer cambiare il ContextAdmin si prega di utilizzare il menu utente.</lang>
+            <lang id="fr">The ContextAdmin is already set!\nFor changing the ContextAdmin please use the menu User.</lang>
+            <lang id="nl">De context beheerder is al gemaakt!\nWijzig de gegevens van de context beheerder in menu Gebruiker.</lang>
+        </text>
+
+        <text id="ctxerror">
+            <lang id="es">Error relacionado al Contexto</lang>
+            <lang id="de">Fehler bezüglich Kontext</lang>
+            <lang id="en">Context related error</lang>
+            <lang id="it">Errore legato al Context</lang>
+            <lang id="fr">Context related error</lang>
+            <lang id="nl">Context gerelateerde fout</lang>
+        </text>
+
+        <text id="delwrnctx">
+            <lang id="es">
+ <![CDATA[<b><u>Peligro:</u></b> ¿Estas seguro de querer borrar los contextos seleccionados?<br />
+!Esta acción borrará <span style="color:red">irreversiblemente</span> todos
+los usuarios, recursos y grupos de el contexto!]]>
+            </lang>
+            <lang id="de">
+ <![CDATA[<b><u>Achtung:</u></b> Wollen Sie wirklich die selektieren Kontexte löschen?<br />
+Dieser Vorgang löscht auch <span style="color:red">unwideruflich</span> alle
+dem Kontext zugehörigen Benutzer, Ressourcen und Gruppen!]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected contexts?<br />
+This action deletes <span style="color:red">irreversibly</span> all
+users, resources and groups of the context!]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b><u>Warning:</u></b> Sei sicuro di voler cancellare i context selezionati?<br />
+Questa azione cancellerà in modo <span style="color:red">irreversibile</span> tutti
+gli utenti, risorse e gruppi del context!]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected contexts?<br />
+This action deletes <span style="color:red">irreversibly</span> all
+users, resources and groups of the context!]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b><u>Waarschuwing:</u></b> Weet u zeker dat u de context wilt verwijderen??<br />
+Deze actie verwijderd <span style="color:red">permanenty</span> alle
+gebruikers, contacten en groepen van de context!]]>
+            </lang>
+        </text>
+
+        <text id="ctxIDinuse">
+            <lang id="es">!Ésta ID de Contexto está en uso!</lang>
+            <lang id="de">Diese ContextID ist schon vergeben!</lang>
+            <lang id="en">This ContextID is in use!</lang>
+            <lang id="it">Questo ContextID è in uso!</lang>
+            <lang id="fr">This ContextID is in use!</lang>
+            <lang id="nl">Het ID van deze context is in gebruik!</lang>
+        </text>
+
+        <text id="ctxNot0">
+            <lang id="es">!La ID de Contexto debe ser mayor que 0!</lang>
+            <lang id="de">ContextID muss gößer sein als 0!</lang>
+            <lang id="en">ContextID must be greater than 0!</lang>
+            <lang id="it">Il ContextID deve essere più grande di 0!</lang>
+            <lang id="fr">ContextID must be greater than 0!</lang>
+            <lang id="nl">Het ID van de context moet groter dan 0 zijn!</lang>
+        </text>
+
+        <text id="quotaNot0">
+            <lang id="es">!El tamaño del Almacén de Archivos debe ser mayor de 0!</lang>
+            <lang id="de">Kontigent muss gößer sein als 0!</lang>
+            <lang id="en">Filestore quota must be greater than 0!</lang>
+            <lang id="it">La quota del Filestore deve essere più grande di 0!</lang>
+            <lang id="fr">Filestore quota must be greater than 0!</lang>
+            <lang id="nl">De limiet van het bestandsarchief moet groter dan 0 zijn!</lang>
+        </text>
+
+        <text id="pwdminimum">
+            <lang id="es">!La longitud mínima de la contraseña es de MIN caracteres!</lang>
+            <lang id="de">Passwortlänge ist minimum MIN Zeichen!</lang>
+            <lang id="en">Minimum length of the password is MIN characters!</lang>
+            <lang id="it">La lunghezza minima della password è di MIN caratteri!</lang>
+            <lang id="fr">Minimum length of the password is MIN characters!</lang>
+            <lang id="nl">De minimale lengte van het wachtwoord is MIN tekens!</lang>
+        </text>
+
+        <text id="pwdnotequal">
+            <lang id="es">!Las Contraseñas no coinciden!</lang>
+            <lang id="de">Passwörter sind nicht ident!</lang>
+            <lang id="en">Passwords are not equal!</lang>
+            <lang id="it">Le password non sono uguali!</lang>
+            <lang id="fr">Passwords are not equal!</lang>
+            <lang id="nl">De wachtwoorden zijn niet gelijk!</lang>
+        </text>
+
+        <text id="invalidemail">
+            <lang id="es">!Dirección de E-Mail no válida!</lang>
+            <lang id="de">Invalide E-Mail Adresse!</lang>
+            <lang id="en">Invalid email address!</lang>
+            <lang id="it">Indirizzo email non valido!</lang>
+            <lang id="fr">Invalid email address!</lang>
+            <lang id="nl">Ongeldig e-mail adres!</lang>
+        </text>
+
+        <text id="createctxerror">
+            <lang id="es">Error durante la creación del Contexto</lang>
+            <lang id="de">Während des Anlegens des Kontexts ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during context creation</lang>
+            <lang id="it">Errore durante la creazione del context</lang>
+            <lang id="fr">Error during context creation</lang>
+            <lang id="nl">Fout tijdens maken van de context</lang>
+        </text>
+
+        <text id="createpluginerror">
+            <lang id="es">Error durante la creación del Plugin</lang>
+            <lang id="de">Während des Anlegens des Plugins ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during plugin creation</lang>
+            <lang id="it">Errore durante la creazione del plugin</lang>
+            <lang id="fr">Error during plugin creation</lang>
+            <lang id="nl">Fout tijdens maken van de plugin</lang>
+        </text>
+
+        <text id="changectxerror">
+            <lang id="es">Error mientras modificaba el Contexto </lang>
+            <lang id="de">Während des Ändern des Kontexts ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during changing context</lang>
+            <lang id="it">Errore nel cambiamento del context</lang>
+            <lang id="fr">Error during changing context</lang>
+            <lang id="nl">Fout tijdens wijzigen van de context</lang>
+        </text>
+
+        <text id="createctx">
+            <lang id="es">Crear Contexto</lang>
+            <lang id="de">Kontext anlegen</lang>
+            <lang id="en">Create context</lang>
+            <lang id="it">Crea context</lang>
+            <lang id="fr">Create context</lang>
+            <lang id="nl">Maak context</lang>
+        </text>
+
+        <text id="changectx">
+            <lang id="es">Cambiar Contexto</lang>
+            <lang id="de">Kontext ändern</lang>
+            <lang id="en">Change context</lang>
+            <lang id="it">Cambia context</lang>
+            <lang id="fr">Change context</lang>
+            <lang id="nl">Wijzig context</lang>
+        </text>
+
+        <text id="ctxname">
+            <lang id="es">Nombre del Contexto</lang>
+            <lang id="de">Kontextname</lang>
+            <lang id="en">Context name</lang>
+            <lang id="it">Nome del Context</lang>
+            <lang id="fr">Context name</lang>
+            <lang id="nl">Context naam</lang>
+        </text>
+
+        <text id="ctxid">
+            <lang id="es">ID del Contexto</lang>
+            <lang id="de">Kontext ID</lang>
+            <lang id="en">Context ID</lang>
+            <lang id="it">Context ID</lang>
+            <lang id="fr">Context ID</lang>
+            <lang id="nl">Context ID</lang>
+        </text>
+
+        <text id="ctxmapping">
+            <lang id="es">Asignaciones</lang>
+            <lang id="de">Zuordnungen</lang>
+            <lang id="en">Mappings</lang>
+            <lang id="it">Mappings</lang>
+            <lang id="fr">Mappings</lang>
+            <lang id="nl">Koppelingen</lang>
+        </text>
+
+        <text id="ctxrights">
+            <lang id="es">Permisos de Acceso</lang>
+            <lang id="de">Zugriffsrechte</lang>
+            <lang id="en">Access rights</lang>
+            <lang id="it">Diritti di Accesso</lang>
+            <lang id="fr">Access rights</lang>
+            <lang id="nl">Toegangsrechten</lang>
+        </text>
+
+        <text id="displayname">
+            <lang id="es">Nombre para mostrar</lang>
+            <lang id="de">angezeigter Name</lang>
+            <lang id="en">Display name</lang>
+            <lang id="it">Nome visualizzato</lang>
+            <lang id="fr">Display name</lang>
+            <lang id="nl">Zichtbare naam</lang>
+        </text>
+
+        <text id="firstname">
+            <lang id="es">Nombre de pila</lang>
+            <lang id="de">Vorname</lang>
+            <lang id="en">Given name</lang>
+            <lang id="it">Nome</lang>
+            <lang id="fr">Given name</lang>
+            <lang id="nl">Voornaam</lang>
+        </text>
+
+        <text id="surname">
+            <lang id="es">Apellidos</lang>
+            <lang id="de">Nachname</lang>
+            <lang id="en">Surname</lang>
+            <lang id="it">Cognome</lang>
+            <lang id="fr">Surname</lang>
+            <lang id="nl">Achternaam</lang>
+        </text>
+
+        <text id="username">
+            <lang id="es">Nombre de Usuario</lang>
+            <lang id="de">Benutzername</lang>
+            <lang id="en">User name</lang>
+            <lang id="it">Nome utente</lang>
+            <lang id="fr">User name</lang>
+            <lang id="nl">Gebruikersnaam</lang>
+        </text>
+
+        <text id="password">
+            <lang id="es">Contraseña</lang>
+            <lang id="de">Passwort</lang>
+            <lang id="en">Password</lang>
+            <lang id="it">Password</lang>
+            <lang id="fr">Password</lang>
+            <lang id="nl">Wachtwoord</lang>
+        </text>
+
+        <text id="email">
+            <lang id="es">E-Mail</lang>
+            <lang id="de">E-Mail</lang>
+            <lang id="en">Email</lang>
+            <lang id="it">Email</lang>
+            <lang id="fr">Email</lang>
+            <lang id="nl">E-mail adres</lang>
+        </text>
+
+        <text id="lang">
+            <lang id="es">Idioma</lang>
+            <lang id="de">Sprache</lang>
+            <lang id="en">Language</lang>
+            <lang id="it">Lingua</lang>
+            <lang id="fr">Language</lang>
+            <lang id="nl">Taal</lang>
+        </text>
+
+        <text id="usertemplate">
+            <lang id="es">Plantilla de usuario</lang>
+            <lang id="de">Benutzervorgaben</lang>
+            <lang id="en">User template</lang>
+            <lang id="it">Modello utente</lang>
+            <lang id="fr">User template</lang>
+            <lang id="nl">Gebruikersinstellingen</lang>
+        </text>
+
+        <text id="timezone">
+            <lang id="es">Zona Horaria</lang>
+            <lang id="de">Zeitzone</lang>
+            <lang id="en">Time zone</lang>
+            <lang id="it">Fuso orario</lang>
+            <lang id="fr">Time zone</lang>
+            <lang id="nl">Tijdzone</lang>
+        </text>
+
+        <text id="company">
+            <lang id="es">Empresa</lang>
+            <lang id="de">Unternehmen</lang>
+            <lang id="en">Company</lang>
+            <lang id="it">Azienda</lang>
+            <lang id="fr">Company</lang>
+            <lang id="nl">Bedrijf</lang>
+        </text>
+
+        <text id="department">
+            <lang id="es">Departamento</lang>
+            <lang id="de">Abteilung</lang>
+            <lang id="en">Department</lang>
+            <lang id="it">Dipartimento</lang>
+            <lang id="fr">Department</lang>
+            <lang id="nl">Afdeling</lang>
+        </text>
+
+        <text id="departments">
+            <lang id="es">Departamentos</lang>
+            <lang id="de">Abteilungen</lang>
+            <lang id="en">Departments</lang>
+            <lang id="it">Dipartimenti</lang>
+            <lang id="fr">Departments</lang>
+            <lang id="nl">Afdelingen</lang>
+        </text>
+
+        <text id="emaildomains">
+            <lang id="es">Dominios de E-Mail</lang>
+            <lang id="de">E-Mail Domänen</lang>
+            <lang id="en">Email domains</lang>
+            <lang id="it">Domini Email</lang>
+            <lang id="fr">Email domains</lang>
+            <lang id="nl">E-mail domeinen</lang>
+        </text>
+
+        <text id="server">
+            <lang id="es">Servidor</lang>
+            <lang id="de">Server</lang>
+            <lang id="en">Server</lang>
+            <lang id="it">Server</lang>
+            <lang id="fr">Server</lang>
+            <lang id="nl">Server</lang>
+        </text>
+
+        <text id="servers">
+            <lang id="es">Servidores</lang>
+            <lang id="de">Server</lang>
+            <lang id="en">Servers</lang>
+            <lang id="it">Server</lang>
+            <lang id="fr">Servers</lang>
+            <lang id="nl">Servers</lang>
+        </text>
+
+        <text id="mandatory">
+            <lang id="es">campo obligatorio</lang>
+            <lang id="de">verpflichtender Parameter</lang>
+            <lang id="en">mandatory field</lang>
+            <lang id="it">campo obbligatorio</lang>
+            <lang id="fr">mandatory field</lang>
+            <lang id="nl">verplicht veld</lang>
+        </text>
+
+        <text id="separated">
+            <lang id="es">separado por coma</lang>
+            <lang id="de">verschiedene Parameter werden durch Komma getrennt</lang>
+            <lang id="en">separated by comma</lang>
+            <lang id="it">separati dalla virgola</lang>
+            <lang id="fr">separated by comma</lang>
+            <lang id="nl">gescheiden door komma's</lang>
+        </text>
+
+        <text id="nonempty">
+            <lang id="es">sólo los valores no vacíos mayores que 0 son usados</lang>
+            <lang id="de">nur nicht leere Werte größer 0 werden angewendet</lang>
+            <lang id="en">only non empty values greater than 0 are used</lang>
+            <lang id="it">solamente i valori più grandi di 0 e non vuoti verranno utilizzati</lang>
+            <lang id="fr">only non empty values greater than 0 are used</lang>
+            <lang id="nl">alleen ingevulde waarden groter dan 0 zijn toegestaan</lang>
+        </text>
+
+        <text id="verification">
+            <lang id="es">verificación</lang>
+            <lang id="de">Kontrolle</lang>
+            <lang id="en">verification</lang>
+            <lang id="it">verifica</lang>
+            <lang id="fr">verifica</lang>
+            <lang id="nl">controle</lang>
+        </text>
+
+        <text id="setctxadmin">
+            <lang id="es">Seleccionar Administrador de Contexto</lang>
+            <lang id="de">ContextAdmin setzen</lang>
+            <lang id="en">Set ContextAdmin</lang>
+            <lang id="it">Imposta il ContextAdmin</lang>
+            <lang id="fr">Set ContextAdmin</lang>
+            <lang id="nl">Selecteer context</lang>
+        </text>
+
+        <text id="pluginrelated">
+            <lang id="es">Valor realcionado con el Plugin</lang>
+            <lang id="de">Plugin spezifischer Wert</lang>
+            <lang id="en">Plugin related value</lang>
+            <lang id="it">Valore inerente al Plugin</lang>
+            <lang id="fr">Plugin related value</lang>
+            <lang id="nl">Plugin gerelateerde waarde</lang>
+        </text>
+
+
+        <text id="setctxadminerror">
+            <lang id="es">Error durante la configuración del 'Administrador de Contexto'</lang>
+            <lang id="de">Während des Setzens des 'ContextAdmin' ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during setting the 'ContextAdmin'</lang>
+            <lang id="it">Errore durante l'impostazione del 'ContextAdmin'</lang>
+            <lang id="fr">Error during setting the 'ContextAdmin'</lang>
+            <lang id="nl">Fout tijdens het selecteren van de context beheerder</lang>
+        </text>
+
+        <text id="ctxadminlogingerror">
+            <lang id="es">El Administrador de Contexto o la contraseña está mal!</lang>
+            <lang id="de">ContextAdmin oder Passwort ist falsch!</lang>
+            <lang id="en">ContextAdmin or password is wrong!</lang>
+            <lang id="it">Il ContextAdmin o la password sono sbagliati!</lang>
+            <lang id="fr">ContextAdmin or password is wrong!</lang>
+            <lang id="nl">Context beheerder of wachtwoord is fout!</lang>
+        </text>
+
+        <text id="automatic">
+            <lang id="es">automático</lang>
+            <lang id="de">automatischer</lang>
+            <lang id="en">automatic</lang>
+            <lang id="it">automatico</lang>
+            <lang id="fr">automatic</lang>
+            <lang id="nl">automatisch</lang>
+        </text>
+
+        <text id="createuser">
+            <lang id="es">Crear usuario</lang>
+            <lang id="de">Benutzer anlegen</lang>
+            <lang id="en">Create user</lang>
+            <lang id="it">Crea utente</lang>
+            <lang id="fr">Create user</lang>
+            <lang id="nl">Maak gebruiker</lang>
+        </text>
+
+        <text id="createplugin">
+            <lang id="es">Crear plugin</lang>
+            <lang id="de">Plugin anlegen</lang>
+            <lang id="en">Create plugin</lang>
+            <lang id="it">Crea plugin</lang>
+            <lang id="fr">Create plugin</lang>
+            <lang id="nl">Maak plugin</lang>
+        </text>
+
+        <text id="changeplugin">
+            <lang id="es">Modificar plugin</lang>
+            <lang id="de">Plugin ändern</lang>
+            <lang id="en">Create plugin</lang>
+            <lang id="it">Modifica plugin</lang>
+            <lang id="fr">Create plugin</lang>
+            <lang id="nl">Wijzig plugin</lang>
+        </text>
+
+        <text id="createusererror">
+            <lang id="es">Error durante la creación del usuario</lang>
+            <lang id="de">Während des Anlegens des Kontexts ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during user creation</lang>
+            <lang id="it">Errore durante la creazione dell'utente</lang>
+            <lang id="fr">Error during user creation</lang>
+            <lang id="nl">Fout bij maken van gebruiker</lang>
+        </text>
+
+        <text id="copy">
+            <lang id="es">copiar</lang>
+            <lang id="de">kopieren</lang>
+            <lang id="en">copy</lang>
+            <lang id="it">copia</lang>
+            <lang id="fr">copy</lang>
+            <lang id="nl">kopieer</lang>
+        </text>
+
+        <text id="nodomain">
+            <lang id="es">sin dominio</lang>
+            <lang id="de">ohne Domain</lang>
+            <lang id="en">without domain</lang>
+            <lang id="it">senza dominio</lang>
+            <lang id="fr">without domain</lang>
+            <lang id="nl">zonder domein</lang>
+        </text>
+
+        <text id="changeuser">
+            <lang id="es">Cambiar usuario</lang>
+            <lang id="de">Benutzer ändern</lang>
+            <lang id="en">Change user</lang>
+            <lang id="it">Cambia utente</lang>
+            <lang id="fr">Change user</lang>
+            <lang id="nl">Wijzig gebruiker</lang>
+        </text>
+
+        <text id="changeusererror">
+            <lang id="es">Error durante el cambio de usuario</lang>
+            <lang id="de">Während des Ändern des Benutzers ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during changing user</lang>
+            <lang id="it">Errore durante il cambiamento dell'utente</lang>
+            <lang id="fr">Error during changing user</lang>
+            <lang id="nl">Fout bij wijzigen van gebruiker</lang>
+        </text>
+
+        <text id="emailalias">
+            <lang id="es">Email alias</lang>
+            <lang id="de">E-Mail Alias</lang>
+            <lang id="en">Email alias</lang>
+            <lang id="it">Alias Email</lang>
+            <lang id="fr">Email alias</lang>
+            <lang id="nl">E-mail alias</lang>
+        </text>
+
+        <text id="usererror">
+            <lang id="es">Error durante la modificación de usuario</lang>
+            <lang id="de">Während des Bearbeiten des Benutzers ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during user modification</lang>
+            <lang id="it">Errore durante la modifica dell'utente</lang>
+            <lang id="fr">Error during user modification</lang>
+            <lang id="nl">Fout bij aanpassen van gebruiker</lang>
+        </text>
+
+        <text id="delwrnuser">
+            <lang id="es">
+<![CDATA[<b><u>Peligro:</u></b>¿Estás seguro de querer borrar el usuario seleccionado?<br />
+!Esta acción borrará todos los datos del usuario!]]>
+            </lang>
+            <lang id="de">
+ <![CDATA[<b><u>Achtung:</u></b> Wollen Sie wirklich die selektieren Benutzer löschen?<br />
+ Dieser Vorgang löscht auch unwideruflich alle Daten des Benutzers]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected users?<br />
+This action deletes  all user data!]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b><u>Attenzione:</u></b> Vuoi veramente cancellare l'utente selezionato?<br />
+Questa azione cancellerà tutti i dati dell'utente!]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected users?<br />
+This action deletes  all user data!]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b><u>Waarschuwing:</u></b> Weet u zeker dat u de geselecteerde gebruikers wilt verwijderen?<br />
+Deze actie verwijderd alle gebruikersgegevens!]]>
+            </lang>
+        </text>
+
+        <text id="legend">
+            <lang id="es">Leyenda</lang>
+            <lang id="de">Legende</lang>
+            <lang id="en">Legend</lang>
+            <lang id="it">Legenda</lang>
+            <lang id="fr">Legend</lang>
+            <lang id="nl">Legenda</lang>
+        </text>
+
+        <text id="manual">
+            <lang id="es">manual</lang>
+            <lang id="de">manuell</lang>
+            <lang id="en">manual</lang>
+            <lang id="it">manuale</lang>
+            <lang id="fr">manual</lang>
+            <lang id="nl">handmatig</lang>
+        </text>
+
+        <text id="IDmanually">
+            <lang id="es">establecer ID manualmente</lang>
+            <lang id="de">ID manuell vergeben</lang>
+            <lang id="en">set ID manually</lang>
+            <lang id="it">imposta l'ID manualmente</lang>
+            <lang id="fr">set ID manually</lang>
+            <lang id="nl">zet het ID handmatig</lang>
+        </text>
+
+        <text id="list">
+            <lang id="es">lista</lang>
+            <lang id="de">Liste</lang>
+            <lang id="en">list</lang>
+            <lang id="it">lista</lang>
+            <lang id="fr">list</lang>
+            <lang id="nl">lijst</lang>
+        </text>
+
+        <text id="standardgrp">
+            <lang id="es">Grupo Estandar</lang>
+            <lang id="de">Standardgruppe</lang>
+            <lang id="en">Standard group</lang>
+            <lang id="it">Gruppo standard</lang>
+            <lang id="fr">Standard group</lang>
+            <lang id="nl">Standaard groep</lang>
+        </text>
+
+        <text id="grouperror">
+            <lang id="es">Error durante la modificación del grupo</lang>
+            <lang id="de">Während des Bearbeiten der Gruppe ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during group modification</lang>
+            <lang id="it">Errore durante la modifica del gruppo</lang>
+            <lang id="fr">Error during group modification</lang>
+            <lang id="nl">Fout bij aanpassen van de groep</lang>
+        </text>
+
+        <text id="nostandardgrpdel">
+            <lang id="es">¡El grupo estandar no pudo ser borrado!</lang>
+            <lang id="de">Die Standardgruppe kann nicht gelöscht werden!</lang>
+            <lang id="en">The standard group can not be deleted!</lang>
+            <lang id="it">Il gruppo predefinito non può essere cancellato!</lang>
+            <lang id="fr">The standard group can not be deleted!</lang>
+            <lang id="nl">De standaardgroep kan niet verwijdered worden!</lang>
+        </text>
+
+        <text id="nogrpselected">
+            <lang id="es">Error: ¡Grupo no seleccionado!</lang>
+            <lang id="de">Fehler: Keine Gruppe ausgewählt!</lang>
+            <lang id="en">Error: No group selected!</lang>
+            <lang id="it">Errore: Nessun gruppo selezionato!</lang>
+            <lang id="fr">Error: No group selected!</lang>
+            <lang id="nl">Fout: Geen groep geselecteerd!</lang>
+        </text>
+
+        <text id="moregrpselected">
+            <lang id="es">Error: ¡Más de un grupo seleccionado!</lang>
+            <lang id="de">Fehler: Es wurde mehr als eine Gruppe ausgewählt!</lang>
+            <lang id="en">Error: More than one group selected!</lang>
+            <lang id="it">Errore: E' stato selezionato più di un gruppo!</lang>
+            <lang id="fr">Error: More than one group selected!</lang>
+            <lang id="nl">Fout: Meer dan een groep geselecteerd!</lang>
+        </text>
+
+        <text id="delwrngrp">
+            <lang id="es">
+<![CDATA[<b><u>Peligro:</u></b> ¿Estás seguro de querer borrar los grupos seleccionados?]]>
+            </lang>
+            <lang id="de">
+<![CDATA[<b><u>Achtung:</u></b> Wollen Sie wirklich die selektieren Gruppen löschen?]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected groups?]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b><u>Attenzione:</u></b> Vuoi veramente cancellare i gruppi selezionati?]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected groups?]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b><u>Waarschuwing:</u></b> Weet u zeker dat u de geselecteerde groepen wilt verwijderen?]]>
+            </lang>
+        </text>
+
+        <text id="creategrp">
+            <lang id="es">Crear grupo</lang>
+            <lang id="de">Gruppe anlegen</lang>
+            <lang id="en">Create group</lang>
+            <lang id="it">Crea gruppo</lang>
+            <lang id="fr">Create group</lang>
+            <lang id="nl">Maak groep</lang>
+        </text>
+
+        <text id="changegrp">
+            <lang id="es">Modificar grupo</lang>
+            <lang id="de">Gruppe ändern</lang>
+            <lang id="en">Change group</lang>
+            <lang id="it">Cambia gruppo</lang>
+            <lang id="fr">Change group</lang>
+            <lang id="nl">Wijzig groep</lang>
+        </text>
+
+        <text id="member">
+            <lang id="es">Miembros</lang>
+            <lang id="de">Mitglieder</lang>
+            <lang id="en">Members</lang>
+            <lang id="it">Membri</lang>
+            <lang id="fr">Members</lang>
+            <lang id="nl">Leden</lang>
+        </text>
+
+        <text id="add">
+            <lang id="es">añadir</lang>
+            <lang id="de">hinzufügen</lang>
+            <lang id="en">add</lang>
+            <lang id="it">aggiungi</lang>
+            <lang id="fr">add</lang>
+            <lang id="nl">toevoegen</lang>
+        </text>
+
+        <text id="remove">
+            <lang id="es">eliminar</lang>
+            <lang id="de">entfernen</lang>
+            <lang id="en">remove</lang>
+            <lang id="it">rimuovi</lang>
+            <lang id="fr">remove</lang>
+            <lang id="nl">verwijderen</lang>
+        </text>
+
+        <text id="membergrp">
+            <lang id="es">de este grupo</lang>
+            <lang id="de">in der Gruppe</lang>
+            <lang id="en">of this group</lang>
+            <lang id="it">di questo gruppo</lang>
+            <lang id="fr">of this group</lang>
+            <lang id="nl">van deze groep</lang>
+        </text>
+
+        <text id="memberctx">
+            <lang id="es">de este contexto</lang>
+            <lang id="de">im Kontext</lang>
+            <lang id="en">of this context</lang>
+            <lang id="it">di questo context</lang>
+            <lang id="fr">of this context</lang>
+            <lang id="nl">in deze context</lang>
+        </text>
+
+        <text id="creategrperror">
+            <lang id="es">Error durante la creación del grupo</lang>
+            <lang id="de">Während des Anlegens der Gruppe ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during group creation</lang>
+            <lang id="it">Errore nella creazione del gruppo</lang>
+            <lang id="fr">Error during group creation</lang>
+            <lang id="nl">Fout tijdens maken van groep</lang>
+        </text>
+
+        <text id="changegrperror">
+            <lang id="es">Error durante la modificación del grupo </lang>
+            <lang id="de">Während des Änderns der Gruppe ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during changing group </lang>
+            <lang id="it">Errore nel cambiamento del gruppo </lang>
+            <lang id="fr">Error during changing group </lang>
+            <lang id="nl">Fout tijdens wijzigen van de groep</lang>
+        </text>
+
+        <text id="noresselected">
+            <lang id="es">Error: ¡Recurso no seleccionado!</lang>
+            <lang id="de">Fehler: Keine Ressource ausgewählt!</lang>
+            <lang id="en">Error: No resource selected!</lang>
+            <lang id="it">Errore: Nessuna risorsa selezionata!</lang>
+            <lang id="fr">Error: No resource selected!</lang>
+            <lang id="nl">Fout: Geen contact geselecteerd!</lang>
+        </text>
+
+        <text id="moreresselected">
+            <lang id="es">Error: ¡Más de un recurso seleccionado!</lang>
+            <lang id="de">Fehler: Es wurde mehr als eine Ressource ausgewählt!</lang>
+            <lang id="en">Error: More than one resource selected!</lang>
+            <lang id="it">Errore: E' stata selezionata più di una risorsa!</lang>
+            <lang id="fr">Error: More than one resource selected!</lang>
+            <lang id="nl">Fout: Meer dan een contact geselecteerd!</lang>
+        </text>
+
+        <text id="nousrselected">
+            <lang id="es">Error: ¡Usuario no seleccionado!</lang>
+            <lang id="de">Fehler: Kein Benuzer ausgewählt!</lang>
+            <lang id="en">Error: No user selected!</lang>
+            <lang id="it">Errore: Nessun utente selezionato!</lang>
+            <lang id="fr">Error: No user selected!</lang>
+            <lang id="nl">Fout: Geen gebruiker geselecteerd!</lang>
+        </text>
+
+        <text id="moreusrselected">
+            <lang id="es">Error: ¡Más de un usuario seleccionado!</lang>
+            <lang id="de">Fehler: Es wurde mehr als eine Benuzer ausgewählt!</lang>
+            <lang id="en">Error: More than one user selected!</lang>
+            <lang id="it">Errore: E' stato selezionato più di un utente!</lang>
+            <lang id="fr">Error: More than one user selected!</lang>
+            <lang id="nl">Fout: Meer dan een gebruiker geselecteerd!</lang>
+        </text>
+
+        <text id="noctxadmindel">
+            <lang id="es">El Administrador de Contexto no puede ser eliminado!</lang>
+            <lang id="de">Der ContextAdmin kann nicht gelöscht werden!</lang>
+            <lang id="en">The ContextAdmin can not be deleted!</lang>
+            <lang id="it">Il ContextAdmin non può essere cancellato!</lang>
+            <lang id="fr">The ContextAdmin can not be deleted!</lang>
+            <lang id="nl">De context beheerder kan niet verwijderd worden!</lang>
+        </text>
+
+        <text id="invalid">
+            <lang id="es">no válido</lang>
+            <lang id="de">ungültig</lang>
+            <lang id="en">invalid</lang>
+            <lang id="it">non valido</lang>
+            <lang id="fr">invalid</lang>
+            <lang id="nl">ongeldig</lang>
+        </text>
+
+        <text id="reserror">
+            <lang id="es">Error durante la modificación del recurso</lang>
+            <lang id="de">Während des Bearbeiten der Resource ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during resource modification</lang>
+            <lang id="it">Errore nella modifica della risorsa</lang>
+            <lang id="fr">Error during resource modification</lang>
+            <lang id="nl">Fout tijdens aanpassen van contact</lang>
+        </text>
+
+        <text id="delwrnres">
+            <lang id="es">
+<![CDATA[<b><u>Peligro:</u></b> ¿Estás seguro de querer borrar el recurso seleccionado?]]>
+            </lang>
+            <lang id="de">
+<![CDATA[<b><u>Achtung:</u></b> Wollen Sie wirklich die selektieren Ressourcen löschen?]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected resources?]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b><u>Attenzione:</b></u> Vuoi veramente cancellare la risorsa selezionata?]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b><u>Warning:</b></u> Do you really want to delete selected resources?]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b><u>Waarschuwing:</b></u> Weet u zeker dat u de geselecteerde contacten wilt verwijderen?]]>
+            </lang>
+        </text>
+
+        <text id="createres">
+            <lang id="es">Crear recurso</lang>
+            <lang id="de">Ressource anlegen</lang>
+            <lang id="en">Create resource</lang>
+            <lang id="it">Crea risorsa</lang>
+            <lang id="fr">Create resource</lang>
+            <lang id="nl">Maak contact</lang>
+        </text>
+
+        <text id="changeres">
+            <lang id="es">Modificar recurso</lang>
+            <lang id="de">Ressource ändern</lang>
+            <lang id="en">Change resource</lang>
+            <lang id="it">Modifica risorsa</lang>
+            <lang id="fr">Change resource</lang>
+            <lang id="nl">Wijzig contact</lang>
+        </text>
+
+        <text id="description">
+            <lang id="es">Descripción</lang>
+            <lang id="de">Beschreibung</lang>
+            <lang id="en">Description</lang>
+            <lang id="it">Descrizione</lang>
+            <lang id="fr">Description</lang>
+            <lang id="nl">Omschrijving</lang>
+        </text>
+
+        <text id="createreserror">
+            <lang id="es">Error durante la creación del recurso</lang>
+            <lang id="de">Während des Anlegens der Ressource ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during resource creation</lang>
+            <lang id="it">Errore nella creazione della risorsa</lang>
+            <lang id="fr">Error during resource creation</lang>
+            <lang id="nl">Fout tijdens maken van het contact</lang>
+        </text>
+
+        <text id="changereserror">
+            <lang id="es">Error durante la modificación del recurso</lang>
+            <lang id="de">Während des Änderns der Ressource ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during changing resource</lang>
+            <lang id="it">Errore nella modifica della risorsa</lang>
+            <lang id="fr">Error during changing resource</lang>
+            <lang id="nl">Fout tijdens wijzigen van het contact</lang>
+        </text>
+
+        <text id="login">
+            <lang id="es">Iniciar sesión</lang>
+            <lang id="de">Anmelden</lang>
+            <lang id="en">Login</lang>
+            <lang id="it">Login</lang>
+            <lang id="fr">Login</lang>
+            <lang id="nl">Aanmelden</lang>
+        </text>
+
+        <text id="oxadminlogingerror">
+            <lang id="es">¡El administador de OX o contraseña está mal!</lang>
+            <lang id="de">OXadmin oder Passwort ist falsch!</lang>
+            <lang id="en">OXadmin or password is wrong!</lang>
+            <lang id="it">OXadmin o password errata!</lang>
+            <lang id="fr">OXadmin or password is wrong!</lang>
+            <lang id="nl">OXadmin of wachtwoord is fout!</lang>
+        </text>
+
+        <text id="loginerror">
+            <lang id="es">Error al iniciar sesión</lang>
+            <lang id="de">Während des Login-Vorgangs ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during login</lang>
+            <lang id="it">Errore nel login</lang>
+            <lang id="fr">Error during login</lang>
+            <lang id="nl">Fout tijdens aanmelden</lang>
+        </text>
+
+        <text id="logouttxt">
+            <lang id="es">¡Has salido de la sesión!</lang>
+            <lang id="de">Sie wurden soeben aus dem Portal ausgeloggt!</lang>
+            <lang id="en">You have just logged out of the portal!</lang>
+            <lang id="it">Sei appena stato disconnnesso dal portal!</lang>
+            <lang id="fr">You have just logged out of the portal!</lang>
+            <lang id="nl">U bent afgemeld!</lang>
+        </text>
+
+        <text id="os">
+            <lang id="es">Sistema Operativo</lang>
+            <lang id="de">Betriebssystem</lang>
+            <lang id="en">Operation system</lang>
+            <lang id="it">Sistema operativo</lang>
+            <lang id="fr">Operation system</lang>
+            <lang id="nl">Besturingssysteem</lang>
+        </text>
+
+        <text id="arch">
+            <lang id="es">Arquitectura</lang>
+            <lang id="de">Architektur</lang>
+            <lang id="en">Architecture</lang>
+            <lang id="it">Architettura</lang>
+            <lang id="fr">Architecture</lang>
+            <lang id="nl">Architectuur</lang>
+        </text>
+
+        <text id="inuse">
+            <lang id="es">en uso</lang>
+            <lang id="de">davon in Verwendung</lang>
+            <lang id="en">in use</lang>
+            <lang id="it">in uso</lang>
+            <lang id="fr">in use</lang>
+            <lang id="nl">in gebruik</lang>
+        </text>
+
+        <text id="blog">
+            <lang id="es">Blog de desarrollo</lang>
+            <lang id="de">Entwickler-Blog</lang>
+            <lang id="en">Development-Blog</lang>
+            <lang id="it">Blog di Sviluppo</lang>
+            <lang id="fr">Development-Blog</lang>
+            <lang id="nl">Development-blog</lang>
+        </text>
+
+        <text id="newversion">
+            <lang id="es">Versión actual (enlace externo)</lang>
+            <lang id="de">Aktuelle Version (externer Link)</lang>
+            <lang id="en">Actual version (external link)</lang>
+            <lang id="it">Versione attuale (link esterno)</lang>
+            <lang id="fr">Actual version (external link)</lang>
+            <lang id="nl">Aktuele versie (externe link)</lang>
+        </text>
+
+        <text id="errorreport">
+            <lang id="es">Notificar error</lang>
+            <lang id="de">Fehler-Report</lang>
+            <lang id="en">Error report</lang>
+            <lang id="it">Notifica errore</lang>
+            <lang id="fr">Error report</lang>
+            <lang id="nl">Fout rapport</lang>
+        </text>
+
+        <text id="welcome">
+            <lang id="es">Bienvenido a Peter's Open-Xchange Server Admin GUI!</lang>
+            <lang id="de">Willkommen zu Peters Open-Xchange Server Admin GUI!</lang>
+            <lang id="en">Welcome to Peter's Open-Xchange Server Admin GUI!</lang>
+            <lang id="it">Benvenuto nell'Open-Xchange Server Admin GUI di Peter!</lang>
+            <lang id="fr">Welcome to Peter's Open-Xchange Server Admin GUI!</lang>
+            <lang id="nl">Welkom bij Peters Open-Xchange Server beheersinterface</lang>
+        </text>
+
+        <text id="resetctxadmin">
+            <lang id="es">Habilitar el restablecimiento de los datos Administrador de Contexto</lang>
+            <lang id="de">Zurücksetzen des ContextAdmin erlauben</lang>
+            <lang id="en">Enable reset of the ContextAdmin data</lang>
+            <lang id="it">Abilita il reset dei dati del ContextAdmin</lang>
+            <lang id="fr">Enable reset of the ContextAdmin data</lang>
+            <lang id="nl">Terugzetten van de context beheerder</lang>
+        </text>
+
+        <text id="bundleerror">
+            <lang id="es">Error durante el listado de los paquetes OSG</lang>
+            <lang id="de">Während der Abfrage der OSGI-Bundles ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during listing the OSG bundles</lang>
+            <lang id="it">Errore nell'elencazione dei bundles OSGI</lang>
+            <lang id="fr">Error during listing the OSG bundles</lang>
+            <lang id="nl">Fout tijdens ophalen van de OSGI-Bundles</lang>
+        </text>
+
+        <text id="files">
+            <lang id="es">Archivos de Sistema</lang>
+            <lang id="de">System-Dateien</lang>
+            <lang id="en">System files</lang>
+            <lang id="it">File di sistema</lang>
+            <lang id="fr">System files</lang>
+            <lang id="nl">Systeembestanden</lang>
+        </text>
+
+        <text id="fileerror">
+            <lang id="es">Error al contar los archivos del sistema</lang>
+            <lang id="de">Während der Enumerierung der Systemdateien ist ein Fehler aufgetreten</lang>
+            <lang id="en">Error during enumerating the system files</lang>
+            <lang id="it">Errore durante l'enumerazione dei file di sistema</lang>
+            <lang id="fr">Error during enumerating the system files</lang>
+            <lang id="nl">Fout tijdens ophalen van de systeembestanden</lang>
+        </text>
+
+        <text id="showfile">
+            <lang id="es">Mostrar archivo</lang>
+            <lang id="de">Datei anzeigen</lang>
+            <lang id="en">Show file</lang>
+            <lang id="it">Visualizza file</lang>
+            <lang id="fr">Show file</lang>
+            <lang id="nl">Toon bestand</lang>
+        </text>
+
+        <text id="implementation">
+            <lang id="es">Implementación</lang>
+            <lang id="de">Umsetzung</lang>
+            <lang id="en">Implementation</lang>
+            <lang id="it">Implementazione</lang>
+            <lang id="fr">Implementation</lang>
+            <lang id="nl">Implementatie</lang>
+        </text>
+
+        <text id="plugintype">
+            <lang id="es">Tipo</lang>
+            <lang id="de">Typ</lang>
+            <lang id="en">Type</lang>
+            <lang id="it">Tipo</lang>
+            <lang id="fr">Type</lang>
+            <lang id="nl">Soort</lang>
+        </text>
+
+        <text id="pluginerror">
+            <lang id="es">Error del plugin</lang>
+            <lang id="de">Fehler bezüglich Plugin</lang>
+            <lang id="en">Plugin related error</lang>
+            <lang id="it">Errore del Plugin</lang>
+            <lang id="fr">Plugin related error</lang>
+            <lang id="nl">Plugin gerelateerde fout</lang>
+        </text>
+
+        <text id="nopluginselected">
+            <lang id="es">Error: ¡Plugin no selecionado!</lang>
+            <lang id="de">Fehler: Kein Plugin ausgewählt!</lang>
+            <lang id="en">Error: No Plugin selected!</lang>
+            <lang id="it">Errore: Nessun Plugin selezionato!</lang>
+            <lang id="fr">Error: No Plugin selected!</lang>
+            <lang id="nl">Fout: Geen plugin geselecteerd!</lang>
+        </text>
+
+        <text id="morepluginselected">
+            <lang id="es">Error: ¡Más de un plugin selecionado!</lang>
+            <lang id="de">Fehler: Es wurde mehr als ein Plugin ausgewählt!</lang>
+            <lang id="en">Error: More than one plugin selected!</lang>
+            <lang id="it">Errore: E' stato selezionato più di un plugin!</lang>
+            <lang id="fr">Error: More than one plugin selected!</lang>
+            <lang id="nl">Fout: meer dan een plugin geselecteerd!</lang>
+        </text>
+
+        <text id="priority">
+            <lang id="es">Prioridad</lang>
+            <lang id="de">Priorität</lang>
+            <lang id="en">Priority</lang>
+            <lang id="it">Priorità</lang>
+            <lang id="fr">Priority</lang>
+            <lang id="nl">Prioriteit</lang>
+        </text>
+
+        <text id="class">
+            <lang id="es">Clase</lang>
+            <lang id="de">Klasse</lang>
+            <lang id="en">Class</lang>
+            <lang id="it">Classe</lang>
+            <lang id="fr">Class</lang>
+            <lang id="nl">Class</lang>
+        </text>
+
+        <text id="classpath">
+            <lang id="es">Ruta de la clase</lang>
+            <lang id="de">Klassenpfad</lang>
+            <lang id="en">Class path</lang>
+            <lang id="it">Path della Classe</lang>
+            <lang id="fr">Class path</lang>
+            <lang id="nl">Pad van de class</lang>
+        </text>
+
+        <text id="jarfile">
+            <lang id="es">Archivo JAR/ZIP</lang>
+            <lang id="de">JAR/ZIP-Datei</lang>
+            <lang id="en">JAR/ZIP file</lang>
+            <lang id="it">JAR/ZIP file</lang>
+            <lang id="fr">JAR/ZIP file</lang>
+            <lang id="nl">JAR/ZIP bestand</lang>
+        </text>
+
+        <text id="interface">
+            <lang id="es">Interfaz Java</lang>
+            <lang id="de">Java-Interface</lang>
+            <lang id="en">Java interface</lang>
+            <lang id="it">Interfaccia Java</lang>
+            <lang id="fr">Java interface</lang>
+            <lang id="nl">Java interface</lang>
+        </text>
+
+        <text id="externalscript">
+            <lang id="es">script externo</lang>
+            <lang id="de">externes Skript</lang>
+            <lang id="en">external script</lang>
+            <lang id="it">script esterno</lang>
+            <lang id="fr">external script</lang>
+            <lang id="nl">externe script</lang>
+        </text>
+
+        <text id="delwrnplugin">
+            <lang id="es">
+<![CDATA[<b><u>Peligro:</u></b> ¿Estás seguro de querer borrar el plugin seleccionado?]]>
+            </lang>
+            <lang id="de">
+ <![CDATA[<b><u>Achtung:</u></b> Wollen Sie wirklich die selektieren Plugins löschen?<br />]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected plugins?]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b><u>Attenzione:</u></b> Vuoi veramente cancellare il plugin selezionato?]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b><u>Warning:</u></b> Do you really want to delete selected plugins?]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b><u>Waarschuwing:</u></b> Weet u zeker dat u de geselecteerde plugins wilt verwijderen?]]>
+            </lang>
+        </text>
+
+        <text id="missingscript">
+            <lang id="es">¡Un plugin de tipo script debe contener al menos un comando!</lang>
+            <lang id="de">Ein Skript-Plugin muss mindestens ein Skript beinhalten!</lang>
+            <lang id="en">A script plugin must contain at least one script!</lang>
+            <lang id="it">Un plugin di tipo script deve contenere almeno uno script!</lang>
+            <lang id="fr">A script plugin must contain at least one script!</lang>
+            <lang id="nl">Een script plugin moet minstens een script bevatten!</lang>
+        </text>
+
+        <text id="pluginerror">
+            <lang id="es">Notificar error</lang>
+            <lang id="de">Fehlerreport</lang>
+            <lang id="en">Error report</lang>
+            <lang id="it">Notifica Errore</lang>
+            <lang id="fr">Error report</lang>
+            <lang id="nl">Fout rapport</lang>
+        </text>
+
+        <text id="pluginmsg">
+            <lang id="es">Sugerencia</lang>
+            <lang id="de">Hinweis</lang>
+            <lang id="en">Hint</lang>
+            <lang id="it">Suggerimento</lang>
+            <lang id="fr">Hint</lang>
+            <lang id="nl">Tip</lang>
+        </text>
+
+        <text id="bundlestart">
+            <lang id="es">Iniciar paquete</lang>
+            <lang id="de">Bundle starten</lang>
+            <lang id="en">Start Bundle</lang>
+            <lang id="it">Avvia Bundle</lang>
+            <lang id="fr">Start Bundle</lang>
+            <lang id="nl">Start bundle</lang>
+        </text>
+
+        <text id="bundlestop">
+            <lang id="es">Parar paquete</lang>
+            <lang id="de">Bundle beenden</lang>
+            <lang id="en">Stop bundle</lang>
+            <lang id="it">Ferma bundle</lang>
+            <lang id="fr">Stop bundle</lang>
+            <lang id="nl">Stop bundle</lang>
+        </text>
+
+        <text id="contextcreate">
+            <lang id="es">Crear contexto</lang>
+            <lang id="de">Kontext anlegen</lang>
+            <lang id="en">Create context</lang>
+            <lang id="it">Crea context</lang>
+            <lang id="fr">Create context</lang>
+            <lang id="nl">Maak context</lang>
+        </text>
+
+        <text id="contextchange">
+            <lang id="es">Modificar contexto</lang>
+            <lang id="de">Kontext ändern</lang>
+            <lang id="en">Change context</lang>
+            <lang id="it">Modifica context</lang>
+            <lang id="fr">Change context</lang>
+            <lang id="nl">Wijzig context</lang>
+        </text>
+
+        <text id="contextdelete">
+            <lang id="es">Eliminar contexto</lang>
+            <lang id="de">Kontext löschen</lang>
+            <lang id="en">Delete context</lang>
+            <lang id="it">Cancella context</lang>
+            <lang id="fr">Delete context</lang>
+            <lang id="nl">Verwijder context</lang>
+        </text>
+
+        <text id="contextenable">
+            <lang id="es">Habilitar contexto</lang>
+            <lang id="de">Kontext aktivieren</lang>
+            <lang id="en">Enable context</lang>
+            <lang id="it">Abilita context</lang>
+            <lang id="fr">Enable context</lang>
+            <lang id="nl">Activeer context</lang>
+        </text>
+
+        <text id="contextdisable">
+            <lang id="es">Desabilitar contexto</lang>
+            <lang id="de">Kontext deaktivieren</lang>
+            <lang id="en">Disable context</lang>
+            <lang id="it">Disabilita context</lang>
+            <lang id="fr">Disable context</lang>
+            <lang id="nl">Deactiveer context</lang>
+        </text>
+
+        <text id="usercreate">
+            <lang id="es">Crear usuario</lang>
+            <lang id="de">Benutzer anlegen</lang>
+            <lang id="en">Create user</lang>
+            <lang id="it">Crea utente</lang>
+            <lang id="fr">Create user</lang>
+            <lang id="nl">Maak gebruiker</lang>
+        </text>
+
+        <text id="userchange">
+            <lang id="es">Modificar usuario</lang>
+            <lang id="de">Benutzer ändern</lang>
+            <lang id="en">Change user</lang>
+            <lang id="it">Modifica utente</lang>
+            <lang id="fr">Change user</lang>
+            <lang id="nl">Wijzig gebruiker</lang>
+        </text>
+
+        <text id="userdelete">
+            <lang id="es">Eliminar usuario</lang>
+            <lang id="de">Benutzer löschen</lang>
+            <lang id="en">Delete user</lang>
+            <lang id="it">Cancella utente</lang>
+            <lang id="fr">Delete user</lang>
+            <lang id="nl">Verwijder gebruiker</lang>
+        </text>
+
+        <text id="groupcreate">
+            <lang id="es">Crear grupo</lang>
+            <lang id="de">Gruppe anlegen</lang>
+            <lang id="en">Create group</lang>
+            <lang id="it">Crea gruppo</lang>
+            <lang id="fr">Create group</lang>
+            <lang id="nl">Maak groep</lang>
+        </text>
+
+        <text id="groupchange">
+            <lang id="es">Modificar grupo</lang>
+            <lang id="de">Gruppe ändern</lang>
+            <lang id="en">Change group</lang>
+            <lang id="it">Modifica gruppo</lang>
+            <lang id="fr">Change group</lang>
+            <lang id="nl">Wijzig groep</lang>
+        </text>
+
+        <text id="groupdelete">
+            <lang id="es">Eliminar grupo</lang>
+            <lang id="de">Gruppe löschen</lang>
+            <lang id="en">Delete group</lang>
+            <lang id="it">Cancella gruppo</lang>
+            <lang id="fr">Delete group</lang>
+            <lang id="nl">Verwijder groep</lang>
+        </text>
+
+        <text id="resourcecreate">
+            <lang id="es">Crear recurso</lang>
+            <lang id="de">Ressource anlegen</lang>
+            <lang id="en">Create resource</lang>
+            <lang id="it">Crea risorsa</lang>
+            <lang id="fr">Create resource</lang>
+            <lang id="nl">Maak contact</lang>
+        </text>
+
+        <text id="resourcechange">
+            <lang id="es">Modificar recurso</lang>
+            <lang id="de">Ressource ändern</lang>
+            <lang id="en">Change resource</lang>
+            <lang id="it">Modifica risorsa</lang>
+            <lang id="fr">Change resource</lang>
+            <lang id="nl">Wijzig contact</lang>
+        </text>
+
+        <text id="resourcedelete">
+            <lang id="es">Eliminar recurso</lang>
+            <lang id="de">Ressource löschen</lang>
+            <lang id="en">Delete resource</lang>
+            <lang id="it">Cancella risorsa</lang>
+            <lang id="fr">Delete resource</lang>
+            <lang id="nl">Verwijder contact</lang>
+        </text>
+
+        <text id="resourceenable">
+            <lang id="es">Habilitar recurso</lang>
+            <lang id="de">Ressource aktivieren</lang>
+            <lang id="en">Enable resource</lang>
+            <lang id="it">Abilita risorsa</lang>
+            <lang id="fr">Enable resource</lang>
+            <lang id="nl">Activeer contact</lang>
+        </text>
+
+        <text id="resourcedisable">
+            <lang id="es">Deshabilitar recurso</lang>
+            <lang id="de">Ressource deaktivieren</lang>
+            <lang id="en">Disable resource</lang>
+            <lang id="it">Disabilita risorsa</lang>
+            <lang id="fr">Disable resource</lang>
+            <lang id="nl">Deactiveer contact</lang>
+        </text>
+
+        <text id="pgroup">
+            <lang id="es">Grupo</lang>
+            <lang id="de">Gruppe</lang>
+            <lang id="en">Group</lang>
+            <lang id="it">Gruppo</lang>
+            <lang id="fr">Group</lang>
+            <lang id="nl">Groep</lang>
+        </text>
+
+        <text id="presource">
+            <lang id="es">Recurso</lang>
+            <lang id="de">Ressoucre</lang>
+            <lang id="en">Resource</lang>
+            <lang id="it">Risorsa</lang>
+            <lang id="fr">Resource</lang>
+            <lang id="nl">Contact</lang>
+        </text>
+
+        <text id="help">
+            <lang id="es">Ayuda</lang>
+            <lang id="de">Hilfe</lang>
+            <lang id="en">Help</lang>
+            <lang id="it">Aiuto</lang>
+            <lang id="fr">Help</lang>
+            <lang id="nl">Help</lang>
+        </text>
+
+        <text id="missingpriority">
+            <lang id="es">Error: ¡Prioridad de plugin no encontrada!</lang>
+            <lang id="de">Fehler: Priorität des Plugins fehlt!</lang>
+            <lang id="en">Error: Missing plugin priority!</lang>
+            <lang id="it">Errore: Priorità plugin mancante!</lang>
+            <lang id="fr">Error: Missing plugin priority!</lang>
+            <lang id="nl">Fout: Ontbrekende plugin prioriteit!</lang>
+        </text>
+
+        <text id="missingclassname">
+            <lang id="es">Error: ¡Nombre de clase no encontrado!</lang>
+            <lang id="de">Name der Java Klasse fehlt!</lang>
+            <lang id="en">Error: Missing class name!</lang>
+            <lang id="it">Errore: Nome della classe mancante!</lang>
+            <lang id="fr">Error: Missing class name!</lang>
+            <lang id="nl">Fout: Ontbrekende class naam!</lang>
+        </text>
+
+        <text id="missingpluginname">
+            <lang id="es">Error: ¡Nombre de plugin no encontrado!</lang>
+            <lang id="de">Name des Plugins fehlt!</lang>
+            <lang id="en">Error: Missing plugin name!</lang>
+            <lang id="it">Errore: Nome plugin mancante!</lang>
+            <lang id="fr">Error: Missing plugin name!</lang>
+            <lang id="nl">Fout: Ontbrekende plugin naam!</lang>
+        </text>
+
+        <text id="pluginsupport">
+            <lang id="es">Soporte para plugin</lang>
+            <lang id="de">Plugin Support</lang>
+            <lang id="en">Plugin support</lang>
+            <lang id="it">Supporto Plugin</lang>
+            <lang id="fr">Plugin support</lang>
+            <lang id="nl">Plugin ondersteuning</lang>
+        </text>
+
+        <text id="emailforward">
+            <lang id="es">Reenvío</lang>
+            <lang id="de">Weiterleitung</lang>
+            <lang id="en">Forwarding</lang>
+            <lang id="it">Inoltro</lang>
+            <lang id="fr">Forwarding</lang>
+            <lang id="nl">Doorsturen</lang>
+        </text>
+
+        <text id="autoresponder">
+            <lang id="es">Respuesta automática</lang>
+            <lang id="de">Autoreply</lang>
+            <lang id="en">Autoresponder</lang>
+            <lang id="it">Risponditore automatico</lang>
+            <lang id="fr">Autoresponder</lang>
+            <lang id="nl">Automatisch antwoorden</lang>
+        </text>
+
+        <text id="on">
+            <lang id="es">activado</lang>
+            <lang id="en">on</lang>
+            <lang id="de">ein</lang>
+            <lang id="it">abilitato</lang>
+            <lang id="fr">on</lang>
+            <lang id="nl">aan</lang>
+        </text>
+
+        <text id="off">
+            <lang id="es">desactivado</lang>
+            <lang id="en">off</lang>
+            <lang id="de">aus</lang>
+            <lang id="it">disabilitato</lang>
+            <lang id="fr">off</lang>
+            <lang id="nl">uit</lang>
+        </text>
+
+        <text id="timedependent">
+            <lang id="es">dependencia de tiempo</lang>
+            <lang id="en">time-dependent</lang>
+            <lang id="de">zeitgesteuert</lang>
+            <lang id="it">a tempo</lang>
+            <lang id="fr">time-dependent</lang>
+            <lang id="nl">tijdsafhankelijk</lang>
+        </text>
+
+        <text id="groupemail">
+            <lang id="es">Email de grupo</lang>
+            <lang id="en">Group email</lang>
+            <lang id="de">Gruppen-Email</lang>
+            <lang id="it">Email di gruppo</lang>
+            <lang id="fr">Gruppen-Email</lang>
+            <lang id="nl">Groep e-mail</lang>
+        </text>
+
+        <text id="additionalemails">
+            <lang id="es">emails adicionales</lang>
+            <lang id="en">additional emails</lang>
+            <lang id="de">weitere Empfänger</lang>
+            <lang id="it">email aggiuntiva</lang>
+            <lang id="fr">weitere Empfänger</lang>
+            <lang id="nl">andere ontvangers</lang>
+        </text>
+
+        <text id="emptygroup">
+            <lang id="es">Grupo vacío - email no disponible!</lang>
+            <lang id="de">Leere Gruppe - kein Gruppen-E-Mail vorhanden!</lang>
+            <lang id="en">Empty group - no email available!</lang>
+            <lang id="it">Gruppo vuoto - nessuna email disponibile!</lang>
+            <lang id="fr">Empty group - no email available!</lang>
+            <lang id="nl">Lege groep - geen e-mail beschikbaar</lang>
+        </text>
+
+        <text id="deletegroupemail">
+            <lang id="es">Eliminar el correo electrónico del grupo elimina también las envíos existentes.</lang>
+            <lang id="de">Das Löschen der Gruppen-E-Mail löscht gleichzeitig auch die entsprechenden Weiterleitungen.</lang>
+            <lang id="en">Deleting the group email deletes also existing forwardings.</lang>
+            <lang id="it">Cancellando l'email del gruppo si cancellano anche le impostazioni dei forward.</lang>
+            <lang id="fr">Deleting the group email deletes also existing forwardings.</lang>
+            <lang id="nl">Het verwijderen van de groep-mail verwijderd ook de doorstuur instellingen.</lang>
+        </text>
+
+        <text id="mappinghint">
+            <lang id="es">
+<![CDATA[<b>Sugerencia:</b> ¡Añadir la asignación al <tt style="color:blue">defaultcontext</tt> para iniciar sesión sólo con el nombre de usuario!]]>
+            </lang>
+            <lang id="de">
+<![CDATA[<b>Hinweis:</b> <tt style="color:blue">defaultcontext</tt> ermöglicht eine Anmeldung nur mit dem Benutzer!]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b>Hint:</b> Add the mapping <tt style="color:blue">defaultcontext</tt> for login only with the user name!]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b>Suggerimento:</b> Aggiungi i mapping al <tt style="color:blue">defaultcontext</tt> per entrare solamente con il nome utente!]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b>Hint:</b> Add the mapping <tt style="color:blue">defaultcontext</tt> for login only with the user name!]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b>Tip:</b> Voeg de koppeling <tt style="color:blue">defaultcontext</tt> toe voor alleen aanmelden met de gebruikersnaam!]]>
+            </lang>
+        </text>
+
+        <text id="disableContextDelete">
+            <lang id="es">¡La opción 'eliminar' contextos está desctivada por razones de seguridad!</lang>
+            <lang id="de">Das Menü 'Löschen' von Kontexten ist aus Sicherheitsgründen deaktiviert!</lang>
+            <lang id="en">The menu 'delete' contexts is deactivated for security reasons!</lang>
+            <lang id="it">Il menu 'cancella' context è stato disattivato per ragioni di sicurezza!</lang>
+            <lang id="fr">The menu 'delete' contexts is deactivated for security reasons!</lang>
+            <lang id="nl">De functie 'verwijder' contexten is voor de veiligheid uitgeschakeld!</lang>
+        </text>
+
+        <text id="allgroups">
+            <lang id="es">... todos los grupos</lang>
+            <lang id="en">... all groups</lang>
+            <lang id="de">... vorhandene Gruppen</lang>
+            <lang id="it">... tutti i gruppi</lang>
+            <lang id="fr">... all groups</lang>
+            <lang id="nl">... alle groepen</lang>
+        </text>
+
+        <text id="ismemberof">
+            <lang id="es">... es miembro de</lang>
+            <lang id="en">... is member of</lang>
+            <lang id="de">... ist Mitglied von</lang>
+            <lang id="it">... è membro di</lang>
+            <lang id="fr">... is member of</lang>
+            <lang id="nl">... is lid van</lang>
+        </text>
+
+        <text id="middlename">
+            <lang id="es">Segundo nombre</lang>
+            <lang id="en">Middle name</lang>
+            <lang id="de">Zweiter Vorname</lang>
+            <lang id="it">Secondo Nome</lang>
+            <lang id="fr">Middle name</lang>
+            <lang id="nl">Tussenvoegsel</lang>
+        </text>
+
+        <text id="streethome">
+            <lang id="es">Calle (Casa)</lang>
+            <lang id="en">Street (Home)</lang>
+            <lang id="de">Straße (privat)</lang>
+            <lang id="it">Indirizzo (Casa)</lang>
+            <lang id="fr">Street (Home)</lang>
+            <lang id="nl">Straat (thuis)</lang>
+        </text>
+
+        <text id="postalcodehome">
+            <lang id="es">Código Postal (Casa)</lang>
+            <lang id="en">Postal Code (Home)</lang>
+            <lang id="de">PLZ (privat)</lang>
+            <lang id="it">CAP (Casa)</lang>
+            <lang id="fr">Postal Code (Home)</lang>
+            <lang id="nl">Postcode (thuis)</lang>
+        </text>
+
+        <text id="cityhome">
+            <lang id="es">Ciudad (Casa)</lang>
+            <lang id="en">City (Home)</lang>
+            <lang id="de">Stadt (privat)</lang>
+            <lang id="it">Città (Casa)</lang>
+            <lang id="fr">City (Home)</lang>
+            <lang id="nl">Plaats (thuis)</lang>
+        </text>
+
+        <text id="statehome">
+            <lang id="es">Provincia (Casa)</lang>
+            <lang id="en">State (Home)</lang>
+            <lang id="de">Bundesland (privat)</lang>
+            <lang id="it">Provincia (Casa)</lang>
+            <lang id="fr">State (Home)</lang>
+            <lang id="nl">Provincie (thuis)</lang>
+        </text>
+
+        <text id="birthday">
+            <lang id="es">Fecha de Nacimiento</lang>
+            <lang id="en">Birthday</lang>
+            <lang id="de">Geburtsdatum</lang>
+            <lang id="it">Compleanno</lang>
+            <lang id="fr">Birthday</lang>
+            <lang id="nl">Geboortedag</lang>
+        </text>
+
+        <text id="streetbusiness">
+            <lang id="es">Calle (Trabajo)</lang>
+            <lang id="en">Street (Business)</lang>
+            <lang id="de">Straße (geschäftlich)</lang>
+            <lang id="it">Indirizzo (Lavoro)</lang>
+            <lang id="fr">Street (Business)</lang>
+            <lang id="nl">Straat (zakelijk)</lang>
+        </text>
+
+        <text id="postalcodebusiness">
+            <lang id="es">Código Postal (Trabajo)</lang>
+            <lang id="en">Postal Code (Business)</lang>
+            <lang id="de">PLZ (geschäftlich)</lang>
+            <lang id="it">CAP (Lavoro)</lang>
+            <lang id="fr">Postal Code (Business)</lang>
+            <lang id="nl">Postcode (zakelijk)</lang>
+        </text>
+
+        <text id="citybusiness">
+            <lang id="es">Ciudad (Business)</lang>
+            <lang id="en">City (Business)</lang>
+            <lang id="de">Stadt (geschäftlich)</lang>
+            <lang id="it">Città (Lavoro)</lang>
+            <lang id="fr">City (Business)</lang>
+            <lang id="nl">Plaats (zakelijk)</lang>
+        </text>
+
+        <text id="statebusiness">
+            <lang id="es">Provincia (Trabajo)</lang>
+            <lang id="en">State (Business)</lang>
+            <lang id="de">Bundesland (geschäft.)</lang>
+            <lang id="it">Provincia (Lavoro)</lang>
+            <lang id="fr">State (Business)</lang>
+            <lang id="nl">Provincie (zakelijk)</lang>
+        </text>
+
+        <text id="phonebusiness">
+            <lang id="es">Teléfono (Trabajo)</lang>
+            <lang id="en">Telephon (Business)</lang>
+            <lang id="de">Telefon (geschäftlich)</lang>
+            <lang id="it">Telefono (Lavoro)</lang>
+            <lang id="fr">Telefon (geschäftlich)</lang>
+            <lang id="nl">Telefoon (zakelijk)</lang>
+        </text>
+
+        <text id="faxbusiness">
+            <lang id="es">Fax (Trabajo)</lang>
+            <lang id="en">Fax (Business)</lang>
+            <lang id="de">Fax (geschäftlich)</lang>
+            <lang id="it">Fax (Lavoro)</lang>
+            <lang id="fr">Fax (Business)</lang>
+            <lang id="nl">Fax (zakelijk)</lang>
+        </text>
+
+        <text id="phonehome">
+            <lang id="es">Teléfono (Casa)</lang>
+            <lang id="en">Telephon (Home)</lang>
+            <lang id="de">Telefon (privat)</lang>
+            <lang id="it">Telefono (Casa)</lang>
+            <lang id="fr">Telephon (Home)</lang>
+            <lang id="nl">Telefoon (thuis)</lang>
+        </text>
+
+        <text id="mobile">
+            <lang id="es">Móvil</lang>
+            <lang id="en">Mobile</lang>
+            <lang id="de">Mobiltelefon</lang>
+            <lang id="it">Cellulare</lang>
+            <lang id="fr">Mobile</lang>
+            <lang id="nl">Mobiel</lang>
+        </text>
+
+        <!-- 2009/01/29 -->
+
+        <text id="mailquota">
+            <lang id="es">Cuota de correo</lang>
+            <lang id="en">MailQuota</lang>
+            <lang id="de">MailQuota</lang>
+            <lang id="it">Quota Email</lang>
+            <lang id="fr">MailQuota</lang>
+            <lang id="nl">Mail limiet</lang>
+        </text>
+
+        <text id="uploadsizelimit">
+            <lang id="es">LímiteTamañoSubida</lang>
+            <lang id="en">UploadSizeLimit</lang>
+            <lang id="de">UploadSizeLimit</lang>
+            <lang id="it">LimiteDimensioneUpload</lang>
+            <lang id="fr">UploadSizeLimit</lang>
+            <lang id="nl">Upload limiet</lang>
+        </text>
+
+        <text id="uploadsizelimitperfile">
+            <lang id="es">LímiteTamañoSubidaPorArchivo</lang>
+            <lang id="en">UploadSizeLimitPerFile</lang>
+            <lang id="de">UploadSizeLimitPerFile</lang>
+            <lang id="it">Limite Dimensione File</lang>
+            <lang id="fr">UploadSizeLimitPerFile</lang>
+            <lang id="nl">UploadLimietPerBestand</lang>
+        </text>
+
+        <text id="thankstozoffoli">
+            <lang id="es">
+<![CDATA[<b>Gracias a Christian Zoffoli por la traducción a Italiano :</b>  <a href="mailto:czoffoli@xteklabs.com">czoffoli@xteklabs.com</a> / <a href="http://www.xteklabs.com">http://www.xteklabs.com</a>]]>
+            </lang>
+            <lang id="de">
+<![CDATA[<b>Danke an Christian Zoffoli für die italienische Übersetzung:</b> <a href="mailto:czoffoli@xteklabs.com">czoffoli@xteklabs.com</a> / <a href="http://www.xteklabs.com">http://www.xteklabs.com</a>]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b>Thanks to Christian Zoffoli for the Italian language file:</b>  <a href="mailto:czoffoli@xteklabs.com">czoffoli@xteklabs.com</a> / <a href="http://www.xteklabs.com">http://www.xteklabs.com</a>]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b>Grazie ad Christian Zoffoli dalla traduzione in lingua italiana:</b>  <a href="mailto:czoffoli@xteklabs.com">czoffoli@xteklabs.com</a> / <a href="http://www.xteklabs.com">http://www.xteklabs.com</a>]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b>Merci à Christian Zoffoli par la traduction en italien:</b>  <a href="mailto:czoffoli@xteklabs.com">czoffoli@xteklabs.com</a> / <a href="http://www.xteklabs.com">http://www.xteklabs.com</a>]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b>Met dank aan Christian Zoffoli voor de Italiaanse vertaling:</b>  <a href="mailto:czoffoli@xteklabs.com">czoffoli@xteklabs.com</a> / <a ref="http://www.xteklabs.com">http://www.xteklabs.com</a>]]>
+            </lang>
+        </text>
+        
+        <text id="thankstomadrona">
+            <lang id="es">
+<![CDATA[<b>Gracias a Antonio Madrona por la traducción a Español:</b>  <a href="mailto:antonio.madrona@socket.es">antonio.madrona@socket.es</a> / <a href="http://www.socket.es">http://www.socket.es</a>]]>
+            </lang>
+            <lang id="de">
+<![CDATA[<b>Danke an Antonio Madrona für die spanische Übersetzung:</b> <a href="mailto:antonio.madrona@socket.es">antonio.madrona@socket.es</a> / <a href="http://www.socket.es">http://www.socket.es</a>]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b>Thanks to Antonio Madrona for the Spain language file:</b>  <a href="mailto:antonio.madrona@socket.es">antonio.madrona@socket.es</a> / <a href="http://www.socket.es">http://www.socket.es</a>]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b>Grazie ad Antonio Madrona dalla traduzione in spagnolo:</b>  <a href="mailto:antonio.madrona@socket.es">antonio.madrona@socket.es</a> / <a href="http://www.socket.es">http://www.socket.es</a>]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b>Merci à Antonio Madrona par la traduction en espagnol:</b>  <a href="mailto:antonio.madrona@socket.es">antonio.madrona@socket.es</a> / <a href="http://www.socket.es">http://www.socket.es</a>]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b>Met dank aan Antonio Madrona voor de Spaanse vertaling:</b>  <a href="mailto:antonio.madrona@socket.es">antonio.madrona@socket.es</a> / <a href="http://www.socket.es">http://www.socket.es</a>]]>
+            </lang>
+        </text>
+
+
+<text id="thankstodijcks">
+            <lang id="es">
+<![CDATA[<b>Gracias a Frank Dijcks por la traducción a Países Bajos:</b>  <a href="mailto:fd@fdsystems.nl">fd@fdsystems.nl</a> / <a href="http://fdsystems.nl">http://fdsystems.nl</a>]]>
+            </lang>
+            <lang id="de">
+<![CDATA[<b>Danke an Frank Dijcks für die niederländische Übersetzung:</b> <a href="mailto:fd@fdsystems.nl">fd@fdsystems.nl</a> / <a href="http://www.socket.es">http://fdsystems.nl</a>]]>
+            </lang>
+            <lang id="en">
+<![CDATA[<b>Thanks to Frank Dijcks for the Dutch language file:</b>  <a href="mailto:fd@fdsystems.nl">fd@fdsystems.nl</a> / <a href="http://fdsystems.nl">http://fdsystems.nl</a>]]>
+            </lang>
+            <lang id="it">
+<![CDATA[<b>Grazie ad Frank Dijcks dalla traduzione in olandese:</b>  <a href="mailto:fd@fdsystems.nl">fd@fdsystems.nl</a> / <a href="http://fdsystems.nl">http://fdsystems.nl</a>]]>
+            </lang>
+            <lang id="fr">
+<![CDATA[<b>Merci à xxxx par la traduction en espagnol:</b>  <a href="mailto:fd@fdsystems.nl">fd@fdsystems.nl</a> / <a href="http://fdsystems.nl">http://fdsystems.nl</a>]]>
+            </lang>
+            <lang id="nl">
+<![CDATA[<b>Met dank aan  Frank Dijcks voor de Nederlandse vertaling:</b>  <a href="mailto:fd@fdsystems.nl">fd@fdsystems.nl</a> / <a href="http://fdsystems.nl">http://fdsystems.nl</a>]]>
+            </lang>
+        </text>
+
+
+
+         <!-- 2009/02/02 -->
+        <text id="sort">
+            <lang id="es">Ordenar</lang>
+            <lang id="de">Sortierung</lang>
+            <lang id="en">Sorting</lang>
+            <lang id="it">Ordinamento</lang>
+            <lang id="fr">Sorting</lang>
+            <lang id="nl">Sorteer</lang>
+        </text>
+
+        <text id="search">
+            <lang id="es">Buscar</lang>
+            <lang id="de">Suchen</lang>
+            <lang id="en">Search</lang>
+            <lang id="it">Cerca</lang>
+            <lang id="fr">Search</lang>
+            <lang id="nl">Zoek</lang>
+        </text>
+
+        <text id="allfields">
+            <lang id="es">todos los campos</lang>
+            <lang id="de">alle Felder</lang>
+            <lang id="en">all fields</lang>
+            <lang id="it">tutti i campi</lang>
+            <lang id="fr">all fields</lang>
+            <lang id="nl">alle velden</lang>
+        </text>
+
+        <text id="regexp">
+            <lang id="es">REGEXP</lang>
+            <lang id="de">REGEXP</lang>
+            <lang id="en">REGEXP</lang>
+            <lang id="it">REGEXP</lang>
+            <lang id="fr">REGEXP</lang>
+            <lang id="nl">REGEXP</lang>
+        </text>
+
+        <text id="nosearchresult">
+            <lang id="es">Búsqueda sin resultados</lang>
+            <lang id="de">Kein Suchergebnis!</lang>
+            <lang id="en">No search result</lang>
+            <lang id="it">Nessun risultato!</lang>
+            <lang id="fr">No search result</lang>
+            <lang id="nl">Geen zoek resultaten</lang>
+        </text>
+
+        <text id="searchresult">
+            <lang id="es">Resultados de la búsqueda</lang>
+            <lang id="de">Suchergebnisse</lang>
+            <lang id="en">Search results</lang>
+            <lang id="it">Risultati della ricerca</lang>
+            <lang id="fr">Search results</lang>
+            <lang id="nl">Zoek resultaten</lang>
+        </text>
+
+        <text id="reload">
+            <lang id="es">Actualizar</lang>
+            <lang id="de">Neu laden</lang>
+            <lang id="en">Reload</lang>
+            <lang id="it">Ricarica</lang>
+            <lang id="fr">Reload</lang>
+            <lang id="nl">Verversen</lang>
+        </text>
+
+        <text id="searchmode">
+            <lang id="es">buscar sólo</lang>
+            <lang id="de">nur Suche</lang>
+            <lang id="en">search only</lang>
+            <lang id="it">cerca solamente</lang>
+            <lang id="fr">search only</lang>
+            <lang id="nl">alleen zoeken</lang>
+        </text>
+
+        <text id="searchmodehint">
+            <lang id="es">¡Modo 'buscar sólo' está activo, ningún usurio será mostrado! Número de usuarios en este contexto</lang>
+            <lang id="de">Es werden keine Benutzer angezeigt, da 'nur Suche' aktiv ist! Anzahl der Benutzer in diesem Context</lang>
+            <lang id="en">Mode 'search only' is active, no user will be displayed! Number of users in this context</lang>
+            <lang id="it">Mode 'cerca solamente' is active, no user will be displayed! Number of user of this context</lang>
+            <lang id="fr">Mode 'search only' is active, no user will be displayed! Number of users in this context</lang>
+            <lang id="nl">Functie 'alleen zoeken' is actief, er worden geen gebruikers getoond! Aantal gebruikers in deze context</lang>
+        </text>
+
+    </group>
+</content>
+
+

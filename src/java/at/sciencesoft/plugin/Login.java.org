@@ -1,0 +1,88 @@
+/*
+ *     This program is free software; you can redistribute it and/or modify it
+ *     under the terms of the GNU General Public License, Version 2 as published
+ *     by the Free Software Foundation.
+ *
+ *     This program is distributed in the hope that it will be useful, but
+ *     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ *     or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ *     for more details.
+ *
+ *     You should have received a copy of the GNU General Public License along
+ *     with this program; if not, write to the Free Software Foundation, Inc., 59
+ *     Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ */
+package at.sciencesoft.plugin;
+
+import javax.security.auth.login.LoginException;
+
+
+import com.openexchange.authentication.Authenticated;
+import com.openexchange.authentication.AuthenticationService;
+import com.openexchange.authentication.LoginException;
+import com.openexchange.authentication.LoginExceptionCodes;
+import com.openexchange.authentication.LoginInfo;
+// import com.openexchange.authentication.*;
+
+/**
+ *
+ * @author <a href="mailto:peter.sauer@sciencesoft.at">Peter Sauer</a>
+ */
+public class Login implements AuthenticationService {
+
+    public Authenticated handleLoginInfo(final LoginInfo loginInfo)
+            throws LoginException {
+        Plugin[] plist = PluginManager.getPulgin(Plugin.PLUGIN.USER);
+
+        if (plist != null) {
+            final String username = loginInfo.getUsername();
+            final String password = loginInfo.getPassword();
+            /*
+            if (authMap.containsKey(username)) {
+            final AuthObject auth = authMap.get(username);
+            if (auth.getPassword().equals(password)) {
+            return new Authenticated() {
+            public String getContextInfo() {
+            return auth.getContextName();
+            }
+            public String getUserInfo() {
+            return auth.getUserName();
+            }
+            };
+            }
+            }
+             */
+
+            throw LoginExceptionCodes.INVALID_CREDENTIALS.create();
+        }
+        final String[] splitted = split(loginInfo.getUsername());
+        return new Authenticated() {
+
+            public String getContextInfo() {
+                return splitted[0];
+            }
+
+            public String getUserInfo() {
+                return splitted[1];
+            }
+        };
+    }
+
+    private String[] split(String loginInfo) {
+        return split(loginInfo, '@');
+    }
+
+    private String[] split(String loginInfo, char separator) {
+        final int pos = loginInfo.lastIndexOf(separator);
+        final String[] splitted = new String[2];
+        if (-1 == pos) {
+            splitted[1] = loginInfo;
+            splitted[0] = "defaultcontext";
+        } else {
+            splitted[1] = loginInfo.substring(0, pos);
+            splitted[0] = loginInfo.substring(pos + 1);
+        }
+        return splitted;
+    }
+}

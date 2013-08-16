@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Peter's Open-Xchange Server Admin GUI</title>
+        <link rel="shortcut icon" href="images/favicon.ico" />
+        <!-- add your meta tags here -->
+        <link href="css/my_layout.css" rel="stylesheet" type="text/css" />
+        <!--[if lte IE 7]>
+        <link href="css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
+        <![endif]-->
+
+    </head>
+    <body>
+        <script type="text/javascript" src="js/common.js"></script>
+        <script type="text/javascript">
+        function CheckContext(menu) {
+
+            if(document.getElementById('workingOXcontext') == undefined) {
+                alert("Es ist kein aktueller Kontext gesetzt. Setzen Sie bitte über das Menü Kontext einen Kontext!");
+            } else {
+                var tmp =  document.location.href;
+                var pos = tmp.lastIndexOf("link=")
+                if(pos == -1) {
+                    tmp+= "?link=" + menu;
+                } else {
+                    tmp = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + menu;
+                }
+                document.location.href = tmp;
+            }
+        }
+        </script>
+        <div id="workingOXcontext" style="display:none">&nbsp;</div>
+        <div class="page_margins">
+            <div class="page">
+                <div id="header">
+
+                    <div id="topnav">
+                        <b>OXadmin: <span style="color:#369">oxadminmaster</span>&nbsp;
+                        Kontext:
+                        <span style="color:#369">test</span></b>
+                        &nbsp;
+                        <!-- start: skip link navigation -->
+                         <a href="index.html?link=welcome&amp;oxguilang=de"><img style="border:0px" src="images/de.png" alt="de" /></a>
+                         <a href="index.html?link=welcome&amp;oxguilang=en"><img style="border:0px" src="images/en.png" alt="en"  /></a>
+
+                    </div>
+                </div>
+                <div id="main">
+                    <div id="col1">
+                        <div id="col1_content" class="clearfix">
+                            <!-- add your content here -->
+                            <div id="navcontainer">
+                                <ul id="navlist">
+                                    <li id="active"><a href="index.html?link=context">Kontext</a></li>
+
+                                    <li  ><a href="javascript:CheckContext('user')">Benutzer</a></li>
+                                    <li ><a href="javascript:CheckContext('group')">Gruppen</a></li>
+                                    <li ><a href="javascript:CheckContext('resource')">Ressourcen</a></li>
+                                    <li ><a href="index.html?link=plugin">Plugin</a></li>
+                                    <li ><a href="index.html?link=info">Information</a></li>
+                                    <li><a href="index.html?link=logout">Logout</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="col3">
+                        <div id="col3_content" class="clearfix" style="padding: 10px 10px 0 10px">
+                            <!-- add your content here -->
+<script type="text/javascript">
+
+    function ToogleDiv(a,b,c) {
+        document.getElementById(a).style.display = '';
+        document.getElementById(b).style.display = 'none';
+        document.getElementById(c).value = a;
+        return false;
+    }
+
+    function Dismiss() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "user";
+    }
+
+    function Copy() {
+        var area = document.forms[0];
+        var dname = area.elements['displayName'].value.trim();
+        if(dname != "") {
+            var f = dname.indexOf(" ");
+            var l = dname.lastIndexOf(" ");
+            if(f != -1) {
+                area.elements['firstName'].value = dname.substr(0,f);
+                area.elements['lastName'].value = dname.substr(l + 1);
+            }
+        }
+    }
+
+    function CopyImapLogin() {
+        var area = document.forms[0];
+        var e = document.getElementById('email_show');
+        var email;
+        if(e != undefined)  {
+            var s = area.elements['email_show'].value;
+
+            if(s == "" || s == "domain_list") {
+                email = area.elements['emailUser'].value + '@' + area.elements['domain'].value;
+
+            } else {
+                email = area.elements['email_str'].value;
+            }
+        } else {
+            email =  area.elements['email_str'].value;
+        }
+
+        if(area.elements['copydomain'].checked) {
+            var pos = email.indexOf('@');
+            if(pos >= 0) {
+                email = email.substr(0,pos);
+            }
+        }
+
+        area.elements['imapLogin'].value = email;
+    }
+
+    function CopyIMAPlogin(l) {
+        //
+        //
+    }
+
+    function CheckInput() {
+        var area = document.forms[0];
+        var errorCount = 0;
+        var test = new Array('login','displayName','firstName','lastName','pwd','pwdRetype');
+        var f;
+        for(var i = 0; i < test.length; ++i) {
+            f = area.elements[test[i]];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+            }
+        }
+        var e = document.getElementById('domain_list');
+        if(e != undefined && e.style.display == '')  {
+            f = area.elements['emailUser'];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+                if(!checkEmailAdr(f.value + '@' + area.elements['domain'].value)) {
+                    area.elements['emailUser'].style.border = '1px solid red';
+                    document.getElementById('emailhint').style.display = '';
+                    document.getElementById('emailhint').firstChild.nodeValue = "ungültig";
+                    ++errorCount;
+                } else {
+                    area.elements['emailUser'].style.border = '';
+                    document.getElementById('emailhint').style.display = 'none';
+                }
+            }
+        }
+
+
+
+        var e = document.getElementById('email_input');
+        if(e != undefined && e.style.display == '')  {
+            f = area.elements['email_str'];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+                if(!checkEmailAdr(area.elements['email_str'].value)) {
+                    area.elements['email_str'].style.border = '1px solid red';
+                    document.getElementById('emailhint2').style.display = '';
+                    document.getElementById('emailhint2').firstChild.nodeValue = "ungültig";
+                    ++errorCount;
+                } else {
+                    area.elements['email_str'].style.border = '';
+                    document.getElementById('emailhint2').style.display = 'none';
+                }
+            }
+        }
+
+        // special checks
+        v = area.elements['pwd'].value;
+        var v2 = area.elements['pwdRetype'].value;
+
+        if(v.trim().length > 0) {
+            var pwdShort = false;
+            if(v.trim().length < 5) {
+                area.elements['pwd'].style.border = '1px solid red';
+                document.getElementById('pwdhint').style.display = '';
+                document.getElementById('pwdhint').firstChild.nodeValue = "Passwortlänge ist minimum 5 Zeichen!";
+                pwdShort = true;
+                ++errorCount;
+            } else {
+                area.elements['pwd'].style.border = '';
+                document.getElementById('pwdhint').style.display = 'none';
+            }
+            if(!pwdShort) {
+                if(v != v2) {
+                    area.elements['pwd'].style.border = '1px solid red';
+                    area.elements['pwdRetype'].style.border = '1px solid red';
+                    document.getElementById('pwdhint').style.display = '';
+                    document.getElementById('pwdhint').firstChild.nodeValue = "Passwörter sind nicht ident!";
+                    ++errorCount;
+                } else {
+                    area.elements['pwd'].style.border = '';
+                    area.elements['pwdRetype'].style.border = '';
+                    document.getElementById('pwdhint').style.display = 'none';
+                }
+            }
+        }
+
+        //
+
+
+        if(errorCount == 0) {
+            area.submit();
+        }
+    }
+
+</script>
+
+<h2>Benutzer anlegen</h2>
+
+<form action="index.html?link=createuser" method="post">
+    <div style="width:38em; border: 1px solid lightgray;margin-top:1em;margin-bottom:1em;padding:.3em">
+        <div class="subcolumns">
+            <div class="c30l">
+                <div class="thb">Benutzer</div>
+                <div class="tdb">Benutzername<span class="r">&sup1;</span></div>
+                <div class="tdb">angezeigter Name<span class="r">&sup1;</span></div>
+
+                <div class="tdb">Vorame<span class="r">&sup1;</span></div>
+                <div class="tdb">Nachname<span class="r">&sup1;</span></div>
+                <div class="tdb">Passwort<span class="r">&sup1;</span></div>
+
+                <div class="tdb">&nbsp;</div>
+                <div class="tdb">Sprache</div>
+                <div class="tdb">Zeitzone</div>
+
+                <div class="tdb">Unternehmen</div>
+                <div class="tdb">Abteilung</div>
+
+                <div class="tdb">UploadSizeLimit&sup3;</div>
+                <div class="tdb">UploadSizeLimitPerFile&sup3;</div>
+                <div class="thb">E-Mail</div>
+                <div class="tdb">E-Mail<span class="r">&sup1;</span></div>
+
+                <div class="tdb">MailQuota&sup3;&dagger;</div
+                <div class="tdb2">E-Mail Alias&sup2;</div>
+                <div class="tdb">Weiterleitung&sup2;&dagger;</div>
+                <div class="tdb2">&nbsp;</div>
+                <div class="tdb">Autoreply&dagger;</div>
+                <div class="tdb">&nbsp;</div>
+                <div class="tdb3">&nbsp;</div>
+                <div class="tdb">IMAP-Login</div>
+
+                <div class="tdb">SMTP-Server</div>
+                <div class="tdb">IMAP-Server</div>
+
+            </div>
+            <div class="c70r">
+                <div class="td">&nbsp;</div>
+                <div class="td"><input name="login" size="25" maxlength="50" value="" /></div>
+                <div class="td"><input name="displayName" size="35" maxlength="50" value="" /></div>
+
+                <div class="td"><input name="firstName" size="35" maxlength="50" value="" /> <input class="submit" type="button" onclick="return Copy()" value="kopieren" /></div>
+                <div class="td"><input name="lastName" size="35" maxlength="50" value="" /></div>
+                <div class="td">
+                    <div class="td">
+                        <input type="password" name="pwd" size="10" maxlength="50" value="" />
+                        <span id="pwdhint" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </div>
+                </div>
+
+                <div class="td">
+                    <div class="td"><input type="password" name="pwdRetype" size="10" maxlength="50" value="" /> (Kontrolle)</div>
+                </div>
+                <div class="td">
+                    <select name="lang" >
+                        <option value="en_US" >English</option><option value="de_DE" selected="selected">Deutsch</option><option value="fr_FR" >Français</option>
+
+                    </select>
+                </div>
+                <div class="td">
+                    <select name="timeZone">
+                        <option value="0" >Africa/Abidjan</option><option value="1" >Africa/Accra</option><option value="2" >Africa/Addis_Ababa</option><option value="3" >Africa/Algiers</option><option value="4" >Africa/Asmera</option><option value="5" >Africa/Bangui</option><option value="6" >Africa/Banjul</option><option value="7" >Africa/Bissau</option><option value="8" >Africa/Blantyre</option><option value="9" >Africa/Bujumbura</option><option value="10" >Africa/Cairo</option><option value="11" >Africa/Casablanca</option><option value="12" >Africa/Conakry</option><option value="13" >Africa/Dakar</option><option value="14" >Africa/Dar_es_Salaam</option><option value="15" >Africa/Djibouti</option><option value="16" >Africa/Douala</option><option value="17" >Africa/Freetown</option><option value="18" >Africa/Gaborone</option><option value="19" >Africa/Harare</option><option value="20" >Africa/Johannesburg</option><option value="21" >Africa/Kampala</option><option value="22" >Africa/Khartoum</option><option value="23" >Africa/Kigali</option><option value="24" >Africa/Kinshasa</option><option value="25" >Africa/Lagos</option><option value="26" >Africa/Libreville</option><option value="27" >Africa/Lome</option><option value="28" >Africa/Luanda</option><option value="29" >Africa/Lubumbashi</option><option value="30" >Africa/Lusaka</option><option value="31" >Africa/Malabo</option><option value="32" >Africa/Maputo</option><option value="33" >Africa/Maseru</option><option value="34" >Africa/Mbabane</option><option value="35" >Africa/Mogadishu</option><option value="36" >Africa/Monrovia</option><option value="37" >Africa/Nairobi</option><option value="38" >Africa/Ndjamena</option><option value="39" >Africa/Niamey</option><option value="40" >Africa/Nouakchott</option><option value="41" >Africa/Ouagadougou</option><option value="42" >Africa/Porto-Novo</option><option value="43" >Africa/Sao_Tome</option><option value="44" >Africa/Timbuktu</option><option value="45" >Africa/Tripoli</option><option value="46" >Africa/Tunis</option><option value="47" >Africa/Windhoek</option><option value="48" >America/Adak</option><option value="49" >America/Anchorage</option><option value="50" >America/Anguilla</option><option value="51" >America/Antigua</option><option value="52" >America/Arubasubstring</option><option value="53" >America/Asuncion</option><option value="54" >America/Barbados</option><option value="55" >America/Belize</option><option value="56" >America/Bogota</option><option value="57" >America/Buenos_Aires</option><option value="58" >America/Caracas</option><option value="59" >America/Cayenne</option><option value="60" >America/Cayman</option><option value="61" >America/Chicago</option><option value="62" >America/Costa_Rica</option><option value="63" >America/Cuiaba</option><option value="64" >America/Curacao</option><option value="65" >America/Dawson_Creek</option><option value="66" >America/Denver</option><option value="67" >America/Dominica</option><option value="68" >America/Edmonton</option><option value="69" >America/El_Salvador</option><option value="70" >America/Fortaleza</option><option value="71" >America/Godthab</option><option value="72" >America/Grand_Turk</option><option value="73" >America/Grenada</option><option value="74" >America/Guadeloupe</option><option value="75" >America/Guatemala</option><option value="76" >America/Guayaquil</option><option value="77" >America/Guyana</option><option value="78" >America/Halifax</option><option value="79" >America/Havana</option><option value="80" >America/Indianapolis</option><option value="81" >America/Jamaica</option><option value="82" >America/La_Paz</option><option value="83" >America/Lima</option><option value="84" >America/Los_Angeles</option><option value="85" >America/Managua</option><option value="86" >America/Manaus</option><option value="87" >America/Martinique</option><option value="88" >America/Mazatlan</option><option value="89" >America/Mexico_City</option><option value="90" >America/Miquelon</option><option value="91" >America/Montevideo</option><option value="92" >America/Montreal</option><option value="93" >America/Montserrat</option><option value="94" >America/Nassau</option><option value="95" >America/New_York</option><option value="96" >America/Noronha</option><option value="97" >America/Panama</option><option value="98" >America/Paramaribo</option><option value="99" >America/Phoenix</option><option value="100" >America/Port-au-Prince</option><option value="101" >America/Port_of_Spain</option><option value="102" >America/Porto_Acre</option><option value="103" >America/Puerto_Rico</option><option value="104" >America/Regina</option><option value="105" >America/Rio_Branco</option><option value="106" >America/Santiago</option><option value="107" >America/Santo_Domingo</option><option value="108" >America/Sao_Paulo</option><option value="109" >America/Scoresbysund</option><option value="110" >America/St_Johns</option><option value="111" >America/St_Kitts</option><option value="112" >America/St_Lucia</option><option value="113" >America/St_Thomas</option><option value="114" >America/St_Vincent</option><option value="115" >America/Tegucigalpa</option><option value="116" >America/Thule</option><option value="117" >America/Tijuana</option><option value="118" >America/Tortola</option><option value="119" >America/Vancouver</option><option value="120" >America/Winnipeg</option><option value="121" >Antarctica/Casey</option><option value="122" >Antarctica/DumontDUrville</option><option value="123" >Antarctica/Mawson</option><option value="124" >Antarctica/McMurdo</option><option value="125" >Antarctica/Palmer</option><option value="126" >Asia/Aden</option><option value="127" >Asia/Almaty</option><option value="128" >Asia/Amman</option><option value="129" >Asia/Anadyr</option><option value="130" >Asia/Aqtau</option><option value="131" >Asia/Aqtobe</option><option value="132" >Asia/Ashkhabad</option><option value="133" >Asia/Baghdad</option><option value="134" >Asia/Bahrain</option><option value="135" >Asia/Baku</option><option value="136" >Asia/Bangkok</option><option value="137" >Asia/Beirut</option><option value="138" >Asia/Bishkek</option><option value="139" >Asia/Brunei</option><option value="140" >Asia/Calcutta</option><option value="141" >Asia/Colombo</option><option value="142" >Asia/Dacca</option><option value="143" >Asia/Damascus</option><option value="144" >Asia/Dhaka</option><option value="145" >Asia/Dubai</option><option value="146" >Asia/Dushanbe</option><option value="147" >Asia/Hong_Kong</option><option value="148" >Asia/Irkutsk</option><option value="149" >Asia/Jakarta</option><option value="150" >Asia/Jayapura</option><option value="151" >Asia/Jerusalem</option><option value="152" >Asia/Kabul</option><option value="153" >Asia/Kamchatka</option><option value="154" >Asia/Karachi</option><option value="155" >Asia/Katmandu</option><option value="156" >Asia/Krasnoyarsk</option><option value="157" >Asia/Kuala_Lumpur</option><option value="158" >Asia/Kuwait</option><option value="159" >Asia/Macao</option><option value="160" >Asia/Magadan</option><option value="161" >Asia/Manila</option><option value="162" >Asia/Muscat</option><option value="163" >Asia/Nicosia</option><option value="164" >Asia/Novosibirsk</option><option value="165" >Asia/Phnom_Penh</option><option value="166" >Asia/Pyongyang</option><option value="167" >Asia/Qatar</option><option value="168" >Asia/Rangoon</option><option value="169" >Asia/Riyadh</option><option value="170" >Asia/Saigon</option><option value="171" >Asia/Seoul</option><option value="172" >Asia/Shanghai</option><option value="173" >Asia/Singapore</option><option value="174" >Asia/Taipei</option><option value="175" >Asia/Tashkent</option><option value="176" >Asia/Tbilisi</option><option value="177" >Asia/Tehran</option><option value="178" >Asia/Thimbu</option><option value="179" >Asia/Tokyo</option><option value="180" >Asia/Ujung_Pandang</option><option value="181" >Asia/Ulaanbaatar</option><option value="182" >Asia/Vientiane</option><option value="183" >Asia/Vladivostoksubstring</option><option value="184" >Asia/Yakutsk</option><option value="185" >Asia/Yekaterinburg</option><option value="186" >Asia/Yerevan</option><option value="187" >Atlantic/Azores</option><option value="188" >Atlantic/Bermuda</option><option value="189" >Atlantic/Canary</option><option value="190" >Atlantic/Cape_Verde</option><option value="191" >Atlantic/Faeroe</option><option value="192" >Atlantic/Jan_Mayen</option><option value="193" >Atlantic/Reykjavik</option><option value="194" >Atlantic/South_Georgia</option><option value="195" >Atlantic/St_Helena</option><option value="196" >Atlantic/Stanley</option><option value="197" >Australia/Adelaide</option><option value="198" >Australia/Brisbane</option><option value="199" >Australia/Broken_Hill</option><option value="200" >Australia/Darwin</option><option value="201" >Australia/Hobart</option><option value="202" >Australia/Lord_Howe</option><option value="203" >Australia/Perth</option><option value="204" >Australia/Sydney</option><option value="205" >Europe/Amsterdam</option><option value="206" >Europe/Andorra</option><option value="207" >Europe/Athens</option><option value="208" >Europe/Belgrade</option><option value="209" >Europe/Berlin</option><option value="210" >Europe/Brussels</option><option value="211" >Europe/Bucharest</option><option value="212" >Europe/Budapest</option><option value="213" >Europe/Chisinau</option><option value="214" >Europe/Copenhagen</option><option value="215" >Europe/Dublin</option><option value="216" >Europe/Gibraltar</option><option value="217" >Europe/Helsinki</option><option value="218" >Europe/Istanbul</option><option value="219" >Europe/Kaliningrad</option><option value="220" >Europe/Kiev</option><option value="221" >Europe/Lisbon</option><option value="222" >Europe/London</option><option value="223" >Europe/Luxembourg</option><option value="224" >Europe/Madrid</option><option value="225" >Europe/Malta</option><option value="226" >Europe/Minsk</option><option value="227" >Europe/Monaco</option><option value="228" >Europe/Moscow</option><option value="229" >Europe/Oslo</option><option value="230" >Europe/Paris</option><option value="231" >Europe/Prague</option><option value="232" >Europe/Riga</option><option value="233" >Europe/Rome</option><option value="234" >Europe/Samara</option><option value="235" >Europe/Simferopol</option><option value="236" >Europe/Sofia</option><option value="237" >Europe/Stockholm</option><option value="238" >Europe/Tallinn</option><option value="239" >Europe/Tirane</option><option value="240" >Europe/Vaduz</option><option value="241" selected="selected">Europe/Vienna</option><option value="242" >Europe/Vilnius</option><option value="243" >Europe/Warsaw</option><option value="244" >Europe/Zurich</option><option value="245" >GMT</option><option value="246" >Indian/Antananarivo</option><option value="247" >Indian/Chagos</option><option value="248" >Indian/Christmas</option><option value="249" >Indian/Cocos</option><option value="250" >Indian/Comoro</option><option value="251" >Indian/Kerguelen</option><option value="252" >Indian/Mahe</option><option value="253" >Indian/Maldives</option><option value="254" >Indian/Mauritius</option><option value="255" >Indian/Mayotte</option><option value="256" >Indian/Reunion</option><option value="257" >Pacific/Apia</option><option value="258" >Pacific/Auckland</option><option value="259" >Pacific/Chatham</option><option value="260" >Pacific/Easter</option><option value="261" >Pacific/Efate</option><option value="262" >Pacific/Enderbury</option><option value="263" >Pacific/Fakaofo</option><option value="264" >Pacific/Fiji</option><option value="265" >Pacific/Funafuti</option><option value="266" >Pacific/Galapagos</option><option value="267" >Pacific/Gambier</option><option value="268" >Pacific/Guadalcanal</option><option value="269" >Pacific/Guam</option><option value="270" >Pacific/Honolulu</option><option value="271" >Pacific/Kiritimati</option><option value="272" >Pacific/Kosrae</option><option value="273" >Pacific/Majuro</option><option value="274" >Pacific/Marquesas</option><option value="275" >Pacific/Nauru</option><option value="276" >Pacific/Niue</option><option value="277" >Pacific/Norfolk</option><option value="278" >Pacific/Noumea</option><option value="279" >Pacific/Pago_Pago</option><option value="280" >Pacific/Palau</option><option value="281" >Pacific/Pitcairn</option><option value="282" >Pacific/Ponape</option><option value="283" >Pacific/Port_Moresby</option><option value="284" >Pacific/Rarotonga</option><option value="285" >Pacific/Saipan</option><option value="286" >Pacific/Tahiti</option><option value="287" >Pacific/Tarawa</option><option value="288" >Pacific/Tongatapu</option><option value="289" >Pacific/Truk</option><option value="290" >Pacific/Wake</option><option value="291" >Pacific/Wallis</option><option value="292" >UTC</option><option value="293" >WET</option>
+
+                    </select>
+                </div>
+                <div class="td"><input name="company" size="35" maxlength="50" value="" /></div>
+                <div class="td">
+                    <input name="department_str" size="35" maxlength="50" value="" />
+                </div>
+
+                <div class="td"><input name="uploadSizeLimit" onkeyup="Number(this)" size="5" maxlength="7"  value="" />MB</div>
+                <div class="td"><input name="uploadSizeLimitPerFile" onkeyup="Number(this)" size="5" maxlength="7"  value="" />MB</div>
+
+                <div class="td">&nbsp;</div>
+
+                <div class="td">
+                    <input name="email_str" id="email_input" size="35" maxlength="50" value="" />
+                    <span id="emailhint2" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                </div>
+                <div class="td"><input name="mailQuota" onkeyup="Number(this)" size="5" maxlength="7"  value="" disabled="disabled" />MB</div>
+                <div class="td2"><textarea name="emailAlias" cols="43" rows="1"></textarea></div>
+
+                <div class="td">
+                    <input type="radio" name="forward" value="0" checked=checked disabled="disabled" /> aus
+                           <input type="radio" name="forward" value="1"  disabled="disabled" /> ein
+                           <input type="radio" name="forward" value="2"  disabled="disabled" /> zeitgesteuert (Autoreply)
+                </div>
+                <div class="td2"><textarea name="forwardList" cols="43" rows="1" disabled="disabled"></textarea></div>
+                <div class="td">
+                    <input type="radio" name="autoresponder" value="0" checked=checked disabled="disabled" /> aus
+                           <input type="radio" name="autoresponder" value="1"  disabled="disabled" /> ein
+                           <input type="radio" name="autoresponder" value="2"  disabled="disabled" />  zeitgesteuert
+                </div>
+
+                <div class="td">
+                    <select name="year_start" disabled="disabled">
+                            <option >2009</option><option >2011</option>
+                    </select>
+                    <select name="month_start" disabled="disabled">
+                            <option selected="selected">1</option><option >2</option><option >3</option><option >4</option><option >5</option><option >6</option><option >7</option><option >8</option><option >9</option><option >10</option><option >11</option><option >12</option>
+
+                    </select>
+                    <select name="day_start" disabled="disabled">
+                            <option >1</option><option >2</option><option >3</option><option >4</option><option >5</option><option >6</option><option >7</option><option >8</option><option >9</option><option >10</option><option selected="selected">11</option><option >12</option><option >13</option><option >14</option><option >15</option><option >16</option><option >17</option><option >18</option><option >19</option><option >20</option><option >21</option><option >22</option><option >23</option><option >24</option><option >25</option><option >26</option><option >27</option><option >28</option><option >29</option><option >30</option><option >31</option>
+
+                    </select>
+                    -
+                    <select name="year_end" disabled="disabled">
+                            <option >2009</option><option >2011</option>
+                    </select>
+                    <select name="month_end" disabled="disabled">
+                            <option selected="selected">1</option><option >2</option><option >3</option><option >4</option><option >5</option><option >6</option><option >7</option><option >8</option><option >9</option><option >10</option><option >11</option><option >12</option>
+
+                    </select>
+                    <select name="day_end" disabled="disabled">
+                            <option >1</option><option >2</option><option >3</option><option >4</option><option >5</option><option >6</option><option >7</option><option >8</option><option >9</option><option >10</option><option selected="selected">11</option><option >12</option><option >13</option><option >14</option><option >15</option><option >16</option><option >17</option><option >18</option><option >19</option><option >20</option><option >21</option><option >22</option><option >23</option><option >24</option><option >25</option><option >26</option><option >27</option><option >28</option><option >29</option><option >30</option><option >31</option>
+
+                    </select>
+                </div>
+
+                <div class="td3"><textarea name="autoresponderText" cols="43" rows="2"  disabled="disabled" ></textarea></div>
+                <div class="td"><input name="imapLogin" size="35" maxlength="50" value=""  />
+                    <input class="submit" type="button" onclick="return CopyImapLogin()" value= "kopieren"   />
+                    <input type="checkbox" name="copydomain"  /> ohne Domain
+                </div>
+                <div class="td">
+
+                    <input type="hidden" id="smtp_show" name="smtp_show" value="" />
+                    <div id="smtp_list" >
+                         <select name="smtp" >
+                            <option value="127.0.0.1" >127.0.0.1</option>
+                        </select>
+                        <input onclick="return ToogleDiv('smtp_input','smtp_list','smtp_show')" type="checkbox"  /> manuell
+                    </div>
+                    <div id="smtp_input"  style="display:none">
+
+                         <input name="smtp_str" id="smtp_str" size="20" maxlength="50" value="" />
+                        <input onclick="return ToogleDiv('smtp_list','smtp_input','smtp_show')" type="checkbox"  /> Liste
+                        <span id="smtphint" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </div>
+                </div>
+                <div class="td">
+                    <input type="hidden" id="imap_show" name="imap_show" value="" />
+                    <div id="imap_list" >
+                         <select name="imap" >
+
+                            <option value="127.0.0.1" >127.0.0.1</option>
+                        </select>
+                        <input onclick="return ToogleDiv('imap_input','imap_list','imap_show')" type="checkbox"  /> manuell
+                    </div>
+                    <div id="imap_input" style="display:none">
+                         <input name="imap_str" id="imap_str" size="20" maxlength="50" value="" />
+                        <input onclick="return ToogleDiv('imap_list','imap_input','imap_show')" type="checkbox" /> Liste
+                    </div>
+
+                </div>
+                <div class="td"><input class="submit" type="button" onclick="return CheckInput()" value= "Anlegen" /> <input class="submit" type="button" onclick="return Dismiss()" value= "Änderungen verwerfen" /></div>
+            </div>
+        </div>
+    </div>
+    <div style="font-size:smaller;margin-top:.8em">
+        <span class="r">&sup1;</span> verpflichtender Parameter<br />
+
+        &sup2; verschiedene Parameter werden durch Komma getrennt<br />
+        &sup3; nur nicht leere Werte größer 0 werden angewendet<br />
+        &dagger; Plugin spezifischer Wert
+    </div>
+</form>                        </div>
+                        <!-- IE Column Clearing -->
+                        <div id="ie_clearing"> &#160; </div>
+
+                    </div>
+                </div>
+                <div id="footer">
+                    Umsetzung: <a href="http://sciencesoft.at?lang=de">ScienceSoft</a> |
+                    Layout based on <a href="http://www.yaml.de/">YAML</a>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

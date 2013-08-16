@@ -1,0 +1,264 @@
+<script type="text/javascript">
+    <!--
+    function CheckSelection(onlyOne) {
+        var area = document.forms[0];
+        var end = area.elements['contextNum'].value;
+        var count = 0;
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['c' + i].checked) {
+                count+= 1;
+            }
+        }
+        if(count == 0) {
+            alert("${msg.get('noctxselected')}");
+            return false;
+        }
+        if(count > 1 && onlyOne) {
+            alert("${msg.get('morectxselected')}");
+            return false;
+        }
+        return true;
+    }
+
+    function ChangeStatus() {
+        var area = document.forms[0];
+        area.elements['formAction'].value = "changeStatus";
+        if(CheckSelection(false)) {
+            area.submit();
+        }
+        return;
+    }
+
+    var noCTXadmin = "${msg.get('noctxadmin')}";
+
+    function ModifyContext() {
+        if(!CheckSelection(true)) {
+            return;
+        }
+        area = document.forms[0];
+        var tmp =  document.location.href;
+        var contextID;
+        var end = area.elements['contextNum'].value;
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['c' + i].checked) {
+                if(document.getElementById('contextLogin' + i) == undefined) {
+                    alert(noCTXadmin);
+                    return;
+                }
+                contextID = area.elements['c' + i].value.substring(1)
+                break;
+            }
+        }
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "modifycontext&contextID=" + contextID;
+    }
+
+    function SetContext() {
+        if(!CheckSelection(true)) {
+            return;
+        }
+        var area = document.forms[0];
+        var end = area.elements['contextNum'].value;
+        area.elements['formAction'].value = "setContext";
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['c' + i].checked) {
+                if(document.getElementById('contextLogin' + i) == undefined) {
+                    alert(noCTXadmin);
+                    return;
+                } else {
+                    area.elements['context'].value = document.getElementById('name'+i).firstChild.nodeValue;
+                    area.elements['contextID'].value = area.elements['c' + i].value.substring(1);
+                }
+                break;
+            }
+        }
+        area.submit();
+    }
+
+
+    function SetContextAdmin() {
+        if(CheckSelection(false)) {
+            area = document.forms[0];
+            var tmp =  document.location.href;
+            var id;
+            var end = area.elements['contextNum'].value;
+            for(var i = 0; i < end; ++i) {
+                if(area.elements['c' + i].checked) {
+                    id = area.elements['c' + i].value.substring(1);
+                    if(!area.elements['resetctxadmin'].checked) {
+                        if(document.getElementById('contextLogin' + i) != undefined) {
+                            alert("${msg.get('ctxadminset')}");
+                            return;
+                        }
+                    }
+                    break;
+                }
+            }
+           
+            document.location.href = tmp.substring(0,tmp.lastIndexOf("=") + 1) + "setcontextadmin&contextID=" + id;
+        }
+    }
+    
+    function DeleteContext() {
+        // <#if disableContextDelete??>
+        // <#if disableContextDelete == 'true'>
+        alert("${msg.get('disableContextDelete')}")
+        return; 
+        // </#if>
+        // </#if>
+        var area = document.forms[0];
+        if(CheckSelection(false)) {
+            var area = document.forms[0];
+            var end = area.elements['contextNum'].value;
+            for(var i = 0; i < end; ++i) {
+                if(area.elements['c' + i].checked) {
+                    document.getElementById('name'+i).style.backgroundColor = '#FFFF40';
+                    area.elements['c' + i].disabled = true;
+                }
+            }
+            document.getElementById('deletewrn').style.display = '';
+        }
+    }
+
+    function DeleteNo() {
+        var area = document.forms[0];
+        var end = area.elements['contextNum'].value;
+        for(var i = 0; i < end; ++i) {
+            document.getElementById('name'+i).style.backgroundColor = '';
+            area.elements['c' + i].disabled = false;
+        }
+        document.getElementById('deletewrn').style.display = 'none';
+    }
+
+    function DeleteYes() {
+        var area = document.forms[0];
+        area.elements['formAction'].value ="deleteContext";
+        var end = area.elements['contextNum'].value;
+        for(var i = 0; i < end; ++i) {
+            area.elements['c' + i].disabled = false;
+        }
+        area.submit();
+    }
+
+    function CreateContext() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "createcontext";
+    }
+
+    function Sort(s) {
+        var area = document.forms[0];
+        area.elements['sort'].value = s;
+        area.submit();
+    }
+
+    //-->
+</script>
+
+<form action="index.html?link=context" method="post">
+
+    <ul id="hnavlist">
+
+        <li><a href="javascript:CreateContext()">${msg.get('create')}</a></li>
+        <#if contextList??>
+        <li><a href="javascript:SetContext()">${msg.get('set')}</a></li>
+        <li><a href="javascript:ModifyContext()">${msg.get('change')}</a></li>
+        <li><a href="javascript:DeleteContext()">${msg.get('delete')}</a></li>
+        <li><a href="javascript:ChangeStatus()">${msg.get('activate')}</a></li>
+        <li><a href="javascript:SetContextAdmin()">${msg.get('setContextAdmin')}</a></li>
+        </#if>
+    </ul>
+
+    <#if error??>
+    <div class="err">
+        <div class="subcolumns">
+            <div class="c75l">
+                ${msg.get('ctxerror')}:
+            </div>
+            <div  class="c25r" style="text-align:right">
+                <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+            </div>
+        </div>
+        <div class="errmsg">
+            <code id="errorMsg">${error}</code>
+        </div>
+    </div>
+    </#if>
+
+    <div id="deletewrn" style="width:33em;border:1px red solid;padding:.3em;margin:.4em 0 .6em 0;display:none">
+        ${msg.get('delwrnctx')}
+        <div style="margin:.3em">
+            <input class="submit" type="button" onclick="DeleteYes()" value="${msg.get('yes')}" />
+            &nbsp;
+            <input class="submit" type="button" onclick="DeleteNo()" value="${msg.get('no')}" />
+        </div>
+    </div>
+
+
+    <#if contextList??>
+
+    <input type="hidden" name="formAction"  />
+    <input type="hidden" name="contextNum" value="${contextList?size}" />
+    <input type="hidden" name="contextID" />
+    <input type="hidden" name="context" />
+    <input type="hidden" name="sort" value="${sort!}" />
+
+    <div style="margin-bottom:.2em">
+        ${msg.get('sort')}: <input type="radio" name="sortOrder" value="0"  <#if sortOrder = 0>checked="checked"</#if> /> <img src="images/up.png" />
+        <input type="radio" name="sortOrder" value="1" <#if sortOrder = 1>checked="checked"</#if>  /> <img src="images/down.png" />
+        &nbsp;&nbsp;
+        <input type="checkbox" name="resetctxadmin" /> ${msg.get('resetctxadmin')}
+    </div>
+
+    <div class="bframe">
+        <table>
+            <thead>
+                <tr class="sort">
+                    <th>&nbsp;</th>
+                    <th><a <#if sort == '0'>style="color:#0A73CC"</#if> onclick="Sort(0)" href="#">ID</a></th>
+                    <th class="center"><a <#if sort == '1'>style="color:#0A73CC"</#if> onclick="Sort(1)" href="#">${msg.get('name')}</a></th>
+                    <th><a <#if sort == '2'>style="color:#0A73CC"</#if> onclick="Sort(2)" href="#">${msg.get('quota')} (MB)</a></th>
+                    <th class="center">${msg.get('mapping')}</th>
+                    <th>${msg.get('rights')}</th>
+                    <th>${msg.get('active')}</th>
+                    <th>${msg.get('login')}</th>
+                    <th>Plugin</th>
+                </tr>
+            </thead>
+
+            <#list contextList as list>
+
+            <tr>
+                <td><input type="checkbox" name="c${list_index}" value="<#if list.enabled>a<#else>i</#if>${list.ID}"/> </td>
+                <td class="center">${list.ID}</td>
+                <td id="name${list_index}">${list.name}</td>
+                <td>${list.usedQuota} / ${list.maxQuota}</td>
+                <td>${list.loginMappings}</td>
+                <td class="center">${list.accessCombinationName}</td>
+                <td>
+                    <#if list.enabled>
+                    <img class="centeredImage" src="images/active.png" />
+                    <#else>
+                    <img class="centeredImage" src="images/inactive.png" />
+                    </#if>
+                </td>
+                <td>
+                    <#if list.contextDataAvailable>
+                    <input type="hidden" id="contextLogin${list_index}" value="true" />
+                    <img class="centeredImage" src="images/active.png" />
+                    <#else>
+                    <img class="centeredImage" src="images/inactive.png" />
+                    </#if>
+                </td>
+                <td>
+                    <#if contextCache.isPluginSupport(list.ID)>
+                    <input type="hidden" id="contextLogin${list_index}" value="true" />
+                    <img class="centeredImage" src="images/active.png" />
+                    <#else>
+                    <img class="centeredImage" src="images/inactive.png" />
+                    </#if>
+                </td>
+            </tr>
+            </#list>
+        </table>
+    </div>
+    </#if>
+</form>

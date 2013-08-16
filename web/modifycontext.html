@@ -1,0 +1,134 @@
+<script type="text/javascript">
+    function CheckInput() {
+        var area = document.forms[0];
+        var errorCount = 0;
+        
+        var f = area.elements['quota'];
+        var v = f.value.trim();
+        if(v == '') {
+            f.style.border = '1px solid red';
+            ++errorCount;
+        } else {
+            if(v == '0') {
+                f.style.border = '1px solid red';
+                document.getElementById('quotahint').style.display = '';
+                document.getElementById('quotahint').firstChild.nodeValue = "${msg.get('quotaNot0')}";
+                ++errorCount;
+            } else {
+                document.getElementById('quotahint').style.display = 'none';
+                f.style.border = '';
+            }
+        }
+        
+        if(errorCount == 0) {
+            area.submit();
+        }
+    }
+
+    function Dismiss() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "user";
+    }
+
+    function Dismiss() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "context";
+    }
+</script>
+
+<h3>${msg.get('changectx')}</h3>
+
+<#if error??>
+<div class="err">
+     <div class="subcolumns">
+        <div class="c75l">
+         ${msg.get('changectxerror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+        <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+     </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=modifycontext" method="post">
+    <div style="width:42.8em; border: 1px solid lightgray;margin-top:1em;margin-bottom:1em;padding:.3em">
+        <div class="subcolumns">
+            <div class="c30l">
+                <div class="thb">${msg.get('context')}</div>
+                <div class="tdb">${msg.get('ctxname')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('ctxid')}</div>
+                <div class="tdb">${msg.get('ctxmapping')}&sup2;</div>
+                <div class="tdb">${msg.get('quota')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('ctxrights')}</div>
+                <div class="tdb">${msg.get('pluginsupport')}</div>
+                <div class="thb">${msg.get('usertemplate')}</div>
+                <div class="tdb">${msg.get('lang')}</div>
+                <div class="tdb">${msg.get('timezone')}</div>
+                <div class="tdb">${msg.get('company')}</div>
+                <div class="tdb">${msg.get('departments')}&sup2;</div>
+                <div class="tdb">${msg.get('emaildomains')}&sup2;</div>
+                <div class="tdb">IMAP-${msg.get('servers')}&sup2;</div>
+                <div class="tdb">SMTP-${msg.get('servers')}&sup2;</div>
+                <div class="tdb">${msg.get('mailquota')}&dagger;</div>
+                <div class="tdb">${msg.get('uploadsizelimit')}&sup3;</div>
+                <div class="tdb">${msg.get('uploadsizelimitperfile')}&sup3;</div>
+            </div>
+            <div class="c70r">
+                <div class="td">&nbsp;</div>
+                <div class="td"><input name="contextName" size="25" maxlength="50" value="<#if contextName??>${contextName}</#if>" /></div>
+                <div class="td">
+                    <input type="hidden" name="contextID" value="${contextID}" />
+                    <input name="_contextID" size="3" maxlength="5" value="${contextID}" disabled="disabled"/>
+                </div>
+                <div class="td"><input name="mapping" size="48" maxlength="200"  value="<#if mapping??>${mapping}</#if>" /></div>
+                <div class="td"><input name="quota" onkeyup="Number(this)" size="5" maxlength="7"  value="<#if quota??>${quota}</#if>" />MB
+                    <img src='images/hint.png' alt='${usedQuota}' title='${msg.get('inuse')}: ${usedQuota}MB' />
+                    <input type="hidden" name="usedQuota" value="${usedQuota}" />
+                    <span id="quotahint" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                </div>
+               
+                <div class="td">
+                    <#if accessCombinationList??>
+                    <select name="accessCombination">
+                        <#list accessCombinationList as alist><option value="${alist}" <#if accessCombination == alist>selected="selected"</#if>>${alist}</option></#list>
+                    </select>
+                    <input type="checkbox" name="downgrade" <#if downgrade??>checked="checked"</#if> /> ${msg.get('automatic')} &raquo;Downgrade&laquo;
+                    </#if>
+
+                </div>
+                <div class="td"><input type="checkbox" name="pluginsupport" <#if pluginsupport??>checked="checked"</#if> /> </div>
+                <div class="td">&nbsp;</div>
+                <div class="td">
+                    <select name="userLang" >
+                          <#list supportedLang as llist><option value="${llist.code}" <#if userLang?? && userLang ==llist.code>selected="selected"</#if>>${llist.name}</option></#list>
+                    </select>
+                </div>
+                <div class="td">
+                    <select name="userTimeZone">
+                        <#list timeZones as tlist><option value="${tlist_index}"  <#if userTimeZone?? && userTimeZone == tlist_index?string>selected="selected"</#if>>${tlist}</option></#list>
+                    </select>
+                </div>
+                <div class="td"><input name="userCompany" size="30" maxlength="60" value="<#if userCompany??>${userCompany}</#if>" /></div>
+                <div class="td"><input name="userDepartment" size="30" maxlength="60" value="<#if userDepartment??>${userDepartment}</#if>" /></div>
+                <div class="td"><input name="userEmailDomain" size="48" maxlength="200" value="<#if userEmailDomain??>${userEmailDomain}</#if>"<#if DISABLE_EMAIL_DOMAIN??>style="color:gray" onkeydown="return false"</#if> /></div>
+                <div class="td"><input name="userIMAPserver" size="48" maxlength="200"  value="<#if userIMAPserver??>${userIMAPserver}</#if>" <#if DISABLE_SMTP_SERVER??>style="color:gray" onkeydown="return false"</#if> /></div>
+                <div class="td"><input name="userSMTPserver" size="48" maxlength="200"  value="<#if userSMTPserver??>${userSMTPserver}</#if>" <#if DISABLE_IMAP_SERVER??>style="color:gray" onkeydown="return false"</#if> /></div>
+                <div class="td"><input name="mailQuota" onkeyup="Number(this)" size="5" maxlength="7" value="${mailQuota!}" />MB</div>
+                <div class="td"><input name="uploadSizeLimit" onkeyup="Number(this)" size="5" maxlength="7"  value="<#if uploadSizeLimit??>${uploadSizeLimit}</#if>" />MB</div>
+                <div class="td"><input name="uploadSizeLimitPerFile" onkeyup="Number(this)" size="5" maxlength="7"  value="<#if uploadSizeLimitPerFile??>${uploadSizeLimitPerFile}</#if>" />MB</div>
+                <div class="td"><input class="submit" type="button" onclick="return CheckInput()" value= "${msg.get('change')}" /> <input class="submit" type="button" onclick="return Dismiss()" value= "${msg.get('dismiss')}" /></div>
+            </div>
+        </div>    
+    </div>
+     <div style="font-size:smaller;margin-top:.8em">
+            <span class="r">&sup1;</span> ${msg.get('mandatory')}<br />
+            &sup2; ${msg.get('separated')}<br />
+            &sup3; ${msg.get('nonempty')}<br />
+            &dagger; ${msg.get('pluginrelated')}
+        </div>
+</form>
+

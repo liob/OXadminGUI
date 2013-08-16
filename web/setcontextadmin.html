@@ -1,0 +1,45 @@
+
+<h3>${msg.get('setctxadmin')}</h3>
+    
+<#if error??>
+<div class="err">
+     <div class="subcolumns">
+        <div class="c75l">
+         ${msg.get('setctxadminerror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+        <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+     </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=setcontextadmin" method="post">
+    <input type="hidden" name="contextID" value="${contextID}" />
+    <input type="hidden" name="contextName" value="${contextName}" />
+    <div style="width:22em; border: 1px solid <#if loginFailed??>red<#else>lightgray</#if>;padding:.5em;margin-top:1em">
+        <div class="subcolumns">
+            <div class="c33l">
+                <div class="tdb">${msg.get('context')}</div>
+                <div class="tdb">ContextAdmin</div>
+                <div class="tdb">${msg.get('password')}</div>
+            </div>
+            <div class="c66r">
+                <!-- add the contextID to the input elements for the browser - password storing mech //-->
+                <div class="td">${contextName}</div>
+                <div class="td"><input name="user${contextID}" size="25" maxlength="50" /></div>
+                <div class="td"><input type="password" name="pwd${contextID}" size="25" maxlength="50" /></div>
+                <div class="td"><input class="submit" type="submit" value= "Speichern" /></div>
+            </div>
+        </div>
+        <#if loginFailed??>
+        <div style="color:red;text-align:center">
+            ${msg.get('ctxadminlogingerror')}
+        </div>
+        </#if>
+    </div>
+</form>
+

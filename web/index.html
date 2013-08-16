@@ -1,0 +1,94 @@
+<#-- @at.sciencesoft.controller.Main -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Peter's Open-Xchange Server Admin GUI</title>
+        <link rel="shortcut icon" href="images/favicon.ico" />
+        <!-- add your meta tags here -->
+        <link href="css/my_layout.css" rel="stylesheet" type="text/css" />
+        <!--[if lte IE 7]>
+        <link href="css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
+        <![endif]-->
+    </head>
+    <body>
+        <script type="text/javascript" src="js/common.js"></script>
+        <script type="text/javascript">
+        function CheckContext(menu) {
+           
+            if(document.getElementById('workingOXcontext') == undefined) {
+                alert("${msg.get('noworkingCTX')}");
+            } else {
+                var tmp =  document.location.href;
+                var pos = tmp.lastIndexOf("link=")
+                if(pos == -1) {
+                    tmp+= "?link=" + menu;
+                } else {
+                    tmp = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + menu;
+                }
+                if(menu == 'user') {
+                    tmp+= "&init=1";
+                }
+                document.location.href = tmp;
+            }
+        }
+        </script>
+        <#if workingContext??><div id="workingOXcontext" style="display:none">&nbsp;</div></#if>
+        <div class="page_margins">
+            <div class="page">
+                <div id="header">
+                    <div id="topnav">
+                        <#if loggedIn??>
+                        <b><#if isAdmin??>OXadmin<#else>CTXadmin</#if>: <span style="color:#369">${admin}</span>&nbsp;
+                        ${msg.get('context')}:
+                        <span style="color:#369"><#if workingContext??>${workingContext.name}<#else>-</#if></span></b>
+                        </#if>
+                        &nbsp;
+                        <!-- start: skip link navigation -->
+                         <a href="index.html?link=welcome&amp;oxguilang=de"><img style="border:0px" src="images/de.png" alt="de" /></a>
+                         <a href="index.html?link=welcome&amp;oxguilang=en"><img style="border:0px" src="images/en.png" alt="en"  /></a>
+                         <a href="index.html?link=welcome&amp;oxguilang=it"><img style="border:0px" src="images/it.png" alt="it"  /></a>
+                         <a href="index.html?link=welcome&amp;oxguilang=es"><img style="border:0px" src="images/es.png" alt="es"  /></a>
+                         <a href="index.html?link=welcome&amp;oxguilang=nl"><img style="border:0px" src="images/nl.png" alt="nl"  /></a>
+                    </div>
+                </div>
+                <div id="main">
+                    <div id="col1">
+                        <div id="col1_content" class="clearfix">
+                            <!-- add your content here -->
+                            <div id="navcontainer">
+                                <ul id="navlist">
+                                    <#if isAdmin??>
+                                    <li <#if selMenu??><#else>id="active"</#if>><a href="index.html?link=context">${msg.get('context')}</a></li>
+                                    </#if>
+                                    <li <#if selMenu?? && selMenu="user">id="active"</#if> ><a href="<#if loggedIn??>javascript:CheckContext('user')</#if>">${msg.get('user')}</a></li>
+                                    <li <#if selMenu?? && selMenu="group">id="active"</#if>><a href="<#if loggedIn??>javascript:CheckContext('group')</#if>">${msg.get('group')}</a></li>
+                                    <li <#if selMenu?? && selMenu="resource">id="active"</#if>><a href="<#if loggedIn??>javascript:CheckContext('resource')</#if>">${msg.get('resource')}</a></li>
+                                    <#if isAdmin??>
+                                    <li <#if selMenu?? && selMenu="plugin">id="active"</#if>><a href="<#if loggedIn??>index.html?link=plugin</#if>">Plugin</a></li>
+                                    <li <#if selMenu?? && selMenu="info">id="active"</#if>><a href="index.html?link=info">${msg.get('info')}</a></li>
+                                    </#if>
+                                    <#if loggedIn??>
+                                    <li><a href="index.html?link=logout">${msg.get('logout')}</a></li>
+                                    </#if>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="col3">
+                        <div id="col3_content" class="clearfix" style="padding: 10px 10px 0 10px">
+                            <!-- add your content here -->
+                            <#include path>
+                        </div>
+                        <!-- IE Column Clearing -->
+                        <div id="ie_clearing"> &#160; </div>
+                    </div>
+                </div>
+                <div id="footer">
+                    ${msg.get('implementation')}: <a href="http://sciencesoft.at?lang=${oxguilang}">ScienceSoft</a> |
+                    Layout based on <a href="http://www.yaml.de/">YAML</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

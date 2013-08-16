@@ -1,0 +1,488 @@
+<script type="text/javascript">
+    <!--
+    function ToogleDiv(a,b,c) {
+        document.getElementById(a).style.display = '';
+        document.getElementById(b).style.display = 'none';
+        document.getElementById(c).value = a;
+        return false;
+    }
+
+    function Dismiss() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "user";
+    }
+
+    function Copy() {
+        var area = document.forms[0];
+        var dname = area.elements['displayName'].value.trim();
+        if(dname != "") {
+            var f = dname.indexOf(" ");
+            var l = dname.lastIndexOf(" ");
+            if(f != -1) {
+                area.elements['firstName'].value = dname.substr(0,f);
+                area.elements['lastName'].value = dname.substr(l + 1);
+            }
+        }
+    }
+
+    function CopyImapLogin() {
+        var area = document.forms[0];
+        var e = document.getElementById('email_show');
+        var email;
+        if(e != undefined)  {
+            var s = area.elements['email_show'].value;
+            
+            if(s == "" || s == "domain_list") {
+                email = area.elements['emailUser'].value + '@' + area.elements['domain'].value;
+
+            } else {
+                email = area.elements['email_str'].value;
+            }
+        } else {
+            email =  area.elements['email_str'].value;
+        }
+        
+        if(area.elements['copydomain'].checked) {
+            var pos = email.indexOf('@');
+            if(pos >= 0) {
+                email = email.substr(0,pos);
+            }
+        }
+
+        area.elements['imapLogin'].value = email;
+    }
+
+    function CopyIMAPlogin(l) {
+        // <#if COPY_IMAP_USER??>
+        var area = document.forms[0];
+        area.elements['imapLogin'].value = l;
+        // </#if>
+        // <#if COPY_IMAP_EMAIL??>
+        var area = document.forms[0];
+        area.elements['imapLogin'].value = l + '@${emailDomain[0]}';
+        // </#if>
+    }
+
+    function CheckInput() {
+        var area = document.forms[0];
+        var errorCount = 0;
+        var test = new Array('login','displayName','firstName','lastName','pwd','pwdRetype');
+        var f;
+        for(var i = 0; i < test.length; ++i) {
+            f = area.elements[test[i]];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+            }
+        }
+        var e = document.getElementById('domain_list');
+        if(e != undefined && e.style.display == '')  {
+            f = area.elements['emailUser'];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+                if(!checkEmailAdr(f.value + '@' + area.elements['domain'].value)) {
+                    area.elements['emailUser'].style.border = '1px solid red';
+                    document.getElementById('emailhint').style.display = '';
+                    document.getElementById('emailhint').firstChild.nodeValue = "${msg.get('invalid')}";
+                    ++errorCount;
+                } else {
+                    area.elements['emailUser'].style.border = '';
+                    document.getElementById('emailhint').style.display = 'none';
+                }
+            }
+        }
+
+
+
+        var e = document.getElementById('email_input');
+        if(e != undefined && e.style.display == '')  {
+            f = area.elements['email_str'];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+                if(!checkEmailAdr(area.elements['email_str'].value)) {
+                    area.elements['email_str'].style.border = '1px solid red';
+                    document.getElementById('emailhint2').style.display = '';
+                    document.getElementById('emailhint2').firstChild.nodeValue = "${msg.get('invalid')}";
+                    ++errorCount;
+                } else {
+                    area.elements['email_str'].style.border = '';
+                    document.getElementById('emailhint2').style.display = 'none';
+                }
+            }
+        }
+
+        // special checks
+        v = area.elements['pwd'].value;
+        var v2 = area.elements['pwdRetype'].value;
+
+        if(v.trim().length > 0) {
+            var pwdShort = false;
+            if(v.trim().length < ${minPasswordLen}) {
+                area.elements['pwd'].style.border = '1px solid red';
+                document.getElementById('pwdhint').style.display = '';
+                document.getElementById('pwdhint').firstChild.nodeValue = "${msg.get('pwdminimum')}".replace(/MIN/,"${minPasswordLen}");
+                pwdShort = true;
+                ++errorCount;
+            } else {
+                area.elements['pwd'].style.border = '';
+                document.getElementById('pwdhint').style.display = 'none';
+            }
+            if(!pwdShort) {
+                if(v != v2) {
+                    area.elements['pwd'].style.border = '1px solid red';
+                    area.elements['pwdRetype'].style.border = '1px solid red';
+                    document.getElementById('pwdhint').style.display = '';
+                    document.getElementById('pwdhint').firstChild.nodeValue = "${msg.get('pwdnotequal')}";
+                    ++errorCount;
+                } else {
+                    area.elements['pwd'].style.border = '';
+                    area.elements['pwdRetype'].style.border = '';
+                    document.getElementById('pwdhint').style.display = 'none';
+                }
+            }
+        }
+
+        // <#if JS_CHECK_EMAIL??>
+        var alias =  area.elements['emailAlias'].value.trim();
+        if(alias != "") {
+            var l = alias.split(",");
+            area.elements['emailAlias'].style.border = '';
+            for(var i = 0; i < l.length; ++i) {
+                if(!checkEmailAdr(l[i].trim())) {
+                    area.elements['emailAlias'].style.border = '1px solid red';
+                    ++errorCount;
+                    break;
+                }
+                // <#if JS_CHECK_EMAIL_DOMAIN??>
+                var m = l[i].trim().split("@");
+                if(m[1] != area.elements['domain'].value) {
+                    area.elements['emailAlias'].style.border = '1px solid red';
+                    ++errorCount;
+                    break
+                }
+                // </#if>
+            }
+        }
+        
+        var forward =  area.elements['forwardList'].value.trim();
+        if(forward != "") {
+            var l = forward.split(",");
+            area.elements['forwardList'].style.border = '';
+            for(var i = 0; i < l.length; ++i) {
+                if(!checkEmailAdr(l[i].trim())) {
+                    area.elements['forwardList'].style.border = '1px solid red';
+                    ++errorCount;
+                    break;
+                }               
+            }
+        }
+        // </#if>
+
+
+        if(errorCount == 0) {
+            area.submit();
+        }
+    }
+
+    function Move(a,b) {
+        var d = document.forms[0];
+        var area = d.elements[a];
+        var area2 = d.elements[b];
+        var a = new Array(area.options.length);
+        var index = 0;
+        for(var i = area.options.length - 1; i >= 0; --i) {
+            if(area.options[i].selected) {
+                a[index++] = area.options[i];
+            }
+        }
+        for(var i = a.length - 1; i >= 0; --i ) {
+            area2.options[area2.options.length] = a[i];
+        }
+        area = document.forms[0].elements['right'];
+        var members = "";
+        for(var i = 0; i < area.options.length; ++i) {
+            if(i != 0) {
+                members+= ',';
+            }
+            members+= area.options[i].value;
+        }
+        d.elements['groups'].value = members;
+    }
+    -->
+</script>
+
+<h2>${msg.get('createuser')}</h2>
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('createusererror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=createuser" method="post">
+    <input type="hidden" name="groups" value="${groups!}" />
+    <div style="width:42.8em; border: 1px solid lightgray;margin-top:1em;margin-bottom:1em;padding:.3em">
+        <div class="subcolumns">
+            <div class="c30l">
+                <div class="thb">${msg.get('user')}</div>
+                <div class="tdb">${msg.get('username')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('displayname')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('firstname')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('surname')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('password')}<span class="r">&sup1;</span></div>
+
+                <div class="tdb">&nbsp;</div>
+                <div class="tdb">${msg.get('lang')}</div>
+                <div class="tdb">${msg.get('timezone')}</div>
+
+                <div class="tdb">${msg.get('middlename')}</div>
+                <div class="tdb">${msg.get('streethome')}</div>
+                <div class="tdb">${msg.get('postalcodehome')}</div>
+                <div class="tdb">${msg.get('cityhome')}</div>
+                <div class="tdb">${msg.get('statehome')}</div>
+                <div class="tdb">${msg.get('company')}</div>
+                <div class="tdb">${msg.get('department')}</div>
+                <div class="tdb">${msg.get('streetbusiness')}</div>
+                <div class="tdb">${msg.get('postalcodebusiness')}</div>
+                <div class="tdb">${msg.get('citybusiness')}</div>
+                <div class="tdb">${msg.get('statebusiness')}</div>
+                <div class="tdb">${msg.get('phonebusiness')}</div>
+                <div class="tdb">${msg.get('faxbusiness')}</div>
+                <div class="tdb">${msg.get('phonehome')}</div>
+                <div class="tdb">${msg.get('mobile')}</div>
+
+                <div class="tdb">${msg.get('uploadsizelimit')}&sup3;</div>
+                <div class="tdb">${msg.get('uploadsizelimitperfile')}&sup3;</div>
+                <div class="tdb4">${msg.get('groups')}</div>
+                <div class="thb">${msg.get('email')}</div>
+                <div class="tdb">${msg.get('email')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('mailquota')}&sup3;&dagger;</div>
+                <div class="tdb2">${msg.get('emailalias')}&sup2;</div>
+                <div class="tdb">${msg.get('emailforward')}&sup2;&dagger;</div>
+                <div class="tdb2">&nbsp;</div>
+                <div class="tdb">${msg.get('autoresponder')}&dagger;</div>
+                <div class="tdb">&nbsp;</div>
+                <div class="tdb3">&nbsp;</div>
+                <div class="tdb">IMAP-Login</div>
+                <div class="tdb">SMTP-${msg.get('server')}</div>
+                <div class="tdb">IMAP-${msg.get('server')}</div>
+
+            </div>
+            <div class="c70r">
+                <div class="td">&nbsp;</div>
+                <div class="td"><input name="login" size="25" maxlength="50" value="${login!}" /></div>
+                <div class="td"><input name="displayName" size="35" maxlength="50" value="${displayName!}" /></div>
+                <div class="td"><input name="firstName" size="35" maxlength="50" value="${firstName!}" /> <input class="submit" type="button" onclick="return Copy()" value="${msg.get('copy')}" /></div>
+                <div class="td"><input name="lastName" size="35" maxlength="50" value="${lastName!}" /></div>
+                <div class="td">
+                    <div class="td">
+                        <input type="password" name="pwd" size="10" maxlength="50" value="${pwd!}" />
+                        <span id="pwdhint" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </div>
+                </div>
+                <div class="td">
+                    <div class="td"><input type="password" name="pwdRetype" size="10" maxlength="50" value="${pwdRetype!}" /> (${msg.get('verification')})</div>
+                </div>
+                <div class="td">
+                    <select name="lang" >
+                        <#list supportedLang as llist><option value="${llist.code}" <#if lang?? && lang ==llist.code>selected="selected"</#if>>${llist.name}</option></#list>
+                    </select>
+                </div>
+                <div class="td">
+                    <select name="timeZone">
+                        <#list timeZones as tlist><option value="${tlist_index}" <#if timeZone?? && timeZone == tlist_index?string>selected="selected"</#if>>${tlist}</option></#list>
+                    </select>
+                </div>
+                <div class="tdb"><input name="middleName" size="35" maxlength="50" value="${middleName!}" /></div>
+                <div class="tdb"><input name="streetHome" size="35" maxlength="50" value="${streetHome!}" /></div>
+                <div class="tdb"><input name="postalCodeHome" size="35" maxlength="50" value="${postalCodeHome!}" /></div>
+                <div class="tdb"><input name="cityHome" size="35" maxlength="50" value="${cityHome!}" /></div>
+                <div class="tdb"><input name="stateHome" size="35" maxlength="50" value="${stateHome!}" /></div>
+                <div class="td"><input name="company" size="35" maxlength="50" value="${company!}" /></div>
+                <div class="td">
+                    <#if departmentList??>
+                    <input type="hidden" id="dep_show" name="dep_show" value="${dep_show!}"/>
+                    <div id="dep_list" <#if dep_show! = "dep_input">style="display:none"</#if>>
+                         <select name="department" >
+                            <#list departmentList as dlist><option value="${dlist}" <#if department?? && department == dlist>selected="selected"</#if>>${dlist}</option></#list>
+                        </select>
+                        <input onclick="return ToogleDiv('dep_input','dep_list','dep_show')" type="checkbox" /> ${msg.get('manual')}
+                    </div>
+                    <div id="dep_input" <#if dep_show! = "dep_list" || dep_show! = "">style="display:none"</#if> >
+                         <input name="department_str" size="35" maxlength="50" value="${department_str!}" />
+                        <input onclick="return ToogleDiv('dep_list','dep_input','dep_show')" type="checkbox" /> ${msg.get('list')}
+                    </div>
+                    <#else>
+                    <input name="department_str" size="35" maxlength="50" value="${department_str!}" />
+                    </#if>
+                </div>
+                <div class="tdb"><input name="streetBusiness" size="35" maxlength="50" value="${streetBusiness!}" /></div>
+                <div class="tdb"><input name="postalCodeBusiness" size="35" maxlength="50" value="${postalCodeBusiness!}" /></div>
+                <div class="tdb"><input name="cityBusiness" size="35" maxlength="50" value="${cityBusiness!}" /></div>
+                <div class="tdb"><input name="stateBusiness" size="35" maxlength="50" value="${stateBusiness!}" /></div>
+                <div class="tdb"><input name="phoneBusiness" size="35" maxlength="50" value="${phoneBusiness!}" /></div>
+                <div class="tdb"><input name="faxBusiness" size="35" maxlength="50" value="${faxBusiness!}" /></div>
+                <div class="tdb"><input name="phoneHome" size="35" maxlength="50" value="${phoneHome!}" /></div>
+                <div class="tdb"><input name="mobile" size="35" maxlength="50" value="${mobile!}" /></div>
+
+                <div class="td"><input name="uploadSizeLimit" onkeyup="Number(this)" size="5" maxlength="7"  value="${uploadSizeLimit!}" />MB</div>
+                <div class="td"><input name="uploadSizeLimitPerFile" onkeyup="Number(this)" size="5" maxlength="7"  value="${uploadSizeLimitPerFile!}" />MB</div>
+                <div class="tdb4">
+                    <div class="subcolumns" style="margin-bottom:.3em">
+                        <div class="c50l">
+                            <div class="thb">${msg.get('allgroups')}</div>
+                            <select name="left" size="3" style="width:13em" multiple="multiple">
+                                <#if left??>
+                                <#list left as list>
+                                <option value="${list.id}">${list.name}</option>
+                                </#list>
+                                </#if>
+                            </select>
+                            <div style="text-align:left;margin-bottom:.3em;margin-top:.3em">
+                                <input class="submit" type="button" onclick="Move('left','right')" value="${msg.get('add')}" />
+                            </div>
+                        </div>
+                        <div class="c50r">
+                            <div class="thb">${msg.get('ismemberof')}</div>
+                            <select name="right" size="3" style="width:13em" multiple="multiple">
+                                <#if right??>
+                                <#list right as list>
+                                <option value="${list.id}">${list.name}</option>
+                                </#list>
+                                </#if>
+                            </select>    
+                            <div style="text-align:left;margin-bottom:.3em;margin-top:.3em">
+                                <input class="submit" type="button" onclick="Move('right','left')" value="${msg.get('remove')}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="td">&nbsp;</div>
+
+                <div class="td">
+                    <#if emailDomain??>
+                    <input type="hidden" id="email_show" name="email_show" value="${email_show!}" />
+                    <div id="domain_list" <#if email_show! = "email_input">style="display:none"</#if>>
+                         <input name="emailUser" size="15" maxlength="30" style="text-align:right" value="<#if emailUser??>${emailUser}</#if>" onkeyup="CopyIMAPlogin(this.value)" />
+                        @
+                        <select name="domain" >
+                            <#list emailDomain as dlist><option value="${dlist}" <#if domain?? && domain == dlist>selected="selected"</#if>>${dlist}</option></#list>
+                        </select>
+                        <input onclick="return ToogleDiv('email_input','domain_list','email_show')" type="checkbox" <#if DISABLE_MODIFY_EMAIL??>disabled="disabled"</#if> /> ${msg.get('manual')}
+                               <span id="emailhint" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </div>
+                    <div id="email_input" <#if email_show! = "domain_list" || email_show! = "">style="display:none"</#if>>
+                         <input name="email_str" id="email_str" size="35" maxlength="50" value="${email_str!}" />
+                        <input onclick="return ToogleDiv('domain_list','email_input','email_show')" type="checkbox" /> ${msg.get('emaildomains')}
+                        <span id="emailhint2" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+
+                    </div>
+                    <#else>
+                    <input name="email_str" id="email_input" size="35" maxlength="50" value="${email_str!}" />
+                    <span id="emailhint2" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </#if>
+                </div>
+                <div class="td"><input name="mailQuota" onkeyup="Number(this)" size="5" maxlength="7"  value="${mailQuota!}" <#if MAIL_QUOTA??><#else>disabled="disabled"</#if> />MB</div>
+                <div class="td2"><textarea name="emailAlias" cols="43" rows="1">${emailAlias!}</textarea></div>
+                <div class="td">
+                    <input type="radio" name="forward" value="0" <#if forward?? && forward = "0">checked="checked"</#if> <#if MAIL_FORWARDING??><#else>disabled="disabled"</#if> /> ${msg.get('off')}
+                           <input type="radio" name="forward" value="1" <#if forward?? && forward = "1">checked="checked"</#if> <#if MAIL_FORWARDING??><#else>disabled="disabled"</#if> /> ${msg.get('on')}
+                           <input type="radio" name="forward" value="2" <#if forward?? && forward = "2">checked="checked"</#if> <#if MAIL_FORWARDING??><#else>disabled="disabled"</#if> /> ${msg.get('timedependent')} (${msg.get('autoresponder')})
+                </div>
+                <div class="td2"><textarea name="forwardList" cols="43" rows="1" <#if MAIL_FORWARDING??><#else>disabled="disabled"</#if>>${forwardList!}</textarea></div>
+                <div class="td">
+                    <input type="radio" name="autoresponder" value="0" <#if autoresponder?? && autoresponder = "0">checked="checked"</#if> <#if AUTORESPONDER??><#else>disabled="disabled"</#if> /> ${msg.get('off')}
+                           <input type="radio" name="autoresponder" value="1" <#if autoresponder?? && autoresponder = "1">checked="checked"</#if> <#if AUTORESPONDER??><#else>disabled="disabled"</#if> /> ${msg.get('on')}
+                           <input type="radio" name="autoresponder" value="2" <#if autoresponder?? && autoresponder = "2">checked="checked"</#if> <#if AUTORESPONDER??><#else>disabled="disabled"</#if> />  ${msg.get('timedependent')}
+                </div>
+                <div class="td">
+                    <select name="year_start" <#if INTERVALL?? && INTERVALL = "true"><#else>disabled="disabled"</#if>>
+                            <#list yearIntervall as ylist><option <#if year_start?? && year_start == ylist?string>selected="selected"</#if>>${ylist}</option></#list>
+                    </select>
+                    <select name="month_start" <#if INTERVALL?? && INTERVALL = "true"><#else>disabled="disabled"</#if>>
+                            <#list monthIntervall as mlist><option <#if month_start?? && month_start == mlist?string>selected="selected"</#if>>${mlist}</option></#list>
+                    </select>
+                    <select name="day_start" <#if INTERVALL?? && INTERVALL = "true"><#else>disabled="disabled"</#if>>
+                            <#list dayIntervall as dlist><option <#if day_start?? && day_start == dlist?string>selected="selected"</#if>>${dlist}</option></#list>
+                    </select>
+                    -
+                    <select name="year_end" <#if INTERVALL?? && INTERVALL = "true"><#else>disabled="disabled"</#if>>
+                            <#list yearIntervall as ylist><option <#if year_end?? && year_end == ylist?string>selected="selected"</#if>>${ylist}</option></#list>
+                    </select>
+                    <select name="month_end" <#if INTERVALL?? && INTERVALL = "true"><#else>disabled="disabled"</#if>>
+                            <#list monthIntervall as mlist><option <#if month_end?? && month_end == mlist?string>selected="selected"</#if>>${mlist}</option></#list>
+                    </select>
+                    <select name="day_end" <#if INTERVALL?? && INTERVALL = "true"><#else>disabled="disabled"</#if>>
+                            <#list dayIntervall as dlist><option <#if day_end?? && day_end == dlist?string>selected="selected"</#if>>${dlist}</option></#list>
+                    </select>
+                </div>
+
+                <div class="td3"><textarea name="autoresponderText" cols="43" rows="2"  <#if AUTORESPONDER??><#else>disabled="disabled"</#if> >${autoresponderText!}</textarea></div>
+                <div class="td"><input name="imapLogin" size="35" maxlength="50" value="${imapLogin!}" <#if DISABLE_IMAP_LOGIN??>style="color:gray" onkeydown="return false"</#if> />
+                                       <input class="submit" type="button" onclick="return CopyImapLogin()" value= "${msg.get('copy')}"  <#if DISABLE_IMAP_LOGIN??>disabled="disabled"</#if> />
+                                       <input type="checkbox" name="copydomain" <#if DISABLE_IMAP_LOGIN??>disabled="disabled"</#if> /> ${msg.get('nodomain')}
+                </div>
+                <div class="td">
+                    <#if smtpList??>
+                    <input type="hidden" id="smtp_show" name="smtp_show" value="${smtp_show!}" />
+                    <div id="smtp_list" <#if smtp_show! = "smtp_input">style="display:none"</#if>>
+                         <select name="smtp" >
+                            <#list smtpList as slist><option value="${slist}" <#if smtp?? && smtp == slist>selected="selected"</#if>>${slist}</option></#list>
+                        </select>
+                        <input onclick="return ToogleDiv('smtp_input','smtp_list','smtp_show')" type="checkbox" <#if DISABLE_SMTP_SERVER??>disabled="disabled"</#if> /> ${msg.get('manual')}
+                    </div>
+                    <div id="smtp_input"  <#if smtp_show! = "smtp_list" || smtp_show! = "">style="display:none"</#if>>
+                         <input name="smtp_str" id="smtp_str" size="20" maxlength="50" value="${smtp_str!}" />
+                        <input onclick="return ToogleDiv('smtp_list','smtp_input','smtp_show')" type="checkbox"  /> ${msg.get('list')}
+                        <span id="smtphint" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </div>
+                    <#else>
+                    <input name="smtp_str" id="smtp_input" size="35" maxlength="50" value="${smtp_str!}" />
+                    <span id="smtphint" style="color:red;display:none;font-size:smaller">&nbsp;</span>
+                    </#if>
+                </div>
+                <div class="td">
+                    <#if imapList??>
+                    <input type="hidden" id="imap_show" name="imap_show" value="${imap_show!}" />
+                    <div id="imap_list" <#if imap_show! = "imap_input">style="display:none"</#if>>
+                         <select name="imap" >
+                            <#list imapList as ilist><option value="${ilist}" <#if imap?? && imap == ilist>selected="selected"</#if>>${ilist}</option></#list>
+                        </select>
+                        <input onclick="return ToogleDiv('imap_input','imap_list','imap_show')" type="checkbox" <#if DISABLE_IMAP_SERVER??>disabled="disabled"</#if> /> ${msg.get('manual')}
+                    </div>
+                    <div id="imap_input" <#if imap_show! = "imap_list" || imap_show! = "">style="display:none"</#if>>
+                         <input name="imap_str" id="imap_str" size="20" maxlength="50" value="${imap_str!}" />
+                        <input onclick="return ToogleDiv('imap_list','imap_input','imap_show')" type="checkbox" /> ${msg.get('list')}
+                    </div>
+                    <#else>
+                    <input name="imap_str" id="imap_input" size="35" maxlength="50" value="${imap_str!}" />
+                    </#if>
+                </div>
+                <div class="td"><input class="submit" type="button" onclick="return CheckInput()" value= "${msg.get('create')}" /> <input class="submit" type="button" onclick="return Dismiss()" value= "${msg.get('dismiss')}" /></div>
+            </div>
+        </div>
+    </div>
+    <div style="font-size:smaller;margin-top:.8em">
+        <span class="r">&sup1;</span> ${msg.get('mandatory')}<br />
+        &sup2; ${msg.get('separated')}<br />
+        &sup3; ${msg.get('nonempty')}<br />
+        &dagger; ${msg.get('pluginrelated')}
+    </div>
+</form>

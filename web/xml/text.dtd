@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+
+<!ELEMENT content (group)+>
+
+<!ELEMENT group (text)+>
+<!ATTLIST group
+  name CDATA  #REQUIRED
+>
+
+<!ELEMENT text (lang)+>
+<!ATTLIST text
+  id CDATA  #REQUIRED
+>
+
+<!ELEMENT lang (#PCDATA) >
+<!ATTLIST lang
+  id (de | en | fr | it | es | pl | nl | sys ) #REQUIRED
+>
+
+

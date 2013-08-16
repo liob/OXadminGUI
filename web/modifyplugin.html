@@ -1,0 +1,383 @@
+
+
+<script type="text/javascript">
+    function SetType(t) {
+        var area = document.forms[0];
+        if(t == 'script') {
+            document.getElementById('lscript').style.display = '';
+            document.getElementById('rscript').style.display = '';
+            document.getElementById('ljava').style.display = 'none';
+            document.getElementById('rjava').style.display = 'none';
+            area.elements['plugin_type'].value = 'script';
+        } else {
+            document.getElementById('ljava').style.display = '';
+            document.getElementById('lscript').style.display = 'none';
+            document.getElementById('rjava').style.display = '';
+            document.getElementById('rscript').style.display = 'none';
+            area.elements['plugin_type'].value = 'java';
+        }
+    }
+
+
+    var list = new Array('bundle','context','user','group','resource' );
+    var action = new Array('start','stop','create','delete','enable','disable','change' );
+
+    function SetScript(script) {
+        for(var i = 0; i  < list.length; ++i) {
+            if(script == list[i]) {
+                var area = document.forms[0];
+                area.elements['plugin_script'].value = script;
+                document.getElementById('l'+script).style.display = '';
+                document.getElementById('r'+script).style.display = '';
+            } else {
+                document.getElementById('l'+list[i]).style.display = 'none';
+                document.getElementById('r'+list[i]).style.display = 'none';
+            }
+        }
+    }
+
+    function CheckInput() {
+        var area = document.forms[0];
+
+        var v = area.elements['name'].value.trim();
+        if(v == '') {
+            alert("${msg.get('missingpluginname')}");
+            return;
+        }
+
+        v = area.elements['priority'].value.trim();
+        if(v == '') {
+            
+            alert("${msg.get('missingpriority')}");
+            return;
+        }
+
+        if(area.elements['plugin_type'].value == 'java') {
+            v = area.elements['class'].value.trim();
+            if(v == '') {
+                alert("${msg.get('missingclassname')}");
+                return;
+            }
+        } else {
+            var s = area.elements['plugin_script'].value;
+            var sCount = 0;
+            for(var i = 0; i  < action.length; ++i) {
+                var p = 'script_' + s + '_' + action[i];
+                if(area.elements[p] != undefined) {
+                    if(area.elements[p].value.trim() != '') {
+                        ++sCount;
+                    }
+                }
+
+            }
+            if(sCount == 0) {
+                alert("${msg.get('missingscript')}");
+                return;
+            }
+        } 
+        area.submit();
+    }
+
+    function Dismiss() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "plugin";
+    }
+</script>
+
+<h2><#if pluginID??>${msg.get('changeplugin')}<#else>${msg.get('createplugin')}</#if></h2>
+
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('createpluginerror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=modifyplugin" method="post">
+    <input name="plugin_type" type="hidden" value="${plugin_type}" />
+    <input name="plugin_script" type="hidden" value="${plugin}" />
+    <#if pluginID??>
+    <input name="pluginID" type="hidden" value="${pluginID}" />
+    </#if>
+    <div style="width:46em; border: 1px solid lightgray;margin-top:1em;margin-bottom:1em;padding:.3em">
+        <div class="subcolumns">
+            <div class="c30l">
+                <div class="thb">Plugin</div>
+                <div class="tdb">${msg.get('name')}</div>
+                <div class="tdb">${msg.get('active')}</div>
+                <div class="tdb">${msg.get('priority')}</div>
+                <div class="tdb">${msg.get('plugintype')}</div>
+                <div class="tdb">Plugin</div>
+                <div id="ljava" <#if plugin_type == 'script'>style="display:none"</#if> >
+                    <#if false>
+                    <div class="tdb">${msg.get('classpath')}</div>
+                    <div class="tdb">&nbsp;</div>
+                    </#if>
+                    <div class="tdb">${msg.get('class')}</div>
+                </div>
+                <div id="lscript"<#if plugin_type == 'java'>style="display:none"</#if>>
+                     <div id="lbundle"  <#if plugin != 'bundle'>style="display:none"</#if>>
+                     <div class="tdb">&nbsp;</div>
+                        <div class="tdb">${msg.get('pluginerror')}</div>
+                        <div class="tdb">${msg.get('bundlestart')}</div>
+                        <div class="tdb">${msg.get('bundlestop')}</div>
+                    </div>
+
+                    <div id="lcontext"  <#if plugin != 'context'>style="display:none"</#if>>
+                         <div class="tdb">&nbsp;</div>
+                        <div class="tdb">${msg.get('pluginerror')}</div>
+                        <div class="tdb">${msg.get('pluginmsg')}</div>
+
+                        <div class="tdb">${msg.get('contextcreate')}</div>
+                        <div class="tdb">${msg.get('contextchange')}</div>
+                        <div class="tdb">${msg.get('contextdelete')}</div>
+                        <div class="tdb">${msg.get('contextenable')}</div>
+                        <div class="tdb">${msg.get('contextdisable')}</div>
+                    </div>
+
+                    <div id="luser"  <#if plugin != 'user'>style="display:none"</#if>>
+                         <div class="tdb">&nbsp;</div>
+                        <div class="tdb">${msg.get('pluginerror')}</div>
+                        <div class="tdb">${msg.get('pluginmsg')}</div>
+                        <div class="tdb">${msg.get('usercreate')}</div>
+                        <div class="tdb">${msg.get('userchange')}</div>
+                        <div class="tdb">${msg.get('userdelete')}</div>
+                        <!--
+                        <div class="tdb">Change password</div>
+                        //-->
+                    </div>
+
+                    <div id="lgroup"  <#if plugin != 'group'>style="display:none"</#if>>
+                         <div class="tdb">&nbsp;</div>
+                        <div class="tdb">${msg.get('pluginerror')}</div>
+                        <div class="tdb">${msg.get('pluginmsg')}</div>
+                        <div class="tdb">${msg.get('groupcreate')}</div>
+                        <div class="tdb">${msg.get('groupchange')}</div>
+                        <div class="tdb">${msg.get('groupdelete')}</div>
+                    </div>
+                    <div id="lresource"  <#if plugin != 'resource'>style="display:none"</#if>>
+                         <div class="tdb">&nbsp;</div>
+                        <div class="tdb">${msg.get('pluginerror')}</div>
+                        <div class="tdb">${msg.get('pluginmsg')}</div>
+                        <div class="tdb">${msg.get('resourcecreate')}</div>
+                        <div class="tdb">${msg.get('resourcechange')}</div>
+                        <div class="tdb">${msg.get('resourcedelete')}</div>
+                        <div class="tdb">${msg.get('resourceenable')}</div>
+                        <div class="tdb">${msg.get('resourcedisable')}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="c70r">
+                <div class="td">&nbsp;</div>
+                <div class="td"><input name="name" size="25" maxlength="50" value="${name!}" /></div>
+                <div class="td"><input name="enabled" type="checkbox" checked="checked" /></div>
+                <div class="td"><input name="priority" onkeyup="Number(this)" size="5" maxlength="4"  value="${priority!0}" /></div>
+                <div class="td"><input name="type" onclick="SetType('java')" type="radio" <#if plugin_type == 'java'>checked="checked"</#if> />
+                                       ${msg.get('interface')} <input name="type" onclick="SetType('script')" type="radio" <#if plugin_type == 'script'>checked="checked"</#if> />${msg.get('externalscript')} </div>
+                <div class="td">
+                    <select onchange="SetScript(this.value)" name="plugin">
+                        <option value="bundle" <#if plugin == 'bundle'>selected="selected"</#if>>BUNDLE</option>
+                        <option value="context" <#if plugin == 'context'>selected="selected"</#if>>CONTEXT</option>
+                        <option value="user" <#if plugin == 'user'>selected="selected"</#if>>USER</option>
+                        <option value="group" <#if plugin == 'group'>selected="selected"</#if>>GROUP</option>
+                        <option value="resource" <#if plugin == 'resource'>selected="selected"</#if>>RESOURCE</option>
+                    </select>
+                </div>
+
+                <div id="rjava" <#if plugin_type == 'script'>style="display:none"</#if> >
+                    <#if false>
+                    <div class="td"> <input type="checkbox" name="jar" <#if jar??>checked="checked"</#if> /> ${msg.get('jarfile')}</div>
+                    <div class="td"><input name="classpath" size="50" maxlength="2048" value="${classpath!}" /></div>
+                    </#if>
+                    <div class="td"><input name="class" size="50" maxlength="200" value="${class!}" /></div>
+                </div>
+                <div id="rscript" <#if plugin_type == 'java'>style="display:none"</#if>>
+                     <!-- bundle //-->
+                     <div id="rbundle" <#if plugin != 'bundle'>style="display:none"</#if>>
+                     <div class="thb">Bundle</div>
+                        <div class="td"><input name="bundle_error" size="50" maxlength="2048" value="${bundle_error!}" /></div>
+                        <div class="td"><input name="script_bundle_start" size="50" maxlength="2048" value="${script_bundle_start!}" /></div>
+                        <div class="td"><input name="script_bundle_stop" size="50" maxlength="2048" value="${script_bundle_stop!}" /></div>
+                    </div>
+
+                    <!-- context //-->
+
+                    <div id="rcontext" <#if plugin != 'context'>style="display:none"</#if>>
+                         <div class="thb">${msg.get('context')}</div>
+                        <div class="td"><input name="context_error" size="50" maxlength="2048" value="${context_error!}" /></div>
+                        <div class="td"><input name="context_msg" size="50" maxlength="2048" value="${context_msg!}" /></div>
+
+                        <div class="td">
+                            <select name="script_context_create_call">
+                                <option value="0" <#if script_context_create_call?? && script_context_create_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_context_create_call?? && script_context_create_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_context_create_call?? && script_context_create_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_context_create" size="50" maxlength="2048" value="${script_context_create!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_context_change_call">
+                                <option value="0" <#if script_context_change_call?? && script_context_create_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_context_change_call?? && script_context_change_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_context_change_call?? && script_context_change_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_context_change" size="50" maxlength="2048" value="${script_context_change!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_context_delete_call">
+                                <option value="0" <#if script_context_delete_call?? && script_context_delete_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_context_delete_call?? && script_context_delete_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_context_delete_call?? && script_context_delete_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_context_delete" size="50" maxlength="2048" value="${script_context_delete!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_context_enable_call">
+                                <option value="0" <#if script_context_enable_call?? && script_context_enable_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_context_enable_call?? && script_context_enable_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_context_enable_call?? && script_context_enable_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_context_enable" size="50" maxlength="2048" value="${script_context_enable!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_context_disable_call">
+                                <option value="0" <#if script_context_disable_call?? && script_context_disable_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_context_disable_call?? && script_context_disable_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_context_disable_call?? && script_context_disable_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_context_disable" size="50" maxlength="2048" value="${script_context_disable!}" />
+                        </div>
+                    </div>
+
+                    <!-- user //-->
+                    <div id="ruser" <#if plugin != 'user'>style="display:none"</#if>>
+                         <div class="thb">${msg.get('user')}</div>
+                        <div class="td"><input name="user_error" size="50" maxlength="2048" value="${user_error!}" /></div>
+                        <div class="td"><input name="user_msg" size="50" maxlength="2048" value="${user_msg!}" /></div>
+
+                        <div class="td">
+                            <select name="script_user_create_call">
+                                <option value="0" <#if script_user_create_call?? && script_user_create_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_user_create_call?? && script_user_create_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_user_create_call?? && script_user_create_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_user_create" size="50" maxlength="2048" value="${script_user_create!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_user_change_call">
+                                <option value="0" <#if script_user_change_call?? && script_user_change_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_user_change_call?? && script_user_change_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_user_change_call?? && script_user_change_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_user_change" size="50" maxlength="2048" value="${script_user_change!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_user_delete_call">
+                                <option value="0" <#if script_user_delete_call?? && script_user_delete_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_user_delete_call?? && script_user_delete_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_user_delete_call?? && script_user_delete_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_user_delete" size="50" maxlength="2048" value="${script_user_delete!}" />
+                        </div>
+                        <!--
+                         <div class="td">                           
+                            <input name="script_user_change_password" size="50" maxlength="2048" value="${script_user_change_password!}" />
+                        </div>
+                        //-->
+                    </div>
+                    <!-- group //-->
+                    <div id="rgroup" <#if plugin != 'group'>style="display:none"</#if>>
+                        <div class="thb">${msg.get('pgroup')}</div>
+                        <div class="td"><input name="group_error" size="50" maxlength="2048" value="${group_error!}" /></div>
+                        <div class="td"><input name="group_msg" size="50" maxlength="2048" value="${group_msg!}" /></div>
+
+                        <div class="td">
+                            <select name="script_group_create_call">
+                                <option value="0" <#if script_group_create_call?? && script_group_create_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_group_create_call?? && script_group_create_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_group_create_call?? && script_group_create_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_group_create" size="50" maxlength="2048" value="${script_group_create!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_group_change_call">
+                                <option value="0" <#if script_group_change_call?? && script_group_change_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_group_change_call?? && script_group_change_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_group_change_call?? && script_group_change_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_group_change" size="50" maxlength="2048" value="${script_group_change!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_group_delete_call">
+                                <option value="0" <#if script_group_delete_call?? && script_group_delete_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_group_delete_call?? && script_group_delete_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_group_delete_call?? && script_group_delete_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_group_delete" size="50" maxlength="2048" value="${script_group_delete!}" />
+                        </div>
+                    </div>
+                    <!-- resource //-->
+                    <div id="rresource" <#if plugin != 'resource'>style="display:none"</#if>>
+                         <div class="thb">${msg.get('presource')}</div>
+                        <div class="td"><input name="resource_error" size="50" maxlength="2048" value="${resource_error!}" /></div>
+                        <div class="td"><input name="resourcet_msg" size="50" maxlength="2048" value="${resource_msg!}" /></div>
+
+                        <div class="td">
+                            <select name="script_resource_create_call">
+                                <option value="0" <#if script_resource_create_call?? && script_resource_create_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_resource_create_call?? && script_resource_create_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_resource_create_call?? && script_resource_create_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_resource_create" size="50" maxlength="2048" value="${script_resource_create!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_resource_change_call">
+                                <option value="0" <#if script_resource_change_call?? && script_resource_change_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_resource_change_call?? && script_resource_change_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_resource_change_call?? && script_resource_change_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_resource_change" size="50" maxlength="2048" value="${script_resource_change!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_resource_delete_call">
+                                <option value="0" <#if script_resource_delete_call?? && script_resource_delete_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_resource_delete_call?? && script_resource_delete_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_resource_delete_call?? && script_resource_delete_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_resource_delete" size="50" maxlength="2048" value="${script_resource_delete!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_resource_enable_call">
+                                <option value="0" <#if script_resource_enable_call?? && script_resource_enable_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_resource_enable_call?? && script_resource_enable_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_resource_enable_call?? && script_resource_enable_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_resource_enable" size="50" maxlength="2048" value="${script_resource_enable!}" />
+                        </div>
+                        <div class="td">
+                            <select name="script_resource_disable_call">
+                                <option value="0" <#if script_resource_disable_call?? && script_resource_disable_call == 0>selected="selected"</#if>>BEFORE</option>
+                                <option value="1" <#if script_resource_disable_call?? && script_resource_disable_call == 1>selected="selected"</#if>>AFTER</option>
+                                <option value="2" <#if script_resource_disable_call?? && script_resource_disable_call == 2>selected="selected"</#if>>BOTH</option>
+                            </select>
+                            <input name="script_resource_disable" size="50" maxlength="2048" value="${script_resource_disable!}" />
+                        </div>                     
+                    </div>
+                </div>
+                <div class="td">
+                    <input class="submit" type="button" onclick="return CheckInput()" <#if pluginID??>value="${msg.get('change')}"<#else>value="${msg.get('create')}"</#if>/>
+                    <input class="submit" type="button" onclick="return Dismiss()" value= "${msg.get('dismiss')}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

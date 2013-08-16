@@ -1,0 +1,189 @@
+<script type="text/javascript">
+    <!--
+    function CheckSelection(onlyOne) {
+        var area = document.forms[0];
+        var end = area.elements['pluginNum'].value;
+        var count = 0;
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['p' + i].checked) {
+                count+= 1;
+            }
+        }
+        if(count == 0) {
+            alert("${msg.get('nopluginselected')}");
+            return false;
+        }
+        if(count > 1 && onlyOne) {
+            alert("${msg.get('morepluginselected')}");
+            return false;
+        }
+        return true;
+    }
+
+    function DeletePlugin() {
+        var area = document.forms[0];
+        if(CheckSelection(false)) {
+            var area = document.forms[0];
+            var end = area.elements['pluginNum'].value;
+            for(var i = 0; i < end; ++i) {
+                if(area.elements['p' + i].checked) {
+                    document.getElementById('name'+i).style.backgroundColor = '#FFFF40';
+                    area.elements['p' + i].disabled = true;
+                }
+            }
+            document.getElementById('deletewrn').style.display = '';
+        }
+    }
+
+    function DeleteNo() {
+        var area = document.forms[0];
+        var end = area.elements['pluginNum'].value;
+        for(var i = 0; i < end; ++i) {
+            document.getElementById('name'+i).style.backgroundColor = '';
+            area.elements['p' + i].disabled = false;
+        }
+        document.getElementById('deletewrn').style.display = 'none';
+    }
+
+    function DeleteYes() {
+        var area = document.forms[0];
+        area.elements['formAction'].value ="deletePlugin";
+        var end = area.elements['pluginNum'].value;
+        for(var i = 0; i < end; ++i) {
+            area.elements['p' + i].disabled = false;
+        }
+        area.submit();
+    }
+
+    function CreatePlugin() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "modifyplugin";
+    }
+
+    function ChangeStatus() {
+        var area = document.forms[0];
+        area.elements['formAction'].value = "changeStatus";
+        if(CheckSelection(false)) {
+            area.submit();
+        }
+        return;
+    }
+
+    function ModifyPlugin() {
+        if(!CheckSelection(true)) {
+            return;
+        }
+        area = document.forms[0];
+        var tmp =  document.location.href;
+        var pluginID;
+        var end = area.elements['pluginNum'].value;
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['p' + i].checked) {
+                pluginID = area.elements['p' + i].value.substring(1)
+                break;
+            }
+        }
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "modifyplugin&pluginID=" + pluginID;
+    }
+
+    function ShowHelp() {
+        var url = document.location.href.substr(0,document.location.href.indexOf("index.html")) + "pluginhelp.html";
+        var w = window.open(url, "Stacktrace", "width=300,height=200,menubar=yes,scrollbars=yes,resizable=yes");
+        w.focus();
+    }
+    //-->
+</script>
+
+
+
+
+<form action="index.html?link=plugin" method="post">
+    <ul id="hnavlist">
+
+        <li><a href="javascript:CreatePlugin()">${msg.get('create')}</a></li>
+        <#if pluginList??>
+        <li><a href="javascript:ModifyPlugin()">${msg.get('change')}</a></li>
+        <li><a href="javascript:DeletePlugin()">${msg.get('delete')}</a></li>
+        <li><a href="javascript:ChangeStatus()">${msg.get('activate')}</a></li>
+        </#if>
+        <li><a href="javascript:ShowHelp()">${msg.get('help')}</a></li>
+       
+    </ul>
+
+    <#if error??>
+    <div class="err">
+        <div class="subcolumns">
+            <div class="c75l">
+                ${msg.get('pluginerror')}:
+            </div>
+            <div  class="c25r" style="text-align:right">
+                <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+            </div>
+        </div>
+        <div class="errmsg">
+            <code id="errorMsg">${error}</code>
+        </div>
+    </div>
+    </#if>
+
+    <div id="deletewrn" style="width:33em;border:1px red solid;padding:.3em;margin:.4em 0 .6em 0;display:none">
+        ${msg.get('delwrnplugin')}
+        <div style="margin:.3em">
+            <input class="submit" type="button" onclick="DeleteYes()" value="${msg.get('yes')}" />
+            &nbsp;
+            <input class="submit" type="button" onclick="DeleteNo()" value="${msg.get('no')}" />
+        </div>
+    </div>
+
+    <#if pluginList??>
+
+    <input type="hidden" name="formAction"  />
+    <input type="hidden" name="pluginID" />
+    <input type="hidden" name="pluginNum" value="${pluginList?size}" />
+    <div class="bframe">
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th class="center">${msg.get('name')}</th>
+                    <th>${msg.get('plugintype')}</th>
+                    <th>Plugin</th>
+                    <th>Version</th>
+                    <th>${msg.get('priority')}</th>
+                    <th>${msg.get('active')}</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <#list pluginList as list>
+
+            <tr>
+                <td><input type="checkbox" name="p${list_index}" value="<#if list.enabled>+<#else>-</#if>${list.ID}" /> </td>
+                <td id="name${list_index}">${list.name}</td>
+
+                <td>${list.type}</td>
+                <td>${list.plugin}</td>
+                <td>${list.version}</td>
+                <td>${list.priority}</td>
+                <td>
+                    <#if list.enabled>
+                    <img class="centeredImage" src="images/active.png" />
+                    <#else>
+                    <img class="centeredImage" src="images/inactive.png" />
+                    </#if>
+                </td>
+
+                <td  class="center">                 
+                    <#if !list.loadError>
+                    <img class="centeredImage" src="images/active.png" />
+                    <#else>
+                    <img class="centeredImage" src="images/inactive.png" />
+                    </#if>                  
+                </td>
+            </tr>
+            </#list>
+        </table>
+    </div>
+    </#if>
+</form>
+

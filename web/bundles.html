@@ -1,0 +1,50 @@
+<script type="text/javascript">
+function ShowBundles() {
+    var url = document.location.href.substr(0,document.location.href.indexOf("index.html")) + "listbundles.html";
+    var w = window.open(url, "OSGI Bundles", "width=300,height=200,scrollbars=yes,resizable=yes");
+    w.focus();
+}
+</script>
+
+
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('bundleerror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<h3>OSGI Bundles <#if bundleList??><input onclick="ShowBundles()" type="image" src="images/enlarge.png" /></#if></h3>
+ 
+<#if bundleList??>
+<div class="bframe" style="font-size:small;margin-top:.5em;margin-bottom:1em">
+    <table>
+        <thead>
+            <tr>
+                <th>Bundle</th>
+                <th>Status</th>
+                <th>Bundle</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <#list bundleList as list>
+        <tr>
+            <td>${list[0]}</td>
+            <td><#if list[1]!="ACTIVE"><span class="r"></#if>${list[1]}<#if list[1]!="ACTIVE"></span></#if></td>
+            <td>${list[2]}</td>
+            <td><#if list[3]!="ACTIVE"><span class="r"></#if>${list[1]}<#if list[3]!="ACTIVE"></span></#if></td>
+        </tr>
+        </#list>
+    </table>
+</div>
+</#if>
+

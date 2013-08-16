@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    function ShowFile() {
+        var area = document.forms[0].elements['files'];
+        var index = area.selectedIndex ;
+        if(index == -1) {
+            alert("No file selcted");
+            return;
+        }
+        var v = area[index].value
+        if(v == '-') {
+            return;
+        }
+        var url = document.location.href.substr(0,document.location.href.indexOf("index.html")) + "showfile.html?index=" + v;
+        var w = window.open(url, "Stacktrace", "width=300,height=200,scrollbars=yes,resizable=yes");
+        w.focus();
+    }
+</script>
+
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('fileerror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<h3> ${msg.get('files')}</h3>
+<#if propFiles??>
+<form action="index.html?link=files" method="post">
+    <select name="files" size="10" style="margin-top:.3em">
+        <option value="-" style="font-weight:bold">Log-Dateien</option>
+        <#list logFiles as list>
+        <option value="l${list_index}">${list}</option>
+        </#list>
+        <option value="-" style="font-weight:bold">Property-Dateien</option>
+        <#list propFiles as list>
+        <option value="p${list_index}">${list}</option>
+        </#list>
+    </select>
+    <div style="margin-top:.8em">
+        <input class="submit" type="button" onclick="ShowFile()" value="${msg.get('showfile')}" />
+    </div>
+</form>
+</#if>

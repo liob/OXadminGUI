@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Peter's Open-Xchange Server Admin GUI</title>
+        <link rel="shortcut icon" href="images/favicon.ico" />
+        <!-- add your meta tags here -->
+        <link href="css/my_layout.css" rel="stylesheet" type="text/css" />
+        <!--[if lte IE 7]>
+        <link href="css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
+        <![endif]-->
+    </head>
+    <body>
+        <div style="margin:1em;">
+            <h3>Allgemein</h3>
+            <p>
+                Die Priorität eines Plugins regelt die Reihenfolge in der Plugins gleicher Klassifikation aufgerufen werden. Der Wert 0
+                zeichnet die höchste Priorität aus.
+            </p>
+            <br />
+            <p>
+                Java-Plugins müssen vom Klassenpfad her unter dem Verzeichnis <code>/opt/open-xchange/lib/plugin/</code> abgelegt werden. Die Klasse
+                <code>at.sciencesoft.plugin.test.UserText</code> würde z.B. den absoluten Pfad<br />
+                <code>/opt/open-xchange/lib/plugin/at/sciencesoft/plugin/test/UserText.class</code><br />
+                bedingen. Außer für das Interface Bundle gibt es für jede Interface die entsprechende Adapter-Klasse.
+            </p>
+            <br />
+            <p>
+                Grün ausgezeichnete Skript-Parameter sind optional. Im Zusammenhang mit der Aktion <code>CHANGE</code> implizieren diese eine Änderung des
+                entsprechenden Parameters. Optionale Parameter werden immer in Form eines Wertepaars <code>PARAM_NAME <i>Wert</i></code> an das Skript durchgereicht.
+                String-Listen werden immer als einzelner String, der die Listenelemente in kommaseparierter Form enthält, gehandhabt. Das Eingabefeld
+                Fehlerreport beinhaltet den absoluten Pfad auf eine Textdatei in der das Skript optional Fehlermeldungen hinterlegen kann. Im Falle eines
+                Fehlers wird diese Datei ausgelesen und in der GUI angezeigt. Das Feld Hinweis wird momentan noch nicht verwendet. In Zukunft können hier
+                Meldungen gespeichert werden, die innerhalb der GUI angezeigt werden sollen, die aber keinen Fehler implizieren. Gibt ein Skript einen Wert ungleich
+                0 zurück, so wird dies als Fehler interpretiert.
+            </p>
+
+            <br />
+            <h3>Bundle</h3>
+            <div style="margin-left:1em">
+                <b>Java-Interface / Adapter-Klasse:</b> nein<br />
+                <pre>
+ package at.sciencesoft.plugin;
+    public interface BundleIface {
+    public ResultSet startBundle();
+    public ResultSet stopBundle();
+    public String getVersion();
+ }
+                </pre>
+                <b>Skript-Parameter</b>
+                <div class="bframe" style="margin-top:.3em;font-size:smaller">
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th></tr>
+                        <tr><td>Bundle starten</td><td>BUNDLE</td><td>START</td></tr>
+                        <tr><td>Bundle beenden</td><td>BUNDLE</td><td>STOP</td></tr>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <h3>Kontext</h3>
+            <div style="margin-left:1em">
+                <b>Java-Interface / Adapter-Klasse:</b> <code>at.sciencesoft.plugin.ContextImpl</code><br />
+                <pre>
+public interface ContextIface {
+    public ResultSet create(boolean isPost,boolean isSuccess,int contextID, String contextName, String[] mapping, long quota, String accessCombination,String loginName, String displayName,
+            String firstName, String lastName,  String pwd, String email, String lang, String timeZone,ParamMap contextInfos,ResultSet rs,OXcontext context);
+    public ResultSet change(boolean isPost,boolean isSuccess,int contextID, ParamMap changes,ParamMap contextInfos, boolean downgrade,ResultSet rs);
+    public ResultSet delete(boolean isPost,boolean isSuccess,int contextID,ResultSet rs);
+    public ResultSet enable(boolean isPost,boolean isSuccess,int contextID,ResultSet rs);
+    public ResultSet disable(boolean isPost,boolean isSuccess,int contextID,ResultSet rs);
+    public boolean checkGUIflag(FIELD field);
+    public String getVersion();
+    enum FIELD {DISABLE_EMAIL_DOMAIN,DISABLE_SMTP_SERVER,DISABLE_IMAP_SERVER};
+}
+                </pre>
+                <b>Skript-Parameter</b>
+                <div class="bframe" style="margin-top:.3em;;font-size:smaller">
+                    <table>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Plugin</th>
+                            <th>Aktion</th>
+                            <th>pre/post</th>
+                            <th>success</th>
+                            <th>contextID</th>
+                            <th>contextName</th>
+                            <th>mapping</th>
+                            <th>quota</th>
+                            <th>accessCombination</th>
+                            <th>loginName</th>
+                            <th>displayName</th>
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>pwd</th>
+                            <th>email</th>
+                            <th>lang</th>
+                            <th>timezone</th>
+                        </tr>
+                        <tr>
+                            <td>Kontext anlegen</td>
+                            <td>CONTEXT</td>
+                            <td>CREATE</td>
+                            <td>0<i> od. </i>1</td>
+                            <td>0<i> od. </i>1</td>
+                            <td><i>Zahl</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>Zahl</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td><td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                        </tr>
+                    </table>
+
+                    <br />
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th><th style="color:green">mapping</th>
+                        <th style="color:green">accessCombination</th><th style="color:green">fileQuota</th></tr>
+
+                        <tr><td>Kontext ändern</td><td>CONTEXT</td><td>CHANGE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td>
+                            <td><i>MAPPING  <i>String</i></i></td> <td><i>ACCESS_COMBINATION  <i>String</i></i></td><td><i>FILE_QUOTA  <i>Zahl</i></i></td>
+                        </tr>
+
+                    </table>
+                    <br />
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th></tr>
+                        <tr><td>Kontext löschen</td><td>CONTEXT</td><td>DELETE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td></tr>
+                    </table>
+                    <br />
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th></tr>
+                        <tr><td>Kontext aktivieren</td><td>CONTEXT</td><td>ENABLE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td></tr>
+                    </table>
+                    <br />
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th></tr>
+                        <tr><td>Kontext deaktivieren</td><td>CONTEXT</td><td>DISABLE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td></tr>
+                    </table>
+
+                </div>
+            </div>
+            <br />
+            <h3>Benutzer</h3>
+            <div style="margin-left:1em">
+                <b>Java-Interface / Adapter-Klasse:</b> <code>at.sciencesoft.plugin.UserImpl</code><br />
+                <pre>
+public interface UserIface {
+    public ResultSet create(boolean isPost,boolean isSuccess,int contextID,Credentials auth, String loginName, String displayName, String firstName, String lastName,String pwd, String email,ParamMap map,ResultSet rs,User user);
+    public ResultSet change(boolean isPost,boolean isSuccess,int contextID,Credentials auth, int userID, ParamMap changes,ParamMap pluginMap,ResultSet rs);
+    public ResultSet delete(boolean isPost,boolean isSuccess,int contextID,Credentials auth, int userID,ResultSet rs);
+    public void loadGUIdata(int contextID,int userID,HashMap map) throws Exception;
+    public boolean checkGUIflag(FIELD field);
+    public String getVersion();
+    enum FIELD { MAIL_QUOTA,AUTORESPONDER,MAIL_FORWARDING,DISABLE_IMAP_LOGIN,DISABLE_MODIFY_EMAIL,DISABLE_IMAP_SERVER,DISABLE_SMTP_SERVER,
+    COPY_IMAP_USER,COPY_IMAP_EMAIL,JS_CHECK_EMAIL,JS_CHECK_EMAIL_DOMAIN }
+}
+
+                </pre>
+                <b>Skript-Parameter</b>
+
+                <div class="bframe" style="margin-top:.3em;;font-size:smaller">
+                    <table>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Plugin</th>
+                            <th>Aktion</th>
+                            <th>pre/post</th>
+                            <th>success</th>
+                            <th>contextID</th>
+                            <th>loginName</th>
+                            <th>displayName</th>
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>password</th>
+                            <th>email</th>
+                            <th style="color:green">lang</th>
+                            <th style="color:green">timezone</th>
+                            <th style="color:green">department</th>
+                            <th style="color:green">company</th>
+                            <th style="color:green">emailAlias<sup>*</sup></th>
+                            <th style="color:green">imapLogin</th>
+                            <th style="color:green">imapServer</th>
+                            <th style="color:green">smtpServer</th>
+                            <th style="color:green">uploadFileSize</th>
+                            <th style="color:green">uploadFileSizePerFile</th>
+                        </tr>
+                        <tr><td>Benutzer anlegen</td>
+                            <td>USER</td>
+                            <td>CREATE</td>
+                            <td>0 <i>od.</i> 1</td>
+                            <td>0<i> od. </i>1</td>
+                            <td><i>Zahl</i></td><td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td><i>String</i></td>
+                            <td>LANG <i>String</i></td>
+                            <td>TIME_ZONE <i>String</i></td>
+                            <td>DEPARTMENT <i>String</i></td>
+                            <td>COMPANY <i>String</i></td>
+                            <td>EMAIL_ALIAS <i>String</i></td>
+                            <td>IMAP_LOGIN <i>String</i></td>
+                            <td>IMAP_SERVER <i>String</i></td>
+                            <td>SMTP_SERVER <i>String</i></td>
+                            <td>UPLOAD_FILE_SIZE <i>Zahl</i></td>
+                            <td>UPLOAD_FILE_SIZE_PER_FILE <i>Zahl</i></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Plugin</th>
+                            <th>Aktion</th>
+                            <th>pre/post</th>
+                            <th>success</th>
+                            <th>contextID</th>
+                            <th>userID</th>
+                            <th style="color:green">loginName</th>
+                            <th style="color:green">displayName</th>
+                            <th style="color:green">firstName</th>
+                            <th style="color:green">lastName</th>
+                            <th style="color:green">password</th>
+                            <th style="color:green">email</th>
+                            <th style="color:green">lang</th>
+                            <th style="color:green">timezone</th>
+                            <th style="color:green">department</th>
+                            <th style="color:green">company</th>
+                            <th style="color:green">emailAlias<sup>*</sup></th>
+                            <th style="color:green">imapLogin</th>
+                            <th style="color:green">imapServer</th>
+                            <th style="color:green">smtpServer</th>
+                            <th style="color:green">uploadFileSize</th>
+                            <th style="color:green">uploadFileSizePerFile</th>
+                        </tr>
+                        <tr><td>Benutzer ändern</td>
+                            <td>USER</td>
+                            <td>CHANGE</td>
+                            <td>0 <i>od.</i> 1</td>
+                            <td>0 <i>od.</i> 1</td>
+                            <td><i>Zahl</i></td>
+                            <td><i>Zahl</i></td>
+                            <td>LOGIN_NAME <i>String</i></td>
+                            <td>DISPLAY_NAME <i>String</i></td>
+                            <td>FIRST_NAME <i>String</i></td>
+                            <td>LAST_NAME <i>String</i></td>
+                            <td>PASSWORD <i>String</i></td>
+                            <td>EMAIL <i>String</i></td>
+                            <td>LANG <i>String</i></td>
+                            <td>TIME_ZONE <i>String</i></td>
+                            <td>DEPARTMENT <i>String</i></td>
+                            <td>COMPANY <i>String</i></td>
+                            <td>EMAIL_ALIAS <i>String</i></td>
+                            <td>IMAP_LOGIN <i>String</i></td>
+                            <td>IMAP_SERVER <i>String</i></td>
+                            <td>SMTP_SERVER <i>String</i></td>
+                            <td>UPLOAD_FILE_SIZE <i>Zahl</i></td>
+                            <td>UPLOAD_FILE_SIZE_PER_FILE <i>Zahl</i></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>contextID</th><th>resouceID</th></tr>
+                        <tr><td>Benutzer löschen</td><td>USER</td><td>DELETE</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td><i>Zahl</i></td></tr>
+                    </table>
+                    <sup>*</sup> ... String in der Form <i>email1,email2,...</i>
+                </div>
+            </div>
+            <br />
+            <h3>Gruppe</h3>
+            <div style="margin-left:1em">
+                <b>Java-Interface / Adapter-Klasse:</b> <code>at.sciencesoft.plugin.GroupImpl</code><br />
+                <pre>
+public interface GroupIface {
+     public ResultSet create(boolean isPost,boolean isSuccess,int contextID, Credentials auth, String name, String displayName, String members, ParamMap map,ResultSet rs,Group group);
+     public ResultSet change(boolean isPost,boolean isSuccess,int contextID, Credentials auth, int groupID,ParamMap changes, ParamMap pluginMap,ResultSet rs);
+     public ResultSet delete(boolean isPost,boolean isSuccess,int contextID, Credentials auth, int groupID,ResultSet rs);
+     public void loadGUIdata(int contextID,int userID,HashMap map) throws Exception;
+     public boolean checkGUIflag(FIELD field);
+     public String getVersion();
+     enum FIELD { MAIL_GROUP,JS_CHECK_EMAIL,JS_CHECK_EMAIL_DOMAIN }
+}
+                </pre>
+                <b>Skript-Parameter</b>
+
+                <div class="bframe" style="margin-top:.3em;;font-size:smaller">
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th><th>name</th><th>displayName</th><th>members<sup>*</sup></th></tr>
+                        <tr><td>Gruppe anlegen</td><td>GROUP</td><td>CREATE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td><i>String</i></td><td><i>String</i></td><td><i>String</i></td></tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th><th style="color:green">name</th><th style="color:green">displayName</th><th style="color:green">addMembers<sup>*</sup></th><th style="color:green">removeMembers<sup>*</sup></th></tr>
+                        <tr><td>Gruppe ändern</td><td>GROUP</td><td>CHANGE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td>NAME <i>String</i></td><td>DISPLAY_NAME <i>String</i></td><td>ADD_USER <i>String</i></td><td>REMOVE_USER <i>String</i></td></tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th><th>groupID</th></tr>
+                        <tr><td>Gruppe löschen</td><td>GROUP</td><td>DELETE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td><i>Zahl</i></td></tr>
+                    </table>
+                    <sup>*</sup> ... String in der Form <i>UserID1,UserID2,...</i>
+                </div>
+            </div>
+            <br />
+            <h3>Ressource</h3>
+            <div style="margin-left:1em">
+                <b>Java-Interface / Adapter-Klasse:</b> <code>at.sciencesoft.plugin.ResourceImpl</code><br />
+                <pre>
+public interface ResourceIface {
+    public ResultSet create(boolean isPost,boolean isSuccess,int contextID, Credentials auth, String name, String displayName, String description, String email,ResultSet rs,Resource resource);
+    public ResultSet change(boolean isPost,boolean isSuccess,int contextID, Credentials auth, int resourceID,ParamMap changes,ResultSet rs);
+    public ResultSet delete(boolean isPost,boolean isSuccess,int contextID, Credentials auth,int resID,ResultSet rs);
+    public ResultSet enable(boolean isPost,boolean isSuccess,int contextID, Credentials auth,int resID,ResultSet rs);
+    public ResultSet disable(boolean isPost,boolean isSuccess,int contextID, Credentials auth,int resID,ResultSet rs);
+    public String getVersion(); 
+}
+                </pre>
+                <b>Skript-Parameter</b>
+
+                <div class="bframe" style="margin-top:.3em;;font-size:smaller">
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th><th>name</th><th>displayName</th><th>decription</th><th>email</th></tr>
+                        <tr><td>Ressource anlegen</td><td>RESOURCE</td><td>CREATE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td><i>String</i></td><td><i>String</i></td><td><i>String</i></td><td><i>String</i></td></tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th><th style="color:green">name</th><th style="color:green">displayName</th><th style="color:green">description</th><th style="color:green">email</th></tr>
+                        <tr><td>Ressource ändern</td><td>RESOURCE</td><td>CHANGE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td>NAME <i>String</i></td><td>DISPLAY_NAME <i>String</i></td><td>DESCRIPTION <i>String</i></td><td>EMAIL <i>String</i></td></tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th><th>resouceID</th></tr>
+                        <tr><td>Ressource löschen</td><td>RESOURCE</td><td>DELETE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td><i>Zahl</i></td></tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>contextID</th><th>resouceID</th></tr>
+                        <tr><td>Ressource aktivieren</td><td>RESOURCE</td><td>ENABLE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td><i>Zahl</i></td></tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr><th>&nbsp;</th><th>Plugin</th><th>Aktion</th><th>pre/post</th><th>success</th><th>contextID</th><th>resouceID</th></tr>
+                        <tr><td>Ressource deaktivieren</td><td>RESOURCE</td><td>DISABLE</td><td>0 <i>od.</i> 1</td><td>0 <i>od.</i> 1</td><td><i>Zahl</i></td><td><i>Zahl</i></td></tr>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <h3>Appendix</h3>
+            <div style="margin-left:1em">
+                <pre>
+package at.sciencesoft.plugin;
+
+public class ResultSet {
+   // HashMap map for passing data between pre/post calls
+   public ResultSet(boolean success,String errorMsg,String msg,HashMap map);
+   public ResultSet(boolean success,HashMap map);
+   public ResultSet(boolean success);
+   public boolean isSuccess():
+   public HashMap getMap()
+   public String getErrorMsg();
+   public String getErrorMsgHTML();
+   public String getMsg();
+   public String getMsgHTML();
+}
+
+                </pre>
+            </div>
+        </div>
+    </body>
+</html>

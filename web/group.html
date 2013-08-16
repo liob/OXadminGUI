@@ -1,0 +1,162 @@
+<script type="text/javascript">
+    <!--
+    function CheckSelection(onlyOne) {
+        var area = document.forms[0];
+        var end = area.elements['groupNum'].value;
+        var count = 0;
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['g' + i].checked) {
+                count+= 1;
+            }
+        }
+        if(count == 0) {
+            alert("${msg.get('nogrpselected')}");
+            return false;
+        }
+        if(count > 1 && onlyOne) {
+            alert("${msg.get('moregrpselected')}");
+            return false;
+        }
+        return true;
+    }
+
+    function CreateGroup() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "creategroup";
+    }
+
+    function DeleteGroup() {
+        var area = document.forms[0];
+        if(CheckSelection(false)) {
+            var area = document.forms[0];
+            var end = area.elements['groupNum'].value;
+            for(var i = 0; i < end; ++i) {
+                if(area.elements['g' + i].checked) {
+                    if(area.elements['g' + i].value == '1') {
+                        alert("${msg.get('nostandardgrpdel')}");
+                        return;
+                    }
+                    document.getElementById('name'+i).style.backgroundColor = '#FFFF40';
+                    area.elements['g' + i].disabled = true;
+                }
+            }
+            document.getElementById('deletewrn').style.display = '';
+        }
+    }
+
+    function DeleteNo() {
+        var area = document.forms[0];
+        var end = area.elements['groupNum'].value;
+        for(var i = 0; i < end; ++i) {
+            document.getElementById('name'+i).style.backgroundColor = '';
+            area.elements['g' + i].disabled = false;
+        }
+        document.getElementById('deletewrn').style.display = 'none';
+    }
+
+    function DeleteYes() {
+        var area = document.forms[0];
+        area.elements['formAction'].value ="deleteGroup";
+        var end = area.elements['groupNum'].value;
+        for(var i = 0; i < end; ++i) {
+            area.elements['g' + i].disabled = false;
+        }
+        area.submit();
+    }
+
+     function ModifyGroup() {
+        if(!CheckSelection(true)) {
+            return;
+        }
+        area = document.forms[0];
+        var tmp =  document.location.href;
+        var resourceID;
+        var end = area.elements['groupNum'].value;
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['g' + i].checked) {
+                resourceID = area.elements['g' + i].value;
+                break;
+            }
+        }
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "modifygroup&groupID=" + resourceID;
+    }
+
+    function Sort(s) {
+        var area = document.forms[0];
+        area.elements['sort'].value = s;
+        area.submit();
+    }
+
+    //-->
+</script>
+
+
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('grouperror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=group" method="post">
+
+    <ul id="hnavlist">
+        <li><a href="javascript:CreateGroup()">${msg.get('create')}</a></li>
+        <#if groupList??>
+        <li><a href="javascript:ModifyGroup()">${msg.get('change')}</a></li>
+        <li><a href="javascript:DeleteGroup()">${msg.get('delete')}</a></li>
+        </#if>
+    </ul>
+
+    <div id="deletewrn" style="width:33em;border:1px red solid;padding:.3em;margin:.4em 0 .6em 0;display:none">
+        ${msg.get('delwrngrp')}
+        <div style="margin:.3em">
+            <input class="submit" type="button" onclick="DeleteYes()" value="${msg.get('yes')}" />
+            &nbsp;
+            <input class="submit" type="button" onclick="DeleteNo()" value="${msg.get('no')}" />
+        </div>
+    </div>
+
+    <#if groupList??>
+    <input type="hidden" name="formAction"  />
+    <input type="hidden" name="groupNum" value="${groupList?size}" />
+    <input type="hidden" name="sort" value="${sort!}" />
+    <div style="margin-bottom:.2em">
+        ${msg.get('sort')}: <input type="radio" name="sortOrder" value="0"  <#if sortOrder = 0>checked="checked"</#if> /> <img src="images/up.png" />
+        <input type="radio" name="sortOrder" value="1" <#if sortOrder = 1>checked="checked"</#if>  /> <img src="images/down.png" />
+    </div>
+    <div class="bframe">
+        <table>
+            <thead>
+                <tr class="sort">
+                    <th>&nbsp;</th>
+                    <th><a <#if sort == '0'>style="color:#0A73CC"</#if> onclick="Sort(0)" href="#">ID</a></th>
+                    <th><a <#if sort == '1'>style="color:#0A73CC"</#if> onclick="Sort(1)" href="#">${msg.get('name')}</a></th>
+                    <th><a <#if sort == '2'>style="color:#0A73CC"</#if> onclick="Sort(2)" href="#">${msg.get('displayname')}</a></th>
+                </tr>
+            </thead>
+            <#list groupList as list>
+            <tr>
+                <td><input type="checkbox" name="g${list_index}" value="${list.id}" /> </td>
+                <td class="center">${list.id}</td>
+                <td id="name${list_index}" <#if list.id =1>class="ctxadmin"</#if>>${list.name}</td>
+                <td <#if list.id =1>class="ctxadmin"</#if>>${list.displayname}</td>
+            </tr>
+            </#list>
+        </table>
+         <div style="margin-top:.3em;font-size:smaller">
+        ${msg.get('legend')}: <span class="ctxadmin">&nbsp;&nbsp;&nbsp;&nbsp;</span> ${msg.get('standardgrp')}
+        </div>
+
+    </div>
+    </#if>
+</form>

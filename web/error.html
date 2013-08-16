@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Peter's Simple WebServer Error Report</title>
+        <style type="text/css">
+            <!--
+            body { background: #E1E4EB; padding: 0;font-family: Calibri, Arial, Helvetica, sans-serif; }
+            .err {
+                width:40em; border: 1px solid red;margin-top:.5em;margin-bottom:1em;padding:.5em;background-color:Beige;
+            }
+
+            .errmsg {
+                background-color:BlanchedAlmond;border: 1px solid gray;font-size:smaller;margin-top:.3em;
+            }
+            //-->
+        </style>
+    </head>
+    <body>
+        <div class="err">
+            <b style="font-size:larger">Web Server Status Report</b><br />
+            <b>${status}</b>
+            <div class="errmsg">
+                <code id="errorMsg">${error}</code>
+            </div>
+        </div>
+    </body>
+</html>

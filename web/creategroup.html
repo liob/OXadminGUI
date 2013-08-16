@@ -1,0 +1,197 @@
+<script type="text/javascript">
+
+    function Dismiss() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "group";
+    }
+
+    function SelectAll(name,v) {
+        var area = document.forms[0].elements[name];
+        for(var i = 0; i < area.options.length; ++i) {
+            area.options[i].selected = v;
+        }
+    }
+
+
+
+
+    function CheckInput() {
+        var area = document.forms[0];
+        var errorCount = 0;
+        var test = new Array('name','displayName');
+        var f;
+        for(var i = 0; i < test.length; ++i) {
+            f = area.elements[test[i]];
+            if(f.value.trim() == '') {
+                f.style.border = '1px solid red';
+                ++errorCount;
+            } else {
+                f.style.border = '';
+            }
+        }
+
+        // <#if JS_CHECK_EMAIL??>
+        var email =  area.elements['emailGroup'].value.trim();
+        if(email != "") {
+            area.elements['emailGroup'].style.border = '';
+            if(!checkEmailAdr(area.elements['emailGroup'].value + "@${emailDomain!}")) {
+                area.elements['emailGroup'].style.border = '1px solid red';
+                ++errorCount;
+            }
+        }
+
+        var additional =  area.elements['emailAdditional'].value.trim();
+        if(additional != "") {
+            var l = additional.split(",");
+            area.elements['emailAdditional'].style.border = '';
+            for(var i = 0; i < l.length; ++i) {
+                if(!checkEmailAdr(l[i].trim())) {
+                    area.elements['emailAdditional'].style.border = '1px solid red';
+                    ++errorCount;
+                    break;
+                }
+            }
+        }
+        // </#if>
+
+        if(errorCount == 0) {
+            area.submit();
+        }
+    }
+
+    function Move(a,b) {
+        var d = document.forms[0];
+        var area = d.elements[a];
+        var area2 = d.elements[b];
+        var a = new Array(area.options.length);
+        var index = 0;
+        for(var i = area.options.length - 1; i >= 0; --i) {
+            if(area.options[i].selected) {
+                a[index++] = area.options[i];
+            }
+        }
+        for(var i = a.length - 1; i >= 0; --i ) {
+            area2.options[area2.options.length] = a[i];
+        }
+        area = document.forms[0].elements['left'];
+        var members = "";
+        for(var i = 0; i < area.options.length; ++i) {
+            if(i != 0) {
+                members+= ',';
+            }
+            members+= area.options[i].value;
+        }
+        d.elements['members'].value = members;
+    }
+
+
+
+
+</script>
+
+<h2>${msg.get('creategrp')}</h2>
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('creategrperror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=creategroup" method="post">
+    <input type="hidden" name="members" value="${members!}" />
+    <div style="width:38em; border: 1px solid lightgray;margin-top:1em;margin-bottom:1em;padding:.3em">
+        <div class="subcolumns">
+            <div class="c30l">
+                <div class="tdb">${msg.get('name')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('displayname')}<span class="r">&sup1;</span></div>
+                <div class="tdb">${msg.get('groupemail')}&dagger;</div>
+                <div class="tdb">&nbsp;</div>
+                <div class="tdb2">...${msg.get('additionalemails')}&dagger;&sup2;</div>
+                <div class="tdb">${msg.get('member')}</div>
+
+            </div>
+            <div class="c70r">
+                <div class="td"><input name="name" size="25" maxlength="50" value="${name!}" /></div>
+                <div class="td"><input name="displayName" size="35" maxlength="50" value="${displayName!}" /></div>
+                <div class="td">
+                    <input type="checkbox" name="activeEmailGroup" <#if activeEmailGroup??>checked="checked"</#if> <#if MAIL_GROUP??><#else>disabled="disabled"</#if>/> ${msg.get('active')}
+                </div>
+                <div class="td">
+                    <input name="emailGroup" size="15" maxlength="30" style="text-align:right" value="<#if emailGroup??>${emailGroup}</#if>" <#if MAIL_GROUP??><#else>disabled="disabled"</#if>/>
+                           @${emailDomain!}
+                </div>
+                <div class="td2"><textarea name="emailAdditional" cols="43" rows="1" <#if MAIL_GROUP??><#else>disabled="disabled"</#if>>${emailAdditional!}</textarea></div>
+                <div class="subcolumns" style="margin-bottom:.3em">
+                    <div class="c50l">
+                        <div class="thb">... ${msg.get('membergrp')}</div>
+                        <select name="left" size="10" style="width:15em" multiple="multiple">
+                            <#if left??>
+                            <#list left as list>
+                            <#switch showUserInGroup>
+                            <#case 0>
+                            <option value="${list.id}">${list.display_name}</option>
+                            <#break>
+                            <#case 1>
+                            <option value="${list.id}">${list.name}</option>
+                            <#break>
+                            <#case 2>
+                            <option value="${list.id}">${list.primaryEmail}</option>
+                            <#default>
+                            </#switch>
+                            </#list>
+                            </#if>
+                        </select>
+                        <div style="text-align:left;margin-bottom:.3em;margin-top:.3em">
+                            <input class="submit" type="button" onclick="SelectAll('left',true)" value="+" />
+                            <input class="submit" type="button" onclick="SelectAll('left',false)" value="-" />
+                            <input class="submit" type="button" onclick="Move('left','right')" value="${msg.get('remove')}" />
+                        </div>
+                    </div>
+                    <div class="c50r">
+                        <div class="thb">... ${msg.get('memberctx')}</div>
+                        <select name="right" size="10" style="width:15em" multiple="multiple">
+                            <#if right??>
+                            <#list right as list>
+                            <#switch showUserInGroup>
+                            <#case 0>
+                            <option value="${list.id}">${list.display_name}</option>
+                            <#break>
+                            <#case 1>
+                            <option value="${list.id}">${list.name}</option>
+                            <#break>
+                            <#case 2>
+                            <option value="${list.id}">${list.primaryEmail}</option>
+                            <#default>
+                            </#switch>
+                            </#list>
+                            </#if>
+                        </select>
+                        <div style="text-align:left;margin-bottom:.3em;margin-top:.3em">
+                            <input class="submit" type="button" onclick="SelectAll('right',true)" value="+" />
+                            <input class="submit" type="button" onclick="SelectAll('right',false)" value="-" />
+                            <input class="submit" type="button" onclick="Move('right','left')" value="${msg.get('add')}" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="td"><input class="submit" type="button" onclick="return CheckInput()" value= "${msg.get('create')}" /> <input class="submit" type="button" onclick="return Dismiss()" value= "${msg.get('dismiss')}" /></div>
+            </div>
+        </div>
+
+    </div>
+    <div style="font-size:smaller;margin-top:.8em">
+        <span class="r">&sup1;</span> ${msg.get('mandatory')}<br />
+        &sup2; ${msg.get('separated')}<br />
+        &dagger; ${msg.get('pluginrelated')}
+    </div>
+
+</form>

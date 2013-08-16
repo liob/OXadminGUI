@@ -1,0 +1,205 @@
+<script type="text/javascript">
+    <!--
+    function CheckSelection(onlyOne) {
+        var area = document.forms[0];
+        var end = area.elements['userNum'].value;
+        var count = 0;
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['u' + i].checked) {
+                count+= 1;
+            }
+        }
+        if(count == 0) {
+            alert("${msg.get('nousrselected')}");
+            return false;
+        }
+        if(count > 1 && onlyOne) {
+            alert("${msg.get('moreusrselected')}");
+            return false;
+        }
+        return true;
+    }
+
+
+    function CreateUser() {
+        var tmp =  document.location.href;
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "createuser";
+    }
+
+    function DeleteUser() {
+        var area = document.forms[0];
+        if(CheckSelection(false)) {
+            var area = document.forms[0];
+            var end = area.elements['userNum'].value;
+            var oxCtxID = ${userContextAdminID};
+            for(var i = 0; i < end; ++i) {
+                if(area.elements['u' + i].checked) {
+                    if(area.elements['u' + i].value == oxCtxID) {
+                        alert("${msg.get('noctxadmindel')}");
+                        area.elements['u' + i].checked  = false;
+                        return;
+                    }
+                    document.getElementById('user'+i).style.backgroundColor = 'yellow';
+                }
+            }
+            for(var i = 0; i < end; ++i) {
+                if(area.elements['u' + i].checked) {
+                    area.elements['u' + i].disabled = true;
+                }
+            }
+            document.getElementById('deletewrn').style.display = '';
+        }
+    }
+
+    function DeleteNo() {
+        var area = document.forms[0];
+        var end = area.elements['userNum'].value;
+        var contextList = "";
+        for(var i = 0; i < end; ++i) {
+            contextList+= document.getElementById('user'+i).style.backgroundColor = '';
+            area.elements['u' + i].disabled = false;
+        }
+        document.getElementById('deletewrn').style.display = 'none';
+
+    }
+
+    function DeleteYes() {
+        var area = document.forms[0];
+        area.elements['formAction'].value ="deleteUser";
+        var end = area.elements['userNum'].value;
+        for(var i = 0; i < end; ++i) {
+            area.elements['u' + i].disabled = false;
+        }
+        area.submit();
+    }
+
+    function ModifyUser() {
+        if(!CheckSelection(true)) {
+            return;
+        }
+        var area = document.forms[0];
+        var tmp =  document.location.href;
+        var userID;
+        var end = area.elements['userNum'].value;
+        for(var i = 0; i < end; ++i) {
+            if(area.elements['u' + i].checked) {
+                userID = area.elements['u' + i].value;
+                break;
+            }
+        }
+        document.location.href = tmp.substring(0,tmp.lastIndexOf("link=") + 5) + "modifyuser&userID=" + userID;
+    }
+
+    function Sort(s) {
+        var area = document.forms[0];
+        area.elements['sort'].value = s;
+        area.elements['resort'].value = "1";
+        area.submit();
+    }
+
+
+    //-->
+</script>
+
+<#if error??>
+<div class="err">
+    <div class="subcolumns">
+        <div class="c75l">
+            ${msg.get('usererror')}:
+        </div>
+        <div  class="c25r" style="text-align:right">
+            <input onclick="ShowStackTrace()" type="image" src="images/enlarge.png" /><br/>
+        </div>
+    </div>
+    <div class="errmsg">
+        <code id="errorMsg">${error}</code>
+    </div>
+</div>
+</#if>
+
+<form action="index.html?link=user" method="post">
+
+    <ul id="hnavlist">
+        <li><a href="javascript:CreateUser()">${msg.get('create')}</a></li>
+        <li><a href="javascript:ModifyUser()">${msg.get('change')}</a></li>
+        <li><a href="javascript:DeleteUser()">${msg.get('delete')}</a></li>
+    </ul>
+
+    <div id="deletewrn" style="width:33em;border:1px red solid;padding:.3em;margin:.4em 0 .6em 0;display:none">
+        ${msg.get('delwrnuser')}
+        <div style="margin:.3em">
+            <input class="submit" type="button" onclick="DeleteYes()" value="${msg.get('yes')}" />
+            &nbsp;
+            <input class="submit" type="button" onclick="DeleteNo()" value="${msg.get('no')}" />
+        </div>
+    </div>
+
+
+   
+   
+    <input type="hidden" name="formAction"  />
+    <input type="hidden" name="sort" value="${sort!}" />
+    <input type="hidden" name="resort" />
+    <div style="margin-bottom:.2em">
+        ${msg.get('sort')}: <input type="radio" name="sortOrder" value="0"  <#if sortOrder = 0>checked="checked"</#if> /> <img src="images/up.png" />
+        <input type="radio" name="sortOrder" value="1" <#if sortOrder = 1>checked="checked"</#if>  /> <img src="images/down.png" />   
+        <input type="checkbox" name="allFields" <#if allFields??>checked="checked"</#if> /> ${msg.get('allfields')}
+        <input type="checkbox" name="regexp" <#if regexp??>checked="checked"</#if> /> ${msg.get('regexp')}
+        <input name="search" size="20" value="${search!}" />
+        <input type="submit" name="searchbutton" value="${msg.get('search')}" />
+        <input type="checkbox" name="searchmode" <#if searchmode??>checked="checked"</#if> /> ${msg.get('searchmode')}
+        <input type="submit" name="reload" value="${msg.get('reload')}" />
+    </div>
+    <#if noresult??>
+    <div style="margin-top:.2em">
+     ${msg.get('nosearchresult')}
+    </div>
+    </#if>
+    <#if found??>
+    <div style="margin-top:.2em;font-size:smaller">
+     ${found}/${listsize}  ${msg.get('searchresult')}
+    </div>
+    </#if>
+    <#if regexperr??>
+    <div style="margin-top:.2em;color:red">
+    ${regexperr}
+    </div>
+    </#if>
+    <#if searchmodehint??>
+    <div style="margin-top:.2em;font-size:smaller">
+     ${msg.get('searchmodehint')}: ${listsize}
+    </div>
+    </#if>
+    <#if userList??>
+    <input type="hidden" name="userNum" value="${userList?size}" />
+    <div class="bframe">
+        <table>
+            <thead>
+                <tr class="sort">
+                    <th>&nbsp;</th>
+                    <th><a <#if sort == '0'>style="color:#0A73CC"</#if> onclick="Sort(0)" href="#">ID</a></th>
+                    <th><a <#if sort == '1'>style="color:#0A73CC"</#if> onclick="Sort(1)" href="#">${msg.get('username')}</a></th>
+                    <th><a <#if sort == '2'>style="color:#0A73CC"</#if> onclick="Sort(2)" href="#">${msg.get('displayname')}</a></th>
+                    <th><a <#if sort == '3'>style="color:#0A73CC"</#if> onclick="Sort(3)" href="#">${msg.get('firstname')}</a></th>
+                    <th><a <#if sort == '4'>style="color:#0A73CC"</#if> onclick="Sort(4)" href="#">${msg.get('surname')}</a></th>
+                    <th><a <#if sort == '5'>style="color:#0A73CC"</#if> onclick="Sort(5)" href="#">${msg.get('email')}</a></th>
+                </tr>
+            </thead>
+            <#list userList as list>
+            <tr>
+                <td><input type="checkbox" name="u${list_index}"  value="${list.id}" /> </td>
+                <td class="center">${list.id}</td>
+                <td id="user${list_index}" <#if userContextAdminID = list.id>class="ctxadmin"</#if> >${list.name}</td>
+                <td  <#if userContextAdminID = list.id>class="ctxadmin"</#if> >${list.display_name}</td>
+                <td  <#if userContextAdminID = list.id>class="ctxadmin"</#if> >${list.given_name}</td>
+                <td  <#if userContextAdminID = list.id>class="ctxadmin"</#if> >${list.sur_name}</td>
+                <td  <#if userContextAdminID = list.id>class="ctxadmin"</#if> >${list.primaryEmail}</td>
+            </tr>    
+            </#list>
+        </table>
+        <div style="margin-top:.3em;font-size:smaller">
+            ${msg.get('legend')}: <span class="ctxadmin">&nbsp;&nbsp;&nbsp;&nbsp;</span> ContextAdmin
+        </div>
+    </div>
+    </#if>
+</form>

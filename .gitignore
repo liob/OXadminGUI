@@ -4,3 +4,7 @@
 *.jar
 *.war
 *.ear
+
+# Ant Directories #
+/build
+/dist
