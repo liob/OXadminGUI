@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="OXadminGUI" default="default" basedir=".">
+    <description>Builds and distributes the project OXadminGUI.</description>   
+
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+      <classpath>
+        <fileset dir="/usr/share/java">
+          <include name="*.jar"/>
+        </fileset>
+        <fileset dir="extlibs">
+          <include name="*.jar"/>
+        </fileset>
+        <fileset dir="/opt/open-xchange/bundles">
+          <include name="*.jar"/>
+          <include name="*/*.jar"/>
+          <include name="*/*/*.jar"/>
+          <include name="*/*/*/*.jar"/>
+        </fileset>
+        <pathelement path="${classpath}"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="copy-web" depends="init">
+    <!-- copy web pages -->
+    <copy todir="${build}/web">
+      <fileset dir="web"/>
+    </copy>
+  </target>
+
+  <target name="manifest" depends="init">
+    <mkdir dir="${build}/META-INF"/>
+    <manifest file="${build}/META-INF/MANIFEST.MF">
+      <attribute name="Bundle-ManifestVersion" value="2"/>
+      <attribute name="Bundle-Name" value="Peter's Open-Xchange Admin GUI"/>
+      <attribute name="Bundle-SymbolicName" value="at.sciencesoft.oxadmingui"/>
+      <attribute name="Bundle-Version" value="0.1.17"/>
+      <attribute name="Bundle-Vendor" value="Peter.Sauer"/>
+      <attribute name="Bundle-RequiredExecutionEnvironment" value="JavaSE-1.6"/>
+      <attribute name="Bundle-ClassPath" value=".,external:/opt/open-xchange/lib/freemarker.jar,external:/opt/open-xchange/bundles/com.openexchange.control.jar,external:/opt/open-xchange/lib/jaxrpc.jar,external:/opt/open-xchange/lib/axis.jar,external:/opt/open-xchange/lib/ISPconfig3.jar,external:/opt/open-xchange/lib/plugin/,external:/opt/open-xchange/lib/commons-discovery-0.2.jar"/>
+      <attribute name="Import-Package" value="com.openexchange.server,com.openexchange.sessiond,com.openexchange.osgi,com.openexchange.admin.rmi.exceptions,com.openexchange.admin.rmi,com.openexchange.admin.rmi.dataobjects,org.apache.commons.logging,javax.xml.parsers,javax.crypto.spec,javax.crypto,org.xml.sax,org.xml.sax.helpers,javax.swing.tree,javax.management.remote,javax.management,javax.servlet,javax.servlet.http,org.osgi.framework,org.osgi.service.http"/>
+      <attribute name="Bundle-Activator" value="at.sciencesoft.osgi.OXAdminGuiServletActivator"/>
+    </manifest>
+  </target>
+
+  <target name="dist" depends="compile,copy-web,manifest"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+    <!-- Put everything in ${build} into at.sciencesoft.oxadmingui.jar -->
+    <jar jarfile="${dist}/at.sciencesoft.oxadmingui.jar" basedir="${build}" manifest="${build}/META-INF/MANIFEST.MF"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+</project>
