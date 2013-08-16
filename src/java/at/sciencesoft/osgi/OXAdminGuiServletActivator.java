@@ -53,7 +53,7 @@ import org.osgi.service.http.NamespaceException;
 public final class OXAdminGuiServletActivator extends DeferredActivator {
 
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory.getLog(OXAdminGuiServletActivator.class);
-    private static final String PWC_SRVLT_ALIAS = "servlet/webserver/*";
+    private static final String PWC_SRVLT_ALIAS = "/servlet/webserver";
     private final AtomicBoolean registered;
 
     /**
